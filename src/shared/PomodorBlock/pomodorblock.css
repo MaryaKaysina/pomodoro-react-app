@@ -1,0 +1,11 @@
+.block {
+  background: var(--grayF4);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 19px 40px;
+  background: var(--greyC4);
+}

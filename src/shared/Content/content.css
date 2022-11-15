@@ -1,0 +1,21 @@
+.content {
+  padding: 100px 0;
+  display: grid;
+  grid-template-columns: 41% 57%;
+  justify-content: space-between;
+  grid-template-areas:
+  "header block"
+  "text block";
+}
+
+.content h2 {
+  grid-area: header;
+}
+
+.content ul {
+  grid-area: text;
+}
+
+.content div {
+  grid-area: block;
+}

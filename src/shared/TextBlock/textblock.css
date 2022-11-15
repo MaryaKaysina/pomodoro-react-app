@@ -1,0 +1,22 @@
+.list {
+  margin-top: 3px;
+  margin-bottom: 25px;
+  padding-left: 23px;
+  max-width: 530px;
+}
+
+.list li {
+  position: relative;
+  line-height: 33px;
+}
+
+.list li::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #B7280F;
+}

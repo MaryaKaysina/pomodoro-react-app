@@ -1,0 +1,9 @@
+.menuBlock {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.menuBlock span {
+  margin-left: 5px;
+}
