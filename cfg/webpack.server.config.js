@@ -44,6 +44,18 @@ module.exports = {
       {
         test: GLOBAL_CSS_REGEXP,
         use: ['css-loader']
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+                name: "/assets/fonts/[name].[ext]",
+            }
+          }
+        ]
       }
     ]
   },

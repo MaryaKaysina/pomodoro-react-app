@@ -1,0 +1,47 @@
+.menuItemsList div:last-child .divider{
+  display: none;
+}
+
+.menuItem {
+  padding: 7px 15px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  font-weight: 300;
+}
+
+.menuItem.isDisable svg {
+  filter: grayscale(1);
+}
+
+.menuItem span {
+  margin-left: 7px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background-color: var(--greyEC);
+}
+
+.isHide {
+  display: none;
+}
+
+.isHide + .divider {
+  display: none;
+}
+
+@media all and (min-width: 1024px) {
+  .isHide {
+    display: flex;
+  }
+
+  .isHide + .divider {
+    display: block;
+  }
+
+  .menuItem:hover {
+    background: #F4F4F4;
+  }
+}

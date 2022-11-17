@@ -36,13 +36,7 @@ export function DropdownList(props: IDropdownList) {
 
   function calcPositionMenu() {
     const top = props.position?.top || 0;
-    let listTop = `${top + 60 + window.pageYOffset}px`;
-    if (window.innerWidth < 1540) {
-      listTop = `${top + 60 + window.pageYOffset}px`;
-    }
-    if (window.innerWidth < 1024) {
-      listTop = `${top + 45 + window.pageYOffset}px`;
-    }
+    let listTop = `${top + 40 + window.pageYOffset}px`;
     const left = props.position?.left || 0;
     let listLeft = left;
 

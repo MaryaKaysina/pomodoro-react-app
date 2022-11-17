@@ -1,9 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/SFUIDisplay-Bold.woff2') format('woff2'),
+}
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url('./assets/fonts/SFUIDisplay-Light.woff2') format('woff2'),
+}
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/SFUIDisplay-Medium.woff2') format('woff2'),
+}
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/SFUIDisplay-Regular.woff2') format('woff2'),
+}
+@font-face {
+  font-family: 'SF UI Display';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url('./assets/fonts/SFUIDisplay-Thin.woff2') format('woff2'),
+}
 
 :root {
   --black:          #333333;
   --red:         #DC3E22;
-  --green:          #A4CC33;
+  --green:          #A8B64F;
   --whiteLightness: 100%;
   --white:          hsl(0, 0%, var(--whiteLightness));
   --grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4%));
@@ -20,7 +54,7 @@ body {
   margin: 0;
   font-size: 14px;
   line-height: 16px;
-  font-family: 'Roboto', serif;
+  font-family: 'SF UI Display';
 }
 
 * {

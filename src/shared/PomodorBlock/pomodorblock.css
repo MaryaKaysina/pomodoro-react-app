@@ -9,3 +9,20 @@
   padding: 19px 40px;
   background: var(--greyC4);
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 85px;
+  padding-bottom: 107px;
+}
+
+.content p {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+.btns button:not(:last-child) {
+  margin-right: 25px;
+}

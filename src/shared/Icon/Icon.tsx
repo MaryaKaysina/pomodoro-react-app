@@ -1,12 +1,23 @@
 import React from 'react';
 import styles from './icon.css';
 import {
-  LogoIcon, MenuIcon
+  AddIcon,
+  AddMenuIcon,
+  DeleteMenuIcon,
+  DownMenuIcon,
+  EditMenuIcon,
+  LogoIcon, MenuIcon, MenuLinkIcon
 } from '../Icons';
 
 export enum EIcons {
   logoIcon = 'LogoIcon',
   menuIcon = 'MenuIcon',
+  menuLinkIcon = 'MenuLinkIcon',
+  addIcon = 'AddIcon',
+  addMenuIcon = 'AddMenuIcon',
+  downMenuIcon = 'DownMenuIcon',
+  editMenuIcon = 'EditMenuIcon',
+  deleteMenuIcon = 'DeleteMenuIcon',
 }
 
 type TSizes = 20 | 16 | 14;
@@ -25,6 +36,12 @@ const sizeIcons = {
 const icons = {
   [EIcons.logoIcon]: <LogoIcon />,
   [EIcons.menuIcon]: <MenuIcon />,
+  [EIcons.addIcon]: <AddIcon />,
+  [EIcons.addMenuIcon]: <AddMenuIcon />,
+  [EIcons.downMenuIcon]: <DownMenuIcon />,
+  [EIcons.editMenuIcon]: <EditMenuIcon />,
+  [EIcons.deleteMenuIcon]: <DeleteMenuIcon />,
+  [EIcons.menuLinkIcon]: <MenuLinkIcon />,
 }
 
 export function Icon({ name, size = 16 }: IIconProps) {
