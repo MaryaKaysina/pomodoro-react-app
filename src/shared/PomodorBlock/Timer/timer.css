@@ -19,3 +19,14 @@
   height: auto;
 }
 
+.addButton svg {
+  fill: var(--greyC4);
+  transition: fill .3s ease-in-out;
+}
+
+@media all and (min-width: 1024px) {
+  .addButton:hover svg {
+    fill: var(--greenHover);
+  }
+}
+

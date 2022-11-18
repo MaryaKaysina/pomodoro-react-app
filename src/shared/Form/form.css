@@ -16,7 +16,7 @@
   padding: 19px 15px;
   width: 71%;
   border: none;
-  background: #F4F4F4;
+  background: var(--grayF4);
   font-family: inherit;
   font-weight: 300;
   font-size: 16px;

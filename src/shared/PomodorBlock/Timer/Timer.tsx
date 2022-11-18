@@ -7,7 +7,9 @@ export function Timer() {
   return (
     <div className={styles.timer}>
       <Text As='h3' mobileSize={14} size={16} color={EColors.black}>25:00</Text>
-      <Icon name={EIcons.addIcon} />
+      <button className={styles.addButton}>
+        <Icon name={EIcons.addIcon} />
+      </button>
     </div>
   );
 }

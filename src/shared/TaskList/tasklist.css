@@ -11,5 +11,5 @@
   position: absolute;
   height: 1px;
   width: 100%;
-  background: #E4E4E4;
+  background: var(--grayF4);
 }

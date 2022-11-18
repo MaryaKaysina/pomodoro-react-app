@@ -8,6 +8,7 @@
   flex-flow: row nowrap;
   align-items: center;
   font-weight: 300;
+  cursor: pointer;
 }
 
 .menuItem.isDisable svg {
@@ -42,6 +43,6 @@
   }
 
   .menuItem:hover {
-    background: #F4F4F4;
+    background: var(--grayF4);
   }
 }

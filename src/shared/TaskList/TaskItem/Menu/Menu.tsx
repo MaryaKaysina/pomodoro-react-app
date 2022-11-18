@@ -10,7 +10,7 @@ interface IPosition {
 }
 
 interface IMenu {
-  taskId: string;
+  taskId: number;
 }
 
 export function Menu({ taskId }: IMenu) {

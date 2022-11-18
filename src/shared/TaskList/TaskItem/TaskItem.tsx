@@ -3,7 +3,7 @@ import { Menu } from './Menu';
 import styles from './taskitem.css';
 
 interface ITaskItem {
-  id: string;
+  id: number;
   text: string;
   time: number;
 }

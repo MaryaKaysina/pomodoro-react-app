@@ -8,7 +8,7 @@ import { generateId } from '../../../../../utils/react/generateRandomIndex';
 import { merge } from '../../../../../utils/js/merge';
 
 interface IMenuItemsList {
-  taskId?: string;
+  taskId?: number;
 }
 
 const LIST = [

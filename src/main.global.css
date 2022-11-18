@@ -37,7 +37,9 @@
 :root {
   --black:          #333333;
   --red:         #DC3E22;
+  --redHover:         #B7280F;
   --green:          #A8B64F;
+  --greenHover:          #899441;
   --whiteLightness: 100%;
   --white:          hsl(0, 0%, var(--whiteLightness));
   --grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4%));
