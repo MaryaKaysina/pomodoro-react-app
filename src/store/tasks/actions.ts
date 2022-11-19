@@ -69,4 +69,3 @@ export const tasksRequestAsync =
       dispatch(tasksRequestError('Our new task is empty(:'));
     }
   }
-

@@ -35,20 +35,21 @@
 }
 
 :root {
-  --black:          #333333;
-  --red:         #DC3E22;
-  --redHover:         #B7280F;
-  --green:          #A8B64F;
-  --greenHover:          #899441;
-  --whiteLightness: 100%;
-  --white:          hsl(0, 0%, var(--whiteLightness));
-  --grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 4%));
-  --greyF3:         hsl(0, 0%, calc(var(--whiteLightness) - 5%));
-  --greyEC:         hsl(0, 0%, calc(var(--whiteLightness) - 7%));
-  --greyD9:         hsl(0, 0%, calc(var(--whiteLightness) - 15%));
-  --greyC4:         hsl(0, 0%, calc(var(--whiteLightness) - 23%));
-  --grey99:         hsl(0, 0%, calc(var(--whiteLightness) - 40%));
-  --grey66:         hsl(0, 0%, calc(var(--whiteLightness) - 60%));
+  --black:                #333333;
+  --red:                  #DC3E22;
+  --redHover:             #B7280F;
+  --red9F:                #9F210C;
+  --green:                #A8B64F;
+  --greenHover:           #899441;
+  --whiteLightness:       100%;
+  --white:                hsl(0, 0%, var(--whiteLightness));
+  --grayF4:               hsl(0, 0%, calc(var(--whiteLightness) - 4%));
+  --greyF3:               hsl(0, 0%, calc(var(--whiteLightness) - 5%));
+  --greyEC:               hsl(0, 0%, calc(var(--whiteLightness) - 7%));
+  --greyD9:               hsl(0, 0%, calc(var(--whiteLightness) - 15%));
+  --greyC4:               hsl(0, 0%, calc(var(--whiteLightness) - 23%));
+  --grey99:               hsl(0, 0%, calc(var(--whiteLightness) - 40%));
+  --grey66:               hsl(0, 0%, calc(var(--whiteLightness) - 60%));
 }
 
 body {

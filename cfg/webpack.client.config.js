@@ -58,13 +58,26 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|ttf|woff|woff2)$/,
         exclude: /node_modules/,
         use: [
           {
             loader: "file-loader",
             options: {
-                name: "/assets/fonts/[name].[ext]",
+              name: "/assets/fonts/[name].[ext]",
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              publicPath: '/static/',
             }
           }
         ]
