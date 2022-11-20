@@ -15,36 +15,43 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk from 'redux-thunk';
 import { rootReducer } from './store/reducer';
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { NotFoundPage } from "./shared/NotFoundPage";
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
 ));
 
 function AppComponent() {
-  const [token, setToken] = useState('');
+
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const localToken = localStorage.getItem('token-pomodoro') || '';
-    setToken(localToken);
-  }, [])
+    setMounted(true);
+  }, []);
 
   return (
     <Provider store={store}>
-      {token === '' && (
-        <Routes>
-          <Route path="/auth" element={<Auth/>} />
-        </Routes>
+      {mounted && (
+        <BrowserRouter>
+          <Routes>
+            <Route path="*" element={<Navigate to="/auth" replace />} />
+            <Route path="/auth" element={ <Auth/> } />
+            <Route path="/pomodoros" element={
+              <>
+                <Header />
+                <Layout>
+                  <Content>
+                    <TextBlock />
+                    <FormBlock />
+                    <PomodorBlock />
+                  </Content>
+                </Layout>
+              </>
+            } />
+          </Routes>
+        </BrowserRouter>
       )}
-      {/* <Auth/> */}
-      {/* <Header />
-      <Layout>
-        <Content>
-          <TextBlock />
-          <FormBlock />
-          <PomodorBlock />
-        </Content>
-      </Layout> */}
     </Provider>
   );
 }

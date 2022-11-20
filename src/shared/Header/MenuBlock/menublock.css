@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.menuBlock:not(:last-child) {
+  margin-right: 15px;
+}
+
 .menuBlock span {
   margin-left: 5px;
   transition: color .3s ease-in-out;

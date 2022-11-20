@@ -10,7 +10,7 @@ interface ITaskItem {
 }
 
 interface ITaskList {
-  tasks?: ITaskItem[];
+  tasks: ITaskItem[];
 }
 
 export function TaskList({ tasks }: ITaskList) {
@@ -27,12 +27,16 @@ export function TaskList({ tasks }: ITaskList) {
 
   return (
     <>
-      <ul className={styles.taskList}>
-        {tasks?.map((task: ITaskItem) =>
-          <TaskItem key={task.id} task={task} />
-        )}
-      </ul>
-      <Text mobileSize={12} size={16} color={EColors.grey99}>{allTimeText}</Text>
+    {tasks?.length > 0 && (
+      <>
+        <ul className={styles.taskList}>
+          {tasks?.map((task: ITaskItem) =>
+            <TaskItem key={task.id} task={task} />
+          )}
+        </ul>
+        <Text mobileSize={12} size={16} color={EColors.grey99}>{allTimeText}</Text>
+      </>
+    )}
     </>
   );
 }

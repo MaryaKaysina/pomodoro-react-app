@@ -3,8 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
   padding: 25px 90px;
-  margin-bottom: 228px;
   background: var(--redHover);
 }
 

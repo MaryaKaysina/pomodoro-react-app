@@ -3,8 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 150px;
-  padding-bottom: 30px;
+  padding-top: 100px;
+  min-height: 100vh;
   background: var(--red9F);
   overflow: hidden;
+}
+
+.container > span {
+  margin-top: auto;
+  margin-bottom: 30px;
 }

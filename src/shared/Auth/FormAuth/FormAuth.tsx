@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '../../Button';
 import { ErrorBlock } from '../../ErrorBlock';
 import { Text, EColors } from '../../Text';
@@ -72,7 +73,9 @@ export function FormAuth(
       </div>
 
       <Button>
-        Зарегистрироваться
+        {/* <Link to='/pomodoros'> */}
+          Зарегистрироваться
+        {/* </Link> */}
         {authError && authError.code === 114 && (
           <ErrorBlock message={authError.message}/>
         )}

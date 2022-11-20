@@ -6,3 +6,4 @@ export * from './DownMenuIcon';
 export * from './EditMenuIcon';
 export * from './DeleteMenuIcon';
 export * from './MenuIcon';
+export * from './LogoutIcon';

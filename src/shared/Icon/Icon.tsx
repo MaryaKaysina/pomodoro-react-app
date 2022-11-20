@@ -6,7 +6,7 @@ import {
   DeleteMenuIcon,
   DownMenuIcon,
   EditMenuIcon,
-  LogoIcon, MenuIcon, MenuLinkIcon
+  LogoIcon, LogoutIcon, MenuIcon, MenuLinkIcon
 } from '../Icons';
 
 export enum EIcons {
@@ -18,6 +18,7 @@ export enum EIcons {
   downMenuIcon = 'DownMenuIcon',
   editMenuIcon = 'EditMenuIcon',
   deleteMenuIcon = 'DeleteMenuIcon',
+  logoutIcon = 'LogoutIcon',
 }
 
 type TSizes = 20 | 16 | 14;
@@ -42,6 +43,7 @@ const icons = {
   [EIcons.editMenuIcon]: <EditMenuIcon />,
   [EIcons.deleteMenuIcon]: <DeleteMenuIcon />,
   [EIcons.menuLinkIcon]: <MenuLinkIcon />,
+  [EIcons.logoutIcon]: <LogoutIcon />,
 }
 
 export function Icon({ name, size = 16 }: IIconProps) {

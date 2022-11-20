@@ -45,7 +45,8 @@ export const authRequestAsync =
     dispatch(authRequest());
 
     if (auth.length !== 0) {
-      localStorage.setItem('token-pomodoro', auth);
+      const data = `{ auth: ${auth}, tasks: [] }`;
+      localStorage.setItem('token-pomodoro', data);
       dispatch(authRequestSuccess(auth));
     } else {
       dispatch(authRequestError('Our e-mail is empty(:'));
