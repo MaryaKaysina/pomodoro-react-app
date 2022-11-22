@@ -1,8 +1,8 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { customErrorFactory } from 'ts-custom-error';
-import { authRequestAsync } from '../../store/auth/actions';
+import { authRequestAsync, IData } from '../../store/auth/actions';
 import { RootState, updateCheck, updateMail, updateName } from '../../store/reducer';
 import styles from './auth.css';
 import { Copyright } from './Copyright';
@@ -24,8 +24,15 @@ export function Auth() {
   const name = useSelector<RootState, string>(state => state.name);
   const mail = useSelector<RootState, string>(state => state.mail);
   const isCheck = useSelector<RootState, string>(state => state.isCheck);
+
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
+
+  const data = useSelector<RootState, IData[]>(state => state.auth.data);
+
+  const localDefault = JSON.stringify([{auth: "", tasks: [], logInDate: 0}]);
+  const localString = localStorage.getItem('token-pomodoro') || localDefault;
+  const local: IData[] = JSON.parse(localString);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.id === 'name') {
@@ -57,18 +64,28 @@ export function Auth() {
         throw new AuthError(114, 'Не проставлено согласие (:');
       }
 
-      dispatch(authRequestAsync(mail));
+      const currentData = data.filter((item) => item.auth === mail.trim());
+      const currentLocal = local.filter((item) => item.auth === mail.trim());
+      const otherData = data.filter((item) => item.auth !== mail.trim());
+      const otherLocal = local.filter((item) => item.auth !== mail.trim());
+
+      const current = currentData.length === 0 ? currentData : currentLocal;
+      const other = otherData.length === 0 ? otherData : otherLocal;
+
+      const newAuthData: IData[] = [{
+        auth: mail.trim(),
+        tasks: current.length === 0 ? [] : current[0].tasks,
+        logInDate: Date.now(),
+      }];
+
+      const newData: IData[] = [ ...other, ... newAuthData ];
+
+      dispatch(authRequestAsync(newData));
       navigate('/pomodoros');
     } catch (error: any) {
       setAuthError({ code: error.code, message: error.message });
     }
   }
-
-  useEffect(() => {
-    const localToken = localStorage.getItem('token-pomodoro') || '';
-    console.log(localToken);
-    dispatch(authRequestAsync(localToken));
-  }, []);
 
   return (
     <>

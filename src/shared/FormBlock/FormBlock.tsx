@@ -1,14 +1,33 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { authRequestAsync, IData } from '../../store/auth/actions';
 import { RootState, updateNewTask } from '../../store/reducer';
-import { ITaskItem, tasksRequestAsync } from '../../store/tasks/actions';
 import { Form } from '../Form';
 import { TaskList } from '../TaskList';
 
 export function FormBlock() {
-  const newTask = useSelector<RootState, string>(state => state.newTask);
-  const tasks = useSelector<RootState, ITaskItem[]>(state => state.tasks.data);
+  const [mounred, setMounted] = useState(false);
   const dispatch = useDispatch<any>();
+
+  const localDefault = JSON.stringify([{auth: "", tasks: [], logInDate: 0}]);
+  const localString = localStorage.getItem('token-pomodoro') || localDefault;
+  const local: IData[] = JSON.parse(localString);
+
+  useEffect(() => {
+    dispatch(authRequestAsync(local));
+    setMounted(true);
+  }, [])
+
+  const newTask = useSelector<RootState, string>(state => state.newTask);
+  const data = useSelector<RootState, IData[]>(state => state.auth.data);
+  console.log(data);
+
+  const currentAuth = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0].auth;
+  const current = data.filter((item) => item.auth === currentAuth)[0];
+  const other = data.filter((item) => item.auth !== currentAuth);
+
+  const logInDate = current?.logInDate;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     dispatch(updateNewTask(event.target.value));
@@ -17,7 +36,24 @@ export function FormBlock() {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (newTask.length > 0) {
-      dispatch(tasksRequestAsync({ text: newTask }));
+      const task = {
+        id: current.tasks.length,
+        text: newTask,
+        time: 25,
+        currentTime: 0,
+        createdAt: Date.now(),
+        done:false
+      };
+      const newTasks = [ ... current.tasks, task];
+      const newAuthData = [{
+        auth: currentAuth,
+        tasks: newTasks,
+        logInDate: logInDate,
+      }];
+
+      const newData: IData[] = [ ...other, ... newAuthData ];
+
+      dispatch(authRequestAsync(newData));
       dispatch(updateNewTask(''));
     } else {
       console.log('Our new task is empty(:');
@@ -26,12 +62,13 @@ export function FormBlock() {
 
   return (
     <>
+      {mounred && currentAuth.length == 0 && (<Navigate to="/auth" replace />)}
       <Form
         value={newTask}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={current.tasks} />
     </>
   );
 }

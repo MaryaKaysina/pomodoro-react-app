@@ -37,6 +37,7 @@ export function Menu({ taskId }: IMenu) {
     <div className={styles.menu}>
       <div>
           <Dropdown
+            taskId={taskId}
             button={
               <button
                 className={styles.menuButton}

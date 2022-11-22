@@ -8,59 +8,66 @@ import { generateId } from '../../../../../utils/react/generateRandomIndex';
 import { merge } from '../../../../../utils/js/merge';
 
 interface IMenuItemsList {
-  taskId?: number;
+  taskId: number;
 }
 
 const LIST = [
   {
-    As: 'li' as const,
+    As: 'button' as const,
     element:
     <>
       <Icon name={EIcons.addMenuIcon} size={16}/>
       <Text mobileSize={12} size={16} color={EColors.grey99}>Увеличить</Text>
     </>,
     className: classNames(styles.menuItem),
+    dataAction: 'UpTime',
   },
   {
-    As: 'li' as const,
+    As: 'button' as const,
     element:
     <>
       <Icon name={EIcons.downMenuIcon} size={16}/>
       <Text mobileSize={12} size={16} color={EColors.grey99}>Уменьшить</Text>
     </>,
     className: classNames(styles.menuItem),
+    dataAction: 'DownTime',
   },
   {
-    As: 'li' as const,
+    As: 'button' as const,
     element:
     <>
       <Icon name={EIcons.editMenuIcon} size={16}/>
       <Text mobileSize={12} size={16} color={EColors.grey99}>Редактировать</Text>
     </>,
     className: styles.menuItem,
+    dataAction: 'EditTask',
   },
   {
-    As: 'li' as const,
+    As: 'button' as const,
     element:
       <>
         <Icon name={EIcons.deleteMenuIcon} size={16}/>
         <Text mobileSize={12} size={16} color={EColors.grey99}>Удалить</Text>
       </>,
     className: classNames(styles.menuItem),
+    dataAction: 'DeleteTask',
   },
 ].map(generateId);
 
 export function MenuItemsList({ taskId }: IMenuItemsList) {
   const [list, setList] = React.useState(LIST);
 
-  const handleItemClick = (id: string) => {
+  const handleClick = (taskId: number, event: Event) => {
+    console.log('handleItemClick');
+    console.log(event.target);
+    console.log(taskId);
     // setList(list.filter((item) => item.id !== id));
   }
 
   return (
     <ul className={styles.menuItemsList}>
       <GenericList
-        list={list.map(merge({ onClick: handleItemClick }))}
+        list={list.map(merge({ onclick: (event: Event) => handleClick(taskId, event) }))}
       />
     </ul>
   );

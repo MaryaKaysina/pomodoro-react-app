@@ -2,22 +2,11 @@ import { ActionCreator, Reducer } from "redux";
 import { AuthRequestAction, AuthRequestSuccessAction, AuthRequestErrorAction, AUTH_REQUEST, AUTH_REQUEST_ERROR, AUTH_REQUEST_SUCCESS } from "./auth/actions";
 import { authReducer, AuthState, initialAuthState } from "./auth/reducer";
 
-import {
-  TASKS_REQUEST,
-  TASKS_REQUEST_SUCCESS,
-  TASKS_REQUEST_ERROR,
-  TasksRequestAction,
-  TasksRequestSuccessAction,
-  TasksRequestErrorAction
-} from "./tasks/actions";
-import { tasksReducer, TasksState, initialTasksState } from "./tasks/reducer";
-
 export type RootState = {
   name: string;
   mail: string;
   isCheck: string;
   newTask: string;
-  tasks: TasksState;
   auth: AuthState;
 }
 
@@ -26,7 +15,6 @@ const initialState: RootState = {
   mail: '',
   isCheck: 'true',
   newTask: '',
-  tasks: initialTasksState,
   auth: initialAuthState,
 }
 
@@ -87,9 +75,6 @@ type MyAction = UpdateNameAction
 | UpdateMailAction
 | UpdateCheckAction
 | NewTaskAction
-| TasksRequestAction
-| TasksRequestSuccessAction
-| TasksRequestErrorAction
 | AuthRequestAction
 | AuthRequestSuccessAction
 | AuthRequestErrorAction;
@@ -116,13 +101,6 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         ...state,
         newTask: action.text,
       };
-    case TASKS_REQUEST:
-    case TASKS_REQUEST_SUCCESS:
-    case TASKS_REQUEST_ERROR:
-      return {
-        ...state,
-        tasks: tasksReducer(state.tasks, action),
-      }
     case AUTH_REQUEST:
     case AUTH_REQUEST_ERROR:
     case AUTH_REQUEST_SUCCESS:

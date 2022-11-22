@@ -6,19 +6,26 @@ import
   AuthRequestSuccessAction,
   AUTH_REQUEST,
   AUTH_REQUEST_ERROR,
-  AUTH_REQUEST_SUCCESS
+  AUTH_REQUEST_SUCCESS,
+  IData
 } from "./actions";
 
 export type AuthState = {
   loading: boolean;
   error: string;
-  auth: string;
+  data: IData[];
 }
 
 export const initialAuthState: AuthState = {
   loading: false,
   error: '',
-  auth: '',
+  data: [
+    {
+      auth: '',
+      tasks: [],
+      logInDate: 0
+    }
+  ]
 }
 
 type AuthActions = AuthRequestAction
@@ -41,7 +48,7 @@ export const authReducer: Reducer<AuthState, AuthActions> = (state = initialAuth
       case AUTH_REQUEST_SUCCESS:
         return {
           ...state,
-          auth: action.auth,
+          data: action.data,
           loading: false,
         }
       default:

@@ -11,6 +11,7 @@ interface IDropdownProps {
   button: React.ReactNode;
   children: React.ReactNode;
   position?: IPosition;
+  taskId?: number;
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
@@ -24,6 +25,7 @@ export function Dropdown(
     children,
     position,
     isOpen,
+    taskId,
     onOpen = NOOP,
     onClose = NOOP
   }: IDropdownProps) {
@@ -43,7 +45,11 @@ export function Dropdown(
         {button}
       </div>
       {isDropdownOpen &&
-      <DropdownList position={position} onClose={() => setIsDropdownOpen(false)}>
+      <DropdownList
+        taskId={taskId}
+        position={position}
+        onClose={() => setIsDropdownOpen(false)}
+      >
         {children}
       </DropdownList>
       }
