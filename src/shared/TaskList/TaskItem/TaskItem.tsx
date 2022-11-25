@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Menu } from './Menu';
 import styles from './taskitem.css';
 
@@ -13,9 +13,22 @@ interface ITask {
 }
 
 export function TaskItem({ task }: ITask) {
+  const [value, setValue] = useState(task.text);
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setValue(event.target.value);
+  };
+
   return (
     <li className={styles.taskItem}>
-      {task.text}
+      <input
+        id={`text_task_id_${task.id}`}
+        type='text'
+        value={value}
+        onChange={handleChange}
+        disabled
+        size={value.length}
+      />
       <Menu taskId={task.id} />
     </li>
   );

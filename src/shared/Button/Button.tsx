@@ -7,19 +7,31 @@ interface IButton {
   isDisabled?: boolean;
   isSuccess?: boolean;
   isDanger?: boolean;
+  isDangerBg?: boolean;
+  onClick?: () => void;
 }
 
-export function Button({ children, isSuccess = true, isDisabled = false, isDanger = false }: IButton) {
+const NOOP = () => {};
+
+export function Button({
+  children,
+  isSuccess = true,
+  isDisabled = false,
+  isDanger = false,
+  isDangerBg = false,
+  onClick = NOOP
+}: IButton) {
 
   const classes = classNames(
     styles['btn'],
     { [styles.isSuccess]: isSuccess },
     { [styles.isDisabled]: isDisabled },
     { [styles.isDanger]: isDanger },
+    { [styles.isDangerBg]: isDangerBg },
   );
 
   return (
-    <button className={classes}>
+    <button className={classes} onClick={onClick}>
       {children}
     </button>
   );

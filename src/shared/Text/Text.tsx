@@ -18,7 +18,7 @@ export enum EColors {
 type TSizes = 24 | 20 | 16 | 14 | 12 | 10;
 
 interface ITextProps {
-  As?: 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div';
+  As?: 'span' | 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'div' | 'input';
   children?: React.ReactNode;
   size: TSizes;
   mobileSize?: TSizes;

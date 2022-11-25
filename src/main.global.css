@@ -60,6 +60,10 @@ body {
   font-family: 'SF UI Display';
 }
 
+body.isModal {
+  overflow: hidden;
+}
+
 * {
   color: var(--black);
   box-sizing: border-box;

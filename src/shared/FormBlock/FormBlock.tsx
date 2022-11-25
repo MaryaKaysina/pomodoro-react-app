@@ -1,6 +1,7 @@
+import { DEFAULT_TIME } from '../conts';
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { authRequestAsync, IData } from '../../store/auth/actions';
 import { RootState, updateNewTask } from '../../store/reducer';
 import { Form } from '../Form';
@@ -21,11 +22,11 @@ export function FormBlock() {
 
   const newTask = useSelector<RootState, string>(state => state.newTask);
   const data = useSelector<RootState, IData[]>(state => state.auth.data);
-  console.log(data);
 
   const currentAuth = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0].auth;
   const current = data.filter((item) => item.auth === currentAuth)[0];
   const other = data.filter((item) => item.auth !== currentAuth);
+  const newId = current.tasks?.sort((a, b) => b?.id - a?.id).slice(0, 1)[0]?.id + 1 || 0;
 
   const logInDate = current?.logInDate;
 
@@ -37,15 +38,16 @@ export function FormBlock() {
     event.preventDefault();
     if (newTask.length > 0) {
       const task = {
-        id: current.tasks.length,
+        id: newId,
         text: newTask,
-        time: 25,
+        time: DEFAULT_TIME,
         currentTime: 0,
         createdAt: Date.now(),
         done:false
       };
       const newTasks = [ ... current.tasks, task];
-      const newAuthData = [{
+
+      const newAuthData: IData[] = [{
         auth: currentAuth,
         tasks: newTasks,
         logInDate: logInDate,

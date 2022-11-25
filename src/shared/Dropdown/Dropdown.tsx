@@ -11,7 +11,7 @@ interface IDropdownProps {
   button: React.ReactNode;
   children: React.ReactNode;
   position?: IPosition;
-  taskId?: number;
+  taskId: number;
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;

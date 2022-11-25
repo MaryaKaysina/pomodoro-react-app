@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { customErrorFactory } from 'ts-custom-error';
@@ -20,6 +20,7 @@ interface IError {
 }
 
 export function Auth() {
+  const [mounred, setMounted] = useState(false);
   const [authError, setAuthError] = useState<IError>({ code: 0, message: '' });
   const name = useSelector<RootState, string>(state => state.name);
   const mail = useSelector<RootState, string>(state => state.mail);
@@ -28,11 +29,16 @@ export function Auth() {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
-  const data = useSelector<RootState, IData[]>(state => state.auth.data);
-
   const localDefault = JSON.stringify([{auth: "", tasks: [], logInDate: 0}]);
   const localString = localStorage.getItem('token-pomodoro') || localDefault;
   const local: IData[] = JSON.parse(localString);
+
+  useEffect(() => {
+    dispatch(authRequestAsync(local));
+    setMounted(true);
+  }, [])
+
+  const data = useSelector<RootState, IData[]>(state => state.auth.data);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.id === 'name') {
@@ -64,17 +70,12 @@ export function Auth() {
         throw new AuthError(114, 'Не проставлено согласие (:');
       }
 
-      const currentData = data.filter((item) => item.auth === mail.trim());
-      const currentLocal = local.filter((item) => item.auth === mail.trim());
-      const otherData = data.filter((item) => item.auth !== mail.trim());
-      const otherLocal = local.filter((item) => item.auth !== mail.trim());
-
-      const current = currentData.length === 0 ? currentData : currentLocal;
-      const other = otherData.length === 0 ? otherData : otherLocal;
+      const current = data.filter((item) => item.auth === mail.trim())[0];
+      const other = data.filter((item) => item.auth !== mail.trim());
 
       const newAuthData: IData[] = [{
         auth: mail.trim(),
-        tasks: current.length === 0 ? [] : current[0].tasks,
+        tasks: current ? current.tasks : [],
         logInDate: Date.now(),
       }];
 

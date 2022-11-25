@@ -3,6 +3,7 @@ import styles from './icon.css';
 import {
   AddIcon,
   AddMenuIcon,
+  CloseIcon,
   DeleteMenuIcon,
   DownMenuIcon,
   EditMenuIcon,
@@ -19,6 +20,7 @@ export enum EIcons {
   editMenuIcon = 'EditMenuIcon',
   deleteMenuIcon = 'DeleteMenuIcon',
   logoutIcon = 'LogoutIcon',
+  closeIcon = 'CloseIcon',
 }
 
 type TSizes = 20 | 16 | 14;
@@ -44,6 +46,7 @@ const icons = {
   [EIcons.deleteMenuIcon]: <DeleteMenuIcon />,
   [EIcons.menuLinkIcon]: <MenuLinkIcon />,
   [EIcons.logoutIcon]: <LogoutIcon />,
+  [EIcons.closeIcon]: <CloseIcon />,
 }
 
 export function Icon({ name, size = 16 }: IIconProps) {

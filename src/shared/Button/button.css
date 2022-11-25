@@ -26,6 +26,12 @@
   cursor: not-allowed;
 }
 
+.isDangerBg {
+  border: 2px solid var(--red);
+  background: var(--red);
+  color: var(--white);
+}
+
 @media all and (min-width: 1540px) {
   .isSuccess:hover {
     background: var(--greenHover);
@@ -37,5 +43,9 @@
   .isDisabled:hover {
     background: none;
     color: var(--greyC4);
+  }
+  .isDangerBg:hover {
+    background: none;
+    color: var(--red);
   }
 }

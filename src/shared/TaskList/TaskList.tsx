@@ -14,7 +14,8 @@ interface ITaskList {
 }
 
 export function TaskList({ tasks }: ITaskList) {
-  const allTime = tasks?.reduce((acc, task) => task.time + acc, 0) || 0;
+  const tasksSort = tasks.sort((a, b) => a.id - b.id);
+  const allTime = tasks?.reduce((acc, task) => task.time + acc, 0) / 60 || 0;
   let allTimeText = '';
 
   if (allTime < 60) {
@@ -27,10 +28,10 @@ export function TaskList({ tasks }: ITaskList) {
 
   return (
     <>
-    {tasks?.length > 0 && (
+    {tasksSort?.length > 0 && (
       <>
         <ul className={styles.taskList}>
-          {tasks?.map((task: ITaskItem) =>
+          {tasksSort?.map((task: ITaskItem) =>
             <TaskItem key={task.id} task={task} />
           )}
         </ul>

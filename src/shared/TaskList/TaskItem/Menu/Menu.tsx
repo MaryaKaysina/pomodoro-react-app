@@ -28,9 +28,8 @@ export function Menu({ taskId }: IMenu) {
 
   useEffect(() => {
     getPosition();
-    window.addEventListener('resize', getPosition)
-    window.addEventListener('scroll', getPosition)
-
+    window.addEventListener('resize', getPosition);
+    window.addEventListener('scroll', getPosition);
   }, []);
 
   return (

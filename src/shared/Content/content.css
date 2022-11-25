@@ -29,6 +29,7 @@
 
 .content > div {
   grid-area: block;
+  align-self: baseline;
 }
 
 .content form {

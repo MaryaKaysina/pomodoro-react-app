@@ -1,0 +1,45 @@
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.modalBlock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px;
+  min-width: 350px;
+  background: #FFFFFF;
+}
+
+.modalTitle {
+  margin: 0;
+  margin-bottom: 25px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 17px;
+}
+
+.modalClose {
+  margin-top: 10px;
+  border-bottom: 1px solid #333;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+}

@@ -37,3 +37,19 @@
   width: 100%;
   background: var(--grayF4);
 }
+
+.taskItem input {
+  padding: 4px 5px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+  cursor: default;
+}
+
+.taskItem input:focus {
+  outline: none;
+  background: var(--grayF4);
+}
