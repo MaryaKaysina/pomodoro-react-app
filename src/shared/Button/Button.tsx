@@ -9,6 +9,8 @@ interface IButton {
   isDanger?: boolean;
   isDangerBg?: boolean;
   onClick?: () => void;
+  onMouseDown?: () => void;
+  onMouseUp?: () => void;
 }
 
 const NOOP = () => {};
@@ -19,7 +21,9 @@ export function Button({
   isDisabled = false,
   isDanger = false,
   isDangerBg = false,
-  onClick = NOOP
+  onClick = NOOP,
+  onMouseDown = NOOP,
+  onMouseUp = NOOP,
 }: IButton) {
 
   const classes = classNames(
@@ -31,7 +35,12 @@ export function Button({
   );
 
   return (
-    <button className={classes} onClick={onClick}>
+    <button
+      className={classes}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+    >
       {children}
     </button>
   );

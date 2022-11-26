@@ -26,3 +26,22 @@
 .btns button:not(:last-child) {
   margin-right: 25px;
 }
+
+.block.isTimerPaused .header {
+  background: var(--red);
+}
+
+.block.isBtnStartActive .header {
+  background: var(--red);
+}
+
+.block.isBtnStartActive h3 {
+  color: var(--red);
+}
+
+.block.isTimerPaused.isBtnStartActive .header {
+  background: var(--green);
+}
+.block.isTimerPaused.isBtnStartActive h3 {
+  color: var(--green);
+}
