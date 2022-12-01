@@ -1,0 +1,32 @@
+.titleBlock {
+  padding: 100px 0;
+}
+
+.menuButton {
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  padding: 19px 15px;
+  min-width: 370px;
+  background: #F4F4F4;
+  font-size: 16px;
+  line-height: 17px;
+  color: #333333;
+}
+
+.menuButton::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 17px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid #B7280F;
+  border-left: 2px solid #B7280F;
+  transform: rotate(-45deg);
+  transition: transform .3s ease-in-out;
+}
+
+.menuButton.isOpen::after {
+  transform: rotate(135deg);
+}

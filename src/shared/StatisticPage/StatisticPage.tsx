@@ -1,6 +1,9 @@
 import React from 'react';
+import { ContentStatistic } from '../ContentStatistic';
 import { Header } from '../Header';
 import { Layout } from '../Layout';
+import { TitleBlock } from '../TitleBlock';
+
 import styles from './statisticpage.css';
 
 export function StatisticPage() {
@@ -8,7 +11,12 @@ export function StatisticPage() {
     <>
       <Header />
       <Layout>
-        <div>Statistic</div>
+        <ContentStatistic>
+          <TitleBlock/>
+          {/* <TextBlock />
+          <FormBlock />
+          <PomodorBlock /> */}
+        </ContentStatistic>
       </Layout>
     </>
   );

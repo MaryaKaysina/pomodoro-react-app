@@ -15,7 +15,7 @@ interface IPosition {
 interface IDropdownList {
   children: React.ReactNode;
   position?: IPosition;
-  taskId: number;
+  taskId?: number;
   onClose?: () => void;
   onClick?: () => void;
 }
@@ -109,15 +109,15 @@ export function DropdownList(props: IDropdownList) {
         }
 
       } else {
-        const cuurentAction = ((event.target as HTMLElement).parentNode as HTMLElement).dataset.action;
+        const currentAction = ((event.target as HTMLElement).parentNode as HTMLElement).dataset.action;
 
-        if(cuurentAction === 'UpTime' || (cuurentAction === 'DownTime' && curentTime > 0)) {
-          if(cuurentAction === 'UpTime') {
+        if(currentAction === 'UpTime' || (currentAction === 'DownTime' && curentTime > 0)) {
+          if(currentAction === 'UpTime') {
             curentTime = upTime(curentTask.time);
             props.onClose?.();
           }
 
-          if(cuurentAction === 'DownTime' && curentTime > 0) {
+          if(currentAction === 'DownTime' && curentTime > 0) {
             curentTime = downTime(curentTask.time);
             props.onClose?.();
           }
@@ -125,7 +125,7 @@ export function DropdownList(props: IDropdownList) {
           setData(curentTime, currentText);
         }
 
-        if(cuurentAction === 'EditTask') {
+        if(currentAction === 'EditTask') {
           const textInput = (document.querySelector(`input#text_task_id_${curentTask.id}`) as HTMLInputElement);
           textInput.disabled = false;
           textInput.disabled = false;
@@ -137,7 +137,7 @@ export function DropdownList(props: IDropdownList) {
           props.onClose?.();
         }
 
-        if(cuurentAction === 'DeleteTask') {
+        if(currentAction === 'DeleteTask') {
           body?.classList.add('isModal');
           setIsOpenModal(true);
 

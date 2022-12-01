@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styles from './dropdown.css';
 import { DropdownList } from './DropdownList';
+import { SelectList } from './SelectList';
 
 interface IPosition {
   top: number;
@@ -11,7 +12,7 @@ interface IDropdownProps {
   button: React.ReactNode;
   children: React.ReactNode;
   position?: IPosition;
-  taskId: number;
+  taskId?: number;
   isOpen?: boolean;
   onOpen?: () => void;
   onClose?: () => void;
@@ -25,7 +26,7 @@ export function Dropdown(
     children,
     position,
     isOpen,
-    taskId,
+    taskId = -1,
     onOpen = NOOP,
     onClose = NOOP
   }: IDropdownProps) {
@@ -44,7 +45,7 @@ export function Dropdown(
       <div onClick={handleOpen}>
         {button}
       </div>
-      {isDropdownOpen &&
+      {isDropdownOpen && taskId !== -1 &&
       <DropdownList
         taskId={taskId}
         position={position}
@@ -52,6 +53,14 @@ export function Dropdown(
       >
         {children}
       </DropdownList>
+      }
+      {isDropdownOpen && taskId === -1 &&
+      <SelectList
+        position={position}
+        onClose={() => setIsDropdownOpen(false)}
+      >
+        {children}
+      </SelectList>
       }
     </div>
   );

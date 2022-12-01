@@ -8,3 +8,4 @@ export * from './DeleteMenuIcon';
 export * from './MenuIcon';
 export * from './LogoutIcon';
 export * from './CloseIcon';
+export * from './ArrowIcon';
