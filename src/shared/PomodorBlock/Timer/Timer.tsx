@@ -4,15 +4,18 @@ import { Text, EColors } from '../../Text';
 import styles from './timer.css';
 
 interface ITimer {
-  time?: number
+  time?: number;
+  onClick?: () => void;
 }
+
+const NOOP = () => {};
 
 function formatTime(time: number) {
   if (time < 10) return `0${time}`;
   return time;
 }
 
-export function Timer({ time }: ITimer) {
+export function Timer({ time, onClick = NOOP }: ITimer) {
   let timeText = '00:00';
 
   if (time) {
@@ -27,7 +30,7 @@ export function Timer({ time }: ITimer) {
   return (
     <div className={styles.timer}>
       <Text As='h3' mobileSize={14} size={16} color={EColors.black}>{timeText}</Text>
-      <button className={styles.addButton}>
+      <button className={styles.addButton} onClick={onClick}>
         <Icon name={EIcons.addIcon} />
       </button>
     </div>

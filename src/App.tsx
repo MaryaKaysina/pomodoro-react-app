@@ -3,12 +3,6 @@ import { hot } from 'react-hot-loader/root';
 import './main.global.css';
 
 import { Auth } from './shared/Auth';
-import { Layout } from './shared/Layout';
-import { Header } from './shared/Header';
-import { Content } from './shared/Content';
-import { TextBlock } from './shared/TextBlock';
-import { PomodorBlock } from './shared/PomodorBlock';
-import { FormBlock } from './shared/FormBlock';
 
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -17,6 +11,8 @@ import thunk from 'redux-thunk';
 import { rootReducer } from './store/reducer';
 import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
 import { NotFoundPage } from "./shared/NotFoundPage";
+import { PomodoroPage } from "./shared/PomodoroPage";
+import { StatisticPage } from "./shared/StatisticPage";
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
@@ -37,18 +33,8 @@ function AppComponent() {
           <Routes>
             <Route path="*" element={<Navigate to="/auth" replace />} />
             <Route path="/auth" element={ <Auth/> } />
-            <Route path="/pomodoros" element={
-              <>
-                <Header />
-                <Layout>
-                  <Content>
-                    <TextBlock />
-                    <FormBlock />
-                    <PomodorBlock />
-                  </Content>
-                </Layout>
-              </>
-            } />
+            <Route path="/pomodoros" element={<PomodoroPage/>} />
+            <Route path="/statistic" element={<StatisticPage/>} />
           </Routes>
         </BrowserRouter>
       )}

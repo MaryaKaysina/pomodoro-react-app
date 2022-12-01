@@ -19,7 +19,9 @@ export interface ITask {
   time: number;
   currentTime: number;
   createdAt: number;
+  updateddAt: number;
   done: boolean;
+  skip: boolean;
 }
 
 export interface IData {

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authRequestAsync, IData } from '../../store/auth/actions';
 import { RootState } from '../../store/reducer';
 import { Button } from '../Button';
-import { DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG } from '../conts';
+import { DEFAULT_TIME_ADD, DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG } from '../conts';
 import { Text, EColors } from '../Text';
 import styles from './pomodorblock.css';
 import { Timer } from './Timer';
@@ -14,18 +14,16 @@ export function PomodorBlock() {
   const [count, setCount] = useState<number>(0);
   const [text, setText] = useState<string>('Введите название задачи');
   const [number, setNumber] = useState<string>('');
+
   const [classList, setClassList] = useState<string>('');
+  const [startBtnText, setStartBtnText] = useState<string>('Старт');
+  const [stopBtnText, setStopBtnText] = useState<string>('Стоп');
+
   const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
   const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
   const [isAfterStart, setIsAfterStart] = useState<boolean>(false);
   const [isBtnStartActive, setIsBtnStartActive] = useState<boolean>(false);
   const [isBreak, setIsBreak] = useState<boolean>(false);
-
-  let startBtnText = 'Старт';
-  if (isTimerActive) startBtnText = 'Пауза';
-  if (isTimerPaused) startBtnText = 'Продолжить';
-
-  let stopBtnText = isTimerPaused ? 'Стоп' : 'Сделано';
 
   const data = useSelector<RootState, IData[]>(state => state.auth.data);
   const currentAuth = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0].auth;
@@ -57,77 +55,29 @@ export function PomodorBlock() {
         if (time > 0) {
           const currentTimerId = setTimeout(() => {
             setTime(time - 1);
-            clearTimeout(currentTimerId);
+            if (current) {
+              current.time = time - 1;
+              current.currentTime = current.currentTime + 1;
+              dispatch(authRequestAsync(data));
+            }
           }, 1000);
+          return () => clearTimeout(currentTimerId);
         } else {
           if (!isBreak) {
             current.done = true;
+            current.updateddAt = Date.now();
             dispatch(authRequestAsync(data));
             setCount(count + 1);
+            setStopBtnText('Пропустить');
           }
           setIsTimerActive(false);
           setIsBreak(!isBreak);
+          setStartBtnText('Старт');
+          setIsAfterStart(false);
         }
       }
     }
   }, [isTimerActive, time])
-
-  // useEffect(() => {
-  //   const current = currentTasks.filter((task) => !task.done).sort((a, b) => a.id - b.id)[0];
-  //   setCurrentTask(current);
-  //   console.log('currentTask', currentTask);
-  // }, [currentTasks])
-
-  // useEffect(() => {
-  //   if (isBreak) {
-  //     setText('Перерыв');
-  //     setNumber('');
-  //     setTime(DEFAULT_TIME_BREAK);
-  //     return;
-  //   }
-
-  //   if (currentTask && currentTask?.id !== -1) {
-  //     setText(currentTask.text);
-  //     setNumber(`${currentTasks.indexOf(currentTask) + 1}`);
-  //     setTime(currentTask.time);
-  //   } else {
-  //     setText('Введите название задачи');
-  //     setNumber('');
-  //     setTime(0);
-  //   }
-  // }, [isTimerActive]);
-
-  // useEffect(() => {
-
-  //   if (isBreak) {
-
-  //     if (time > 0) {
-  //       const currentTimerId = setTimeout(() => {
-  //         setTime(time - 1);
-  //         clearTimeout(currentTimerId);
-  //       }, 1000);
-  //     } else {
-  //       setIsBreak(false);
-  //       setIsTimerActive(false);
-  //     }
-  //   } else if (isTimerActive && currentTask?.id !== -1 ) {
-
-  //     if (time > 0) {
-  //       const currentTimerId = setTimeout(() => {
-  //         setTime(time - 1);
-  //         clearTimeout(currentTimerId);
-  //       }, 1000);
-  //     } else {
-  //       currentTask.done = true;
-  //       dispatch(authRequestAsync(data));
-  //       setIsTimerActive(false);
-  //       setIsBreak(true);
-  //     }
-  //   }
-  //   else {
-  //     setIsTimerActive(false);
-  //   }
-  // }, [isBreak, isTimerActive, time]);
 
   useEffect(() => {
     const classes = classNames(
@@ -139,28 +89,69 @@ export function PomodorBlock() {
   }, [isTimerPaused, isBtnStartActive]);
 
   function handleClickStart() {
-    if (!isTimerActive && !isTimerPaused) {
-      setIsTimerActive(true);
-      setIsAfterStart(true);
+    if (current) {
+      if (!isTimerActive && !isTimerPaused) {
+        setIsTimerActive(true);
+        setIsAfterStart(true);
+        setStartBtnText('Пауза');
+        setStopBtnText('Стоп');
+      }
+      if (isTimerActive && !isTimerPaused) {
+        setIsTimerActive(false);
+        setIsTimerPaused(true);
+        setStartBtnText('Продолжить');
+        setStopBtnText('Сделано');
+      }
+      if (isTimerPaused) {
+        setIsTimerActive(true);
+        setIsTimerPaused(false);
+        setStartBtnText('Пауза');
+        setStopBtnText('Стоп');
+      }
     }
-    if (isTimerActive && !isTimerPaused) {
-      setIsTimerActive(false);
-      setIsTimerPaused(true);
-    }
-    if (isTimerPaused) {
-      setIsTimerActive(true);
-      setIsTimerPaused(false);
+    if (isBreak) {
+      setStopBtnText('Пропустить');
+      if (!isTimerActive && !isTimerPaused) {
+        setIsTimerActive(true);
+        setIsAfterStart(true);
+        setStartBtnText('Пауза');
+      }
+      if (isTimerActive && !isTimerPaused) {
+        setIsTimerActive(false);
+        setIsTimerPaused(true);
+        setStartBtnText('Продолжить');
+      }
+      if (isTimerPaused) {
+        setIsTimerActive(true);
+        setIsTimerPaused(false);
+        setStartBtnText('Пауза');
+      }
     }
   };
 
   function handleClickEnd() {
-    // currentTask.done = true;
-    // setIsTimerActive(false);
-    // dispatch(authRequestAsync(data));
-    // setIsBreak(true);
+    if (current) {
+      current.done = true;
+      current.skip = true;
+      current.updateddAt = Date.now();
+      dispatch(authRequestAsync(data));
+      setCount(count + 1);
+      setIsBreak(true);
+      setIsTimerActive(false);
+      setIsAfterStart(false);
+      setStartBtnText('Старт');
+      setStopBtnText('Пропустить');
+    }
   };
 
-
+  function handleClickAddTime() {
+    if (current) {
+      current.time = current.time + DEFAULT_TIME_ADD;
+      current.updateddAt = Date.now();
+      dispatch(authRequestAsync(data));
+      setTime(current.time);
+    }
+  }
 
   return (
     <div className={classList}>
@@ -171,7 +162,7 @@ export function PomodorBlock() {
         </Text>
       </div>
       <div className={styles.content}>
-        <Timer time={time}/>
+        <Timer time={time} onClick={handleClickAddTime}/>
         {number.length !== 0 && (
           <Text As='p' mobileSize={14} size={16} color={EColors.grey99}>
             Задача {number} -
@@ -187,9 +178,8 @@ export function PomodorBlock() {
             {startBtnText}
           </Button>
           <Button
-            isDisabled = {!isTimerActive && !isTimerPaused}
-            isDanger = {isTimerActive && !isTimerPaused}
-            isDangerBg = {isTimerPaused}
+            isDisabled = {!isTimerActive && !isTimerPaused && !isBreak}
+            isDanger
             onClick={handleClickEnd}
           >
             {stopBtnText}

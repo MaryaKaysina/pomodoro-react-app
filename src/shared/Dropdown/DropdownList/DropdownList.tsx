@@ -26,7 +26,6 @@ export function DropdownList(props: IDropdownList) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [otherData, setOtherData] = useState<IData[]>([]);
 
-  const [newText, setNewText] = useState<string>('');
   const ref = useRef<HTMLDivElement>(null);
 
   const data = useSelector<RootState, IData[]>(state => state.auth.data);
@@ -72,8 +71,10 @@ export function DropdownList(props: IDropdownList) {
         text: currentText,
         time: curentTime,
         currentTime: 0,
-        createdAt: Date.now(),
-        done:false
+        createdAt: curentTask.createdAt,
+        updateddAt: Date.now(),
+        done:false,
+        skip:false,
       };
 
       let newTasks = otherTask;

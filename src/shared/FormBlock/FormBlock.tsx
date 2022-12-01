@@ -43,7 +43,9 @@ export function FormBlock() {
         time: DEFAULT_TIME,
         currentTime: 0,
         createdAt: Date.now(),
-        done:false
+        updateddAt: 0,
+        done:false,
+        skip:false,
       };
       const newTasks = [ ... current.tasks, task];
 
