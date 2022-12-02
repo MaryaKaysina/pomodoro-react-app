@@ -1,0 +1,13 @@
+.dayBlock {
+  padding: 25px;
+  background: var(--grayF4);
+}
+
+.dayBlock h3 {
+  margin: 0;
+  margin-bottom: 14px;
+}
+
+.dayBlock span {
+  margin-left: 5px;
+}

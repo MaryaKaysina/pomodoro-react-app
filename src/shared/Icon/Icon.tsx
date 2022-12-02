@@ -4,11 +4,13 @@ import {
   AddIcon,
   AddMenuIcon,
   ArrowIcon,
+  ClockIcon,
   CloseIcon,
   DeleteMenuIcon,
   DownMenuIcon,
   EditMenuIcon,
-  LogoIcon, LogoutIcon, MenuIcon, MenuLinkIcon
+  FocusIcon,
+  LogoIcon, LogoutIcon, MenuIcon, MenuLinkIcon, StopIcon, TomatoIcon, TomatoNonIcon
 } from '../Icons';
 
 export enum EIcons {
@@ -23,6 +25,11 @@ export enum EIcons {
   logoutIcon = 'LogoutIcon',
   closeIcon = 'CloseIcon',
   arrowIcon = 'ArrowIcon',
+  tomatoNonIcon = 'TomatoNonIcon',
+  tomatoIcon = 'TomatoIcon',
+  focusIcon = 'FocusIcon',
+  clockIcon = 'ClockIcon',
+  stopIcon = 'StopIcon',
 }
 
 type TSizes = 20 | 16 | 14;
@@ -50,6 +57,11 @@ const icons = {
   [EIcons.logoutIcon]: <LogoutIcon />,
   [EIcons.closeIcon]: <CloseIcon />,
   [EIcons.arrowIcon]: <ArrowIcon />,
+  [EIcons.tomatoNonIcon]: <TomatoNonIcon />,
+  [EIcons.tomatoIcon]: <TomatoIcon />,
+  [EIcons.focusIcon]: <FocusIcon />,
+  [EIcons.clockIcon]: <ClockIcon />,
+  [EIcons.stopIcon]: <StopIcon />,
 }
 
 export function Icon({ name, size = 16 }: IIconProps) {

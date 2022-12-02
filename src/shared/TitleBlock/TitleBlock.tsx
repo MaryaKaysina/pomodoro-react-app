@@ -25,6 +25,10 @@ export function TitleBlock() {
     }, 500);
   };
 
+  function handleClick() {
+    setIsOpen(!isOpen);
+  };
+
   useEffect(() => {
     getPosition();
     window.addEventListener('resize', getPosition);
@@ -32,19 +36,11 @@ export function TitleBlock() {
   }, []);
 
   useEffect(() => {
-    function handleClick() {
-      setIsOpen(!isOpen);
-    };
-
-    btnRef.current?.addEventListener('click', handleClick, true);
-
     const classes = classNames(
       styles['menuButton'],
       { [styles.isOpen]: isOpen },
     );
     setClassList(classes);
-
-    // return btnRef.current?.removeEventListener('click', handleClick);
   }, [isOpen]);
 
   return (
@@ -55,6 +51,7 @@ export function TitleBlock() {
           <button
             className={classList}
             ref={btnRef}
+            onClick={handleClick}
           >
             <Text mobileSize={12} size={16} color={EColors.black}>Эта неделя</Text>
           </button>

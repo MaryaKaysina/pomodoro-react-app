@@ -9,3 +9,8 @@ export * from './MenuIcon';
 export * from './LogoutIcon';
 export * from './CloseIcon';
 export * from './ArrowIcon';
+export * from './TomatoNonIcon';
+export * from './TomatoIcon';
+export * from './FocusIcon';
+export * from './ClockIcon';
+export * from './StopIcon';
