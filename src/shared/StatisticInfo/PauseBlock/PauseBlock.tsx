@@ -3,6 +3,6 @@ import styles from './pauseblock.css';
 
 export function PauseBlock() {
   return (
-
+    <div>PauseBlock</div>
   );
 }

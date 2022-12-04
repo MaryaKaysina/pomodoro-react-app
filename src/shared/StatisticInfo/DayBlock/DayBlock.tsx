@@ -20,8 +20,7 @@ export function DayBlock({ day = 0, time = 0 }: IDayBlock) {
 
   function numWord(value: number, words: string[]){
     value = Math.abs(value) % 100;
-    var num = value % 10;
-    console.log(num);
+    const num = value % 10;
 
     if(value > 10 && value < 20) return words[2];
     if(num > 1 && num < 5) return words[1];

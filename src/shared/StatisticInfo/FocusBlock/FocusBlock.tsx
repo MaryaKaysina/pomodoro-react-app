@@ -3,6 +3,6 @@ import styles from './focusblock.css';
 
 export function FocusBlock() {
   return (
-
+    <div>FocusBlock</div>
   );
 }

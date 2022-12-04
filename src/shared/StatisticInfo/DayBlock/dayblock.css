@@ -1,5 +1,6 @@
 .dayBlock {
   padding: 25px;
+  height: 100%;
   background: var(--grayF4);
 }
 

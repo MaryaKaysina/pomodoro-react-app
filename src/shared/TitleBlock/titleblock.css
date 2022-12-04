@@ -10,6 +10,10 @@
   width: auto;
 }
 
+.titleBlock h2 {
+  margin: 0;
+}
+
 .menuButton {
   position: relative;
   z-index: 1000;

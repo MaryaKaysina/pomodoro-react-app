@@ -1,4 +1,34 @@
 .countBlock {
-  padding: 25px;
+  height: 100%;
   background: var(--grayF4);
+}
+
+.countBlock div{
+  width: auto;
+  height: auto;
+}
+
+.countNon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%!important;
+}
+
+.countInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  padding-top: 23px;
+}
+
+.countInfo span {
+  margin-left: 15px;
+}
+
+.countFooter {
+  padding: 9px 0;
+  background: var(--red);
+  text-align: center;
 }

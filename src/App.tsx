@@ -14,6 +14,8 @@ import { NotFoundPage } from "./shared/NotFoundPage";
 import { PomodoroPage } from "./shared/PomodoroPage";
 import { StatisticPage } from "./shared/StatisticPage";
 
+import { TEST } from "./test";
+
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
 ));
@@ -24,6 +26,7 @@ function AppComponent() {
 
   useEffect(() => {
     setMounted(true);
+    localStorage.setItem('token-pomodoro', JSON.stringify(TEST));
   }, []);
 
   return (

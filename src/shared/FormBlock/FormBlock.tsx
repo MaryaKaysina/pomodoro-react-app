@@ -18,7 +18,7 @@ export function FormBlock() {
   useEffect(() => {
     dispatch(authRequestAsync(local));
     setMounted(true);
-  }, [])
+  }, []);
 
   const newTask = useSelector<RootState, string>(state => state.newTask);
   const data = useSelector<RootState, IData[]>(state => state.auth.data);

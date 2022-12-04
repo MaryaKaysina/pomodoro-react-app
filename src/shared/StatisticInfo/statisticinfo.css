@@ -1,0 +1,32 @@
+.infoBlock {
+  display: grid;
+  grid-template-areas:
+  "day diagram"
+  "count diagram"
+  "cards cards";
+  grid-template-columns: 23.125%;
+  grid-template-rows: 260px;
+  gap: 32px;
+  margin-bottom: 100px;
+}
+
+.day {
+  grid-area: day;
+}
+
+.count {
+  grid-area: count;
+  align-self: end;
+  height: 100%;
+}
+
+.diagram {
+  grid-area: diagram;
+}
+
+.cards {
+  grid-area: cards;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+}

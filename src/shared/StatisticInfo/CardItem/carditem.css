@@ -1,0 +1,46 @@
+.cardBlock {
+  position: relative;
+  padding: 25px;
+  width: 100%;
+  background: var(--grayF4);
+}
+
+.cardBlock h3 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.cardBlock svg {
+  fill: none;
+  stroke: #C4C4C4;
+}
+
+.cardBlock.isFocus.isActive {
+  background: #FFDDA9;
+}
+
+.cardBlock.isPause.isActive {
+  background: #DFDCFE;
+}
+
+.cardBlock.isStop.isActive {
+  background: #C5F1FF;
+}
+
+.cardBlock.isFocus.isActive svg {
+  stroke: #FFAE35;
+}
+
+.cardBlock.isPause.isActive svg {
+  stroke: #9C97D7;
+}
+
+.cardBlock.isStop.isActive svg {
+  stroke: #7FC2D7;
+}
+
+.cardIcon {
+  position: absolute;
+  top: 15%;
+  right: 34%;
+}
