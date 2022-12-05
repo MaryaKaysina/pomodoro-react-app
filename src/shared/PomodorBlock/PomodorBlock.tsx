@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authRequestAsync, IData } from '../../store/auth/actions';
 import { RootState } from '../../store/reducer';
+import { IStatistic } from '../../store/statistic/actions';
 import { Button } from '../Button';
 import { DEFAULT_TIME_ADD, DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG } from '../conts';
 import { Text, EColors } from '../Text';
@@ -15,6 +16,14 @@ export function PomodorBlock() {
   const [text, setText] = useState<string>('Введите название задачи');
   const [number, setNumber] = useState<string>('');
 
+  const [focusTime, setFocusTime] = useState<number>(0);
+  const [pauseTime, setPauseTime] = useState<number>(0);
+  const [stopCount, setStopCount] = useState<number>(0);
+
+  // считать перерывом только те случаи когда работает таймер перерыва. То есть если у пользователя было 3 коротких таймеров по 5 минут и один большой по 25 - то время перерыва в статистике будет 40 минут. И не важно сколько раз пользователь нажимал паузы на перерывах/помидорах.
+
+  // Фокус (отношение времени работы с таймером ко времени, потраченному на законченные «помидорки»). 2 помидорки(по 25 минут) и 10 паузы. Время работы с таймером 60 минут, 50 помидорки. 50/60*100=83%
+
   const [classList, setClassList] = useState<string>('');
   const [startBtnText, setStartBtnText] = useState<string>('Старт');
   const [stopBtnText, setStopBtnText] = useState<string>('Стоп');
@@ -26,6 +35,7 @@ export function PomodorBlock() {
   const [isBreak, setIsBreak] = useState<boolean>(false);
 
   const data = useSelector<RootState, IData[]>(state => state.auth.data);
+  const statistic = useSelector<RootState, IStatistic>(state => state.statistic.data);
   const currentAuth = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0].auth;
   const currentTasks = data.filter((item) => item.auth === currentAuth)[0].tasks;
   const current = currentTasks.filter((task) => !task.done).sort((a, b) => a.id - b.id)[0];

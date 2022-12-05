@@ -12,3 +12,7 @@
 .dayBlock span {
   margin-left: 5px;
 }
+
+.dayBlock > span {
+  margin-left: 0;
+}

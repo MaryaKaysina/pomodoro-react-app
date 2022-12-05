@@ -8,6 +8,18 @@ interface ICountBlock {
 }
 
 export function CountBlock({ count = 0 }: ICountBlock) {
+  function numWord(value: number, words: string[]){
+    value = Math.abs(value) % 100;
+    const num = value % 10;
+
+    if(value > 10 && value < 20) return words[2];
+    if(num > 1 && num < 5) return words[1];
+    if(num == 1) return words[0];
+    return words[2];
+  }
+
+  const formatWord = ['помидор','помидора','помидоров'];
+
   return (
     <div className={styles.countBlock}>
       {count === 0 && (
@@ -23,7 +35,7 @@ export function CountBlock({ count = 0 }: ICountBlock) {
           </div>
           <div className={styles.countFooter}>
             <Text mobileSize={16} size={24} color={EColors.white} bold>
-              {count} помидора
+              {count} {numWord(count, formatWord)}
             </Text>
           </div>
         </>
