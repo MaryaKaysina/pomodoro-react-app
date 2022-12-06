@@ -29,7 +29,7 @@ export function StatisticPage() {
 
   return (
     <>
-      {/* {mounred && currentAuth.length === 0 && (<Navigate to="/auth" replace />)} */}
+      {mounred && currentAuth.length === 0 && (<Navigate to="/auth" replace />)}
       <Header />
       <Layout>
         <ContentStatistic>

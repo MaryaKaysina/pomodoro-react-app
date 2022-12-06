@@ -23,7 +23,11 @@ export const initialAuthState: AuthState = {
     {
       auth: '',
       tasks: [],
-      logInDate: 0
+      logInDate: 0,
+      pauseTime: [{
+        createdAt: 0,
+        time: 0,
+      }]
     }
   ]
 }

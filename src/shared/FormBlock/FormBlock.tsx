@@ -53,6 +53,10 @@ export function FormBlock() {
         auth: currentAuth,
         tasks: newTasks,
         logInDate: logInDate,
+        pauseTime: [{
+          createdAt: 0,
+          time: 0,
+        }]
       }];
 
       const newData: IData[] = [ ...other, ... newAuthData ];

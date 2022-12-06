@@ -8,18 +8,26 @@ import { DayBlock } from './DayBlock';
 import { DiagramBlock } from './DiagramBlock';
 import styles from './statisticinfo.css';
 
-export function StatisticInfo() {
+interface IStatisticInfo {
+  currentDay?: number;
+}
+
+function formatDate(date: Date) {
+  return date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + (date.getUTCDate());
+};
+
+export function StatisticInfo({ currentDay = 2 }: IStatisticInfo) {
   const [day, setDay] = useState<number>(0);
   const [dayTime, setDayTime] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
+  const [focus, setFocus] = useState<number>(0);
+  const [pause, setPause] = useState<number>(0);
+  const [stop, setStop] = useState<number>(0);
   const data = useSelector<RootState, IData[]>(state => state.auth.data);
-
-  function formatDate(date: Date) {
-    return date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + (date.getUTCDate());
-  };
+  const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
 
   useEffect(() => {
-    const tasks = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0].tasks;
+    const tasks = currentData.tasks;
     if (tasks.length === 0) return;
 
     const now = new Date();
@@ -38,24 +46,35 @@ export function StatisticInfo() {
       formatDate(new Date(task.updateddAt)) <= week[6]);
 
     const dayTasks = tasks.filter(function (task) {
-      return formatDate(new Date(task.updateddAt)) === week[0] &&
+      return formatDate(new Date(task.updateddAt)) === week[currentDay] &&
         task.done &&
         !task.skip;
     });
 
-    var timeTask = dayTasks.map((task) => task.currentTime).reduce((item, acc) => item + acc, 0);
+    const currentStop = tasks.filter(function (task) {
+      return formatDate(new Date(task.updateddAt)) === week[currentDay] &&
+      task.done &&
+      task.skip;
+    });
 
-    setDay(offset[new Date(week[0]).getDay()]);
+    const currentPause = currentData.pauseTime
+      .filter(pause => formatDate(new Date(pause.createdAt)) === week[currentDay])
+      .map(pause => pause.time)
+      .reduce((item, acc) => item + acc, 0);
+
+    console.log(currentPause);
+
+    const timeTask = dayTasks.map((task) => task.currentTime).reduce((item, acc) => item + acc, 0);
+    const currentFocus = Math.ceil(timeTask / (timeTask + currentPause) * 100);
+
+    setDay(offset[new Date(week[currentDay]).getDay()]);
     setDayTime(timeTask);
     setCount(dayTasks.length);
 
-    // console.log(formatDate(mondayStr));
-    // console.log(timeTask);
+    setFocus(currentFocus);
+    setPause(currentPause / 60);
+    setStop(currentStop.length);
   }, [data]);
-
-  const focusNum = 0;
-  const pauseNum = 0;
-  const stopNum = 0;
 
   return (
     <div className={styles.infoBlock}>
@@ -63,9 +82,9 @@ export function StatisticInfo() {
       <div className={styles.count}><CountBlock count={count}/></div>
       <div className={styles.diagram}><DiagramBlock/></div>
       <div className={styles.cards}>
-        <CardItem type='focus' num={focusNum} />
-        <CardItem type='pause' num={pauseNum} />
-        <CardItem type='stop' num={stopNum} />
+        <CardItem type='focus' num={focus} />
+        <CardItem type='pause' num={pause} />
+        <CardItem type='stop' num={stop} />
       </div>
     </div>
   );

@@ -24,10 +24,16 @@ export interface ITask {
   skip: boolean;
 }
 
+export interface IPause {
+  createdAt: number;
+  time: number;
+}
+
 export interface IData {
   auth: string;
   logInDate: number;
   tasks: ITask[];
+  pauseTime: IPause[];
 }
 
 // AUTH_REQUEST_SUCCESS

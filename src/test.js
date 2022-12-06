@@ -149,7 +149,238 @@ export const TEST = [
       },
       // сб 2022-12-03
       // вс 2022-12-04
+      // last week
+      // пн 2022-12-05
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-28'),
+        updateddAt: Date.parse('2022-12-05'),
+        done: true,
+        skip: false,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-28'),
+        updateddAt: Date.parse('2022-12-05'),
+        done: true,
+        skip: false,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-28'),
+        updateddAt: Date.parse('2022-12-05'),
+        done: true,
+        skip: false,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-28'),
+        updateddAt: Date.parse('2022-12-05'),
+        done: true,
+        skip: true,
+      },
+      // вт 2022-12-06
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-06'),
+        done: true,
+        skip: false,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-06'),
+        done: true,
+        skip: false,
+      },
+      // ср 2022-12-07
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-07'),
+        done: true,
+        skip: false,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-07'),
+        done: true,
+        skip: true,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-07'),
+        done: true,
+        skip: true,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-07'),
+        done: true,
+        skip: false,
+      },
+      // чт 2022-12-08
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-08'),
+        done: true,
+        skip: true,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-08'),
+        done: true,
+        skip: false,
+      },
+      // пт 2022-12-09
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 2000,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-09'),
+        done: true,
+        skip: false,
+      },
+      {
+        id: 0,
+        text: '',
+        time: 0,
+        currentTime: 1500,
+        createdAt: Date.parse('2022-11-29'),
+        updateddAt: Date.parse('2022-12-09'),
+        done: true,
+        skip: false,
+      },
+      // сб 2022-12-10
+      // вс 2022-12-11
     ],
-    logInDate: Date.now()
+    logInDate: Date.now(),
+    pauseTime: [
+      {
+        createdAt: Date.parse('2022-11-28'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-11-28'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-11-28'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-11-29'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-11-29'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-11-30'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-11-30'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-11-30'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-01'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-02'),
+        time: 300,
+      },
+      //
+      {
+        createdAt: Date.parse('2022-12-05'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-05'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-05'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-06'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-06'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-07'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-07'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-07'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-08'),
+        time: 300,
+      },
+      {
+        createdAt: Date.parse('2022-12-09'),
+        time: 300,
+      },
+    ]
   }
 ]

@@ -1,8 +1,6 @@
 import { ActionCreator, Reducer } from "redux";
 import { AuthRequestAction, AuthRequestSuccessAction, AuthRequestErrorAction, AUTH_REQUEST, AUTH_REQUEST_ERROR, AUTH_REQUEST_SUCCESS } from "./auth/actions";
 import { authReducer, AuthState, initialAuthState } from "./auth/reducer";
-import { StatisticRequestAction, StatisticRequestErrorAction, StatisticRequestSuccessAction, STATISTIC_REQUEST, STATISTIC_REQUEST_ERROR, STATISTIC_REQUEST_SUCCESS } from "./statistic/actions";
-import { initialStatisticState, statisticReducer, StatisticState } from "./statistic/reducer";
 
 export type RootState = {
   name: string;
@@ -10,7 +8,6 @@ export type RootState = {
   isCheck: string;
   newTask: string;
   auth: AuthState;
-  statistic: StatisticState;
 }
 
 const initialState: RootState = {
@@ -19,7 +16,6 @@ const initialState: RootState = {
   isCheck: 'true',
   newTask: '',
   auth: initialAuthState,
-  statistic: initialStatisticState,
 }
 
 // NEW_TASK
@@ -81,10 +77,7 @@ type MyAction = UpdateNameAction
 | NewTaskAction
 | AuthRequestAction
 | AuthRequestSuccessAction
-| AuthRequestErrorAction
-| StatisticRequestAction
-| StatisticRequestSuccessAction
-| StatisticRequestErrorAction;
+| AuthRequestErrorAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
   switch (action.type) {
@@ -114,13 +107,6 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
       return {
         ...state,
         auth: authReducer(state.auth, action),
-      }
-    case STATISTIC_REQUEST:
-    case STATISTIC_REQUEST_ERROR:
-    case STATISTIC_REQUEST_SUCCESS:
-      return {
-        ...state,
-        statistic: statisticReducer(state.statistic, action),
       }
     default:
       return state;

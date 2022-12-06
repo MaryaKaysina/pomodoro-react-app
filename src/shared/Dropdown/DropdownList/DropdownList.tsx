@@ -87,6 +87,7 @@ export function DropdownList(props: IDropdownList) {
         auth: currentData.auth,
         tasks: newTasks,
         logInDate: currentData.logInDate,
+        pauseTime: currentData.pauseTime
       }];
 
       const newData: IData[] = [ ...other, ... newAuthData ];
@@ -145,6 +146,7 @@ export function DropdownList(props: IDropdownList) {
             auth: currentData.auth,
             tasks: otherTask,
             logInDate: currentData.logInDate,
+            pauseTime: currentData.pauseTime
           }];
 
           setOtherData(newAuthData);

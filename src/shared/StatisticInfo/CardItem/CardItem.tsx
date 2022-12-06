@@ -48,7 +48,7 @@ export function CardItem({ type, num }: ICardItem) {
     );
 
     setClassList(classes);
-  }, [isFocus, isPause, isStop, isActive]);
+  }, [isFocus, isPause, isStop, isActive, num]);
 
   return (
     <div className={classList}>

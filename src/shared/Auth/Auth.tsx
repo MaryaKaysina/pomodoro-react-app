@@ -77,6 +77,7 @@ export function Auth() {
         auth: mail.trim(),
         tasks: current ? current.tasks : [],
         logInDate: Date.now(),
+        pauseTime: current ? current.pauseTime : [{ createdAt: 0, time: 0 }]
       }];
 
       const newData: IData[] = [ ...other, ... newAuthData ];
