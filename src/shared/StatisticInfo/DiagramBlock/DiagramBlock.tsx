@@ -1,88 +1,66 @@
+import classNames from 'classnames';
 import React from 'react';
 import styles from './diagramblock.css';
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
+interface IDiagramBlock {
+  tasks: number[];
+  currentDay: number;
+}
 
-import { Bar } from 'react-chartjs-2';
+export function DiagramBlock({ tasks, currentDay }: IDiagramBlock) {
+  const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+  const dayNames = labels.map((item, i) => {
+    const classes = classNames(styles.text, {
+      [styles.active]: currentDay === i
+    });
+    return <div
+      onClick={() => {}}
+      key={i}
+      className={classes}>
+      {item}
+    </div>
+  });
 
-export const options = {
-  layout: {
-    padding: {
-      bottom: 13,
-    }
-  },
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-      ticks: {
-        color: 'rgba(153, 153, 153, 1)',
-        font: {
-          size: 24,
-          family: 'SF UI Display'
-        },
+  const columns = labels.map((_, i) => {
+    const colHeight: number | undefined = tasks[i];
 
-      },
-      backgroundColor: 'rgba(236, 236, 236, 1)',
-      backdropPadding: 10,
-    },
-    y: {
-      position: {
-        x: 6,
-      },
-      grid: {
-        borderWidth: 0,
-        display: true,
-        drawOnChartArea: true,
-        drawTicks: true,
-      }
-    },
+    const classes = classNames(styles.column, {
+      [styles.active]: currentDay === i,
+      [styles.noData]: tasks[i] === 0
+    });
+
+    return <div
+      onClick={() => {}}
+      className={classes}
+      style={{ gridColumn: `${i + 2}/${i + 3}`, height: colHeight && colHeight >= 120 ? Math.floor(colHeight / 60 * 3.5) : 5 }}
+      key={i}
+    ></div>
+  });
+
+  const displayTime = (i: number) => {
+    if (i > 59) return `${Math.floor(i / 60)} ч ${i - Math.floor(i / 60) * 60} м`;
+    return `${i} м`
   }
-};
 
-const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-const dataSet = [1000, 726, 926, 168, 425, 224, 787];
+  let rows = [];
+  for (let i = 4; i > 0; --i) {
+    rows.push(<div className={styles.row} style={{ gridRow: `${5 - i}` }} key={i}>
+      <span className={styles.bar}></span>
+      <span className={styles.timeline}>{displayTime(25 * (i))}</span>
+    </div>)
+  };
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      data: dataSet,
-      backgroundColor: 'rgba(234, 137, 121, 1)',
-      hoverBackgroundColor: 'rgba(238, 115, 93, 1)',
-      // hoverBackgroundColor: 'rgba(220, 62, 34, 1)'
-    },
-  ],
-};
-
-export function DiagramBlock() {
   return (
     <div className={styles.diagramBlock}>
-      <Bar options={options} data={data} />
+      <div className={styles.container}>
+        {columns}
+        {rows}
+        <div className={styles.xAxis}>
+          <div></div>
+          {dayNames}
+        </div>
+      </div>
     </div>
   );
 }

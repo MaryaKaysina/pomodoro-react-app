@@ -16,13 +16,14 @@ function formatDate(date: Date) {
   return date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1) + '-' + (date.getUTCDate());
 };
 
-export function StatisticInfo({ currentDay = 2 }: IStatisticInfo) {
+export function StatisticInfo({ currentDay = 0 }: IStatisticInfo) {
   const [day, setDay] = useState<number>(0);
   const [dayTime, setDayTime] = useState<number>(0);
   const [count, setCount] = useState<number>(0);
   const [focus, setFocus] = useState<number>(0);
   const [pause, setPause] = useState<number>(0);
   const [stop, setStop] = useState<number>(0);
+  const [weekTasks, setWeekTasks] = useState<number[]>([]);
   const data = useSelector<RootState, IData[]>(state => state.auth.data);
   const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
 
@@ -42,8 +43,21 @@ export function StatisticInfo({ currentDay = 2 }: IStatisticInfo) {
       week.push(formatDate(day));
     }
 
-    const currentTasks = tasks.filter((task) => formatDate(new Date(task.updateddAt)) >= week[0] &&
-      formatDate(new Date(task.updateddAt)) <= week[6]);
+    const currentTasks = tasks.filter(function (task) {
+      return task.updateddAt >= Date.parse(week[0]) &&
+      task.updateddAt <= Date.parse(week[6]);
+    });
+
+    const taskWeek = [];
+    for (let i = 0; i < 7; i++) {
+      let taskItem = 0;
+      currentTasks.forEach((task) => {
+        if (formatDate(new Date(task.updateddAt)) === week[i] && !task.skip) {
+          taskItem = taskItem + task.currentTime;
+        }
+      })
+      taskWeek.push(taskItem)
+    };
 
     const dayTasks = tasks.filter(function (task) {
       return formatDate(new Date(task.updateddAt)) === week[currentDay] &&
@@ -62,11 +76,10 @@ export function StatisticInfo({ currentDay = 2 }: IStatisticInfo) {
       .map(pause => pause.time)
       .reduce((item, acc) => item + acc, 0);
 
-    console.log(currentPause);
-
     const timeTask = dayTasks.map((task) => task.currentTime).reduce((item, acc) => item + acc, 0);
     const currentFocus = Math.ceil(timeTask / (timeTask + currentPause) * 100);
 
+    setWeekTasks(taskWeek);
     setDay(offset[new Date(week[currentDay]).getDay()]);
     setDayTime(timeTask);
     setCount(dayTasks.length);
@@ -80,7 +93,7 @@ export function StatisticInfo({ currentDay = 2 }: IStatisticInfo) {
     <div className={styles.infoBlock}>
       <div className={styles.day}><DayBlock day={day} time={dayTime}/></div>
       <div className={styles.count}><CountBlock count={count}/></div>
-      <div className={styles.diagram}><DiagramBlock/></div>
+      <div className={styles.diagram}><DiagramBlock tasks={weekTasks} currentDay={currentDay}/></div>
       <div className={styles.cards}>
         <CardItem type='focus' num={focus} />
         <CardItem type='pause' num={pause} />
