@@ -70,13 +70,13 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|svg|jpg|jpeg)$/,
+        test: /\.(png|svg|jpg|jpeg|wav)$/,
         exclude: /node_modules/,
         use: [
           {
             loader: "file-loader",
             options: {
-              name: "[name].[ext]",
+              name: "/assets/[name].[ext]",
               publicPath: '/static/',
             }
           }

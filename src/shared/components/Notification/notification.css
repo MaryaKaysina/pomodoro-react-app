@@ -1,0 +1,68 @@
+.notificationBlock {
+	position: fixed;
+	bottom: 1.5em;
+	right: 1.5em;
+  display: flex;
+	max-width: calc(100% - 3em);
+  border-radius: 15px;
+  background-color: var(--bgNotification);
+  animation: flyIn 0.3s ease-out;
+}
+
+.notificationContent {
+  display: flex;
+  padding: 25px;
+  width: 100%;
+  height: 100%;
+}
+
+.notificationIcon {
+  margin-right: 20px;
+  width: 50px;
+  height: 50px;
+}
+
+.notificationIcon svg {
+  width: 50px;
+  height: 50px;
+}
+
+.notificationTitle {
+  margin-bottom: 5px;
+}
+
+.notificationBtn {
+  cursor: pointer;
+}
+
+.notificationBtn span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  height: 100%;
+  padding: 20px;
+  box-shadow: -1px 0 0 hsl(223deg 10% 90% / 15%);
+}
+
+.notificationOut .notificationBlock {
+	animation: flyOut 0.3s ease-out forwards;
+}
+
+@keyframes flyIn {
+	from {
+		transform: translateX(calc(100% + 1.5em));
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+@keyframes flyOut {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(calc(100% + 1.5em));
+	}
+}

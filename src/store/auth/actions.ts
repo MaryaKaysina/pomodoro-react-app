@@ -29,11 +29,21 @@ export interface IPause {
   time: number;
 }
 
+export interface ISettings {
+  timePomodoro: number;
+  timeShortBreak: number;
+  timeLongBreak: number;
+  frequencyLongBreak: number;
+  isActivePush: boolean;
+}
+
 export interface IData {
   auth: string;
   logInDate: number;
   tasks: ITask[];
   pauseTime: IPause[];
+  isDark: boolean;
+  settings: ISettings;
 }
 
 // AUTH_REQUEST_SUCCESS

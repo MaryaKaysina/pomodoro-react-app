@@ -1,0 +1,95 @@
+.modalClose {
+  display: block;
+  width: fit-content;
+  margin: 20px auto 0;
+  border-bottom: 1px solid var(--black);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalLabel {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 45px;
+}
+
+.modalText {
+  max-width: 50%;
+  color: var(--textblack);
+}
+
+.modalDesc {
+  position: absolute;
+  right: 0;
+  bottom: -18px;
+  color: var(--grey99);
+  font-size: 12px;
+}
+
+.modalInput {
+  padding: 10px 15px;
+  border: none;
+  background: var(--grayF4);
+  font-family: inherit;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+}
+
+.labelCheckbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  cursor: pointer;
+  color: var(--textblack);
+}
+
+.inputCheckbox {
+  margin: 0;
+  opacity: 0;
+}
+
+.checkbox {
+  position: relative;
+  left: -17px;
+  margin-right: -11px;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--red);
+}
+
+.checkbox::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  width: 4px;
+  height: 7px;
+  border-bottom: 1px solid var(--red);
+  border-right: 1px solid var(--red);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+.inputCheckbox:checked + .checkbox::after {
+  opacity: 1;
+}
+
+.modalError {
+  position: absolute;
+  bottom: -17px;
+}

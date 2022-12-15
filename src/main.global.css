@@ -37,10 +37,18 @@
 :root {
   --black:                #333333;
   --red:                  #DC3E22;
+  --redLight:                  #EA8979;
+  --redLightness:                  #EE735D;
   --redHover:             #B7280F;
   --red9F:                #9F210C;
   --green:                #A8B64F;
   --greenHover:           #899441;
+  --orangeLight:           #FFDDA9;
+  --purpleLight:           #DFDCFE;
+  --blueLight:           #C5F1FF;
+  --orange:           #FFAE35;
+  --purple:           #9C97D7;
+  --blue:           #7FC2D7;
   --whiteLightness:       100%;
   --white:                hsl(0, 0%, var(--whiteLightness));
   --grayF4:               hsl(0, 0%, calc(var(--whiteLightness) - 4%));
@@ -51,11 +59,20 @@
   --greyC4:               hsl(0, 0%, calc(var(--whiteLightness) - 23%));
   --grey99:               hsl(0, 0%, calc(var(--whiteLightness) - 40%));
   --grey66:               hsl(0, 0%, calc(var(--whiteLightness) - 60%));
+
+  --text: #333333;
+  --textWhite: hsl(0, 0%, var(--whiteLightness));
+  --textblack:                #333333;
+  --bg: hsl(0, 0%, var(--whiteLightness));
+  --bgHeader: hsl(0, 0%, var(--whiteLightness));
+  --bgNotification: #454954;
+  --bgModal: #ffffff;
 }
 
 body {
   padding: 0;
   margin: 0;
+  background: var(--bg);
   font-size: 14px;
   line-height: 16px;
   font-family: 'SF UI Display';
@@ -63,6 +80,20 @@ body {
 
 body.isModal {
   overflow: hidden;
+}
+
+body.isDark {
+  --white:                #cccccc;
+  --black:                #cccccc;
+  --bg: #333333;
+  --bgHeader: #000000;
+  --grayF4:               hsl(0, 0%, calc(var(--whiteLightness) - 96%));
+  --textWhite: #ffffff;
+  --textblack: #ffffff;
+  --orangeLight:           #ff9a02;
+  --purpleLight:           #1500ff;
+  --blueLight:           #02c4ff;
+  --bgModal: #333333;
 }
 
 * {

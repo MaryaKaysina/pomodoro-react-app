@@ -1,4 +1,5 @@
 import { Reducer } from "redux";
+import { DEFAULT_TIME, DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG, DEFAULT_FREQUENCY_LONG_BREAK, IS_ACTIVE } from "../../utils/conts";
 import
 {
   AuthRequestAction,
@@ -27,7 +28,15 @@ export const initialAuthState: AuthState = {
       pauseTime: [{
         createdAt: 0,
         time: 0,
-      }]
+      }],
+      isDark: false,
+      settings: {
+        timePomodoro: DEFAULT_TIME,
+        timeShortBreak: DEFAULT_TIME_BREAK,
+        timeLongBreak: DEFAULT_TIME_BREAK_LONG,
+        frequencyLongBreak: DEFAULT_FREQUENCY_LONG_BREAK,
+        isActivePush: IS_ACTIVE,
+      }
     }
   ]
 }

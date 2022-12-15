@@ -1,0 +1,95 @@
+.diagramBlock {
+  grid-column: 4 / 13;
+  grid-row: 2 / 4;
+  height: 471px;
+}
+
+.container {
+  min-width: 620px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 20px repeat(8, 1fr);
+  grid-template-rows: repeat(5, 84.5px) 50px;
+  column-gap: 30px;
+  align-items: end;
+  background-color: var(--grayF4);
+}
+
+.column {
+  display: block;
+  background-color: var(--redLight);
+  grid-row: 1 / 6;
+  max-height: 100%;
+  z-index: 100;
+  cursor: pointer;
+  transition: background-color .2s ease;
+}
+
+.column.active {
+  background-color: var(--red);
+}
+
+.column.noData {
+  background-color: var(--greyC4);
+  cursor: not-allowed;
+}
+
+.column:hover:not(.active) {
+  background-color: var(--redLightness);
+}
+
+.column.noData:hover {
+  background-color: var(--greyC4);
+}
+
+.row {
+  grid-column: 1/10;
+  display: flex;
+  align-items: center;
+  margin-bottom: -5px;
+}
+
+.bar {
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--black);
+  opacity: .2;
+}
+
+.timeline {
+  width: 60px;
+  margin-left: 30px;
+  margin-right: 20px;
+  font-size: 12px;
+}
+
+.xAxis {
+  grid-column: 1 / 10;
+  grid-row: 6;
+  bottom: 0;
+
+  display: grid;
+  grid-template-columns: 20px repeat(8, 1fr);
+  column-gap: 30px;
+
+  margin-top: auto;
+  height: 51px;
+  background-color: var(--greyEC);
+  text-align: center;
+}
+
+.text {
+  line-height: 50px;
+  color: var(--grey99);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.text.active {
+  color: var(--red);
+}
+
+.text.noData {
+  pointer-events: none;
+}

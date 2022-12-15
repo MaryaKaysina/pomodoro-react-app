@@ -1,0 +1,44 @@
+.block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 507px;
+  background: var(--grayF4);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 85px;
+  padding-bottom: 107px;
+}
+
+.content p {
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+.btns button:not(:last-child) {
+  margin-right: 25px;
+}
+
+.block.isTimerPaused .header {
+  background: var(--red);
+}
+
+.block.isBtnStartActive .header {
+  background: var(--red);
+}
+
+.block.isBtnStartActive h3 {
+  color: var(--red);
+}
+
+.block.isTimerPaused.isBtnStartActive .header {
+  background: var(--green);
+}
+.block.isTimerPaused.isBtnStartActive h3 {
+  color: var(--green);
+}

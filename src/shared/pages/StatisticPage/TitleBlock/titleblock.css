@@ -1,0 +1,83 @@
+.titleBlock {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 173px 0 30px;
+}
+
+.titleBlock > div {
+  flex: inherit;
+  width: auto;
+}
+
+.titleBlock h2 {
+  margin: 0;
+}
+
+.selectBlock {
+  position: relative;
+}
+
+.menuButton {
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  padding: 17px 15px;
+  min-width: 370px;
+  background: var(--grayF4);
+  font-size: 16px;
+  line-height: 17px;
+  color: var(--black);
+}
+
+.menuButton::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  right: 17px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid var(--redHover);
+  border-left: 2px solid var(--redHover);
+  transform: rotate(-45deg);
+  transform-origin: 2px 8px;
+  transition: transform .3s ease-in-out;
+}
+
+.selectBlock.isOpen .menuButton::after {
+  transform: rotate(135deg);
+}
+
+.dropdown {
+  position: absolute;
+  z-index: 10;
+  display: none;
+  filter: drop-shadow(0px 10px 63px rgba(0, 0, 0, 0.07));
+}
+
+.selectBlock.isOpen .dropdown {
+  display: block;
+}
+
+.selectWrapper {
+  filter: drop-shadow(0px 10px 63px rgba(0, 0, 0, 0.07));
+}
+
+.option {
+  position: relative;
+  padding: 17px 15px;
+  min-width: 370px;
+  background: var(--grayF4);
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.option::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: var(--greyDE);
+}

@@ -1,13 +1,41 @@
-import { ActionCreator, Reducer } from "redux";
-import { AuthRequestAction, AuthRequestSuccessAction, AuthRequestErrorAction, AUTH_REQUEST, AUTH_REQUEST_ERROR, AUTH_REQUEST_SUCCESS } from "./auth/actions";
+import { Reducer } from "redux";
+import {
+  AuthRequestAction,
+  AuthRequestSuccessAction,
+  AuthRequestErrorAction,
+  AUTH_REQUEST,
+  AUTH_REQUEST_ERROR,
+  AUTH_REQUEST_SUCCESS
+} from "./auth/actions";
 import { authReducer, AuthState, initialAuthState } from "./auth/reducer";
+import { CurrentDayAction, CURRENT_DAY } from "./current_day";
+import { CurrentWeekAction, CURRENT_WEEK } from "./current_week";
+import {
+  FrequencyLongBreakAction,
+  FREQUENCY_LONG_BREAK
+} from "./frequency_long_break";
+import { IsActivePushAction, IS_ACTIVE_PUSH } from "./is_active_push";
+import { NewTaskAction, NEW_TASK } from "./new_task";
+import { TimeLongBreakAction, TIME_LONG_BREAK } from "./time_long_break";
+import { TimePomodoroAction, TIME_POMODORO } from "./time_pomodoro";
+import { TimeShortBreakAction, TIME_SHORT_BREAK } from "./time_short_break";
+import { UpdateCheckAction, UPDATE_CHECK } from "./update_check";
+import { UpdateMailAction, UPDATE_MAIL } from "./update_mail";
+import { UpdateNameAction, UPDATE_NAME } from "./update_name";
 
 export type RootState = {
   name: string;
   mail: string;
   isCheck: string;
   newTask: string;
+  currentDay: number;
+  currentWeek: number;
   auth: AuthState;
+  timePomodoro: string;
+  timeShortBreak: string;
+  timeLongBreak: string;
+  frequencyLongBreak: string;
+  isActivePush: string;
 }
 
 const initialState: RootState = {
@@ -15,60 +43,15 @@ const initialState: RootState = {
   mail: '',
   isCheck: 'true',
   newTask: '',
+  currentDay: 0,
+  currentWeek: 0,
   auth: initialAuthState,
+  timePomodoro: '',
+  timeShortBreak: '',
+  timeLongBreak: '',
+  frequencyLongBreak: '',
+  isActivePush: 'true',
 }
-
-// NEW_TASK
-const NEW_TASK = 'NEW_TASK';
-
-type NewTaskAction = {
-  text: string;
-  type: typeof NEW_TASK;
-}
-
-export const updateNewTask: ActionCreator<NewTaskAction> = (text: string) => ({
-  type: NEW_TASK,
-  text
-});
-
-// UPDATE_NAME
-const UPDATE_NAME = 'UPDATE_NAME';
-
-type UpdateNameAction = {
-  text: string;
-  type: typeof UPDATE_NAME;
-}
-
-export const updateName: ActionCreator<UpdateNameAction> = (text: string) => ({
-  type: UPDATE_NAME,
-  text
-});
-
-// UPDATE_MAIL
-const UPDATE_MAIL = 'UPDATE_MAIL';
-
-type UpdateMailAction = {
-  text: string;
-  type: typeof UPDATE_MAIL;
-}
-
-export const updateMail: ActionCreator<UpdateMailAction> = (text: string) => ({
-  type: UPDATE_MAIL,
-  text
-});
-
-// UPDATE_CHECK
-const UPDATE_CHECK = 'UPDATE_CHECK';
-
-type UpdateCheckAction = {
-  isCheck: string;
-  type: typeof UPDATE_CHECK;
-}
-
-export const updateCheck: ActionCreator<UpdateCheckAction> = (isCheck: string) => ({
-  type: UPDATE_CHECK,
-  isCheck
-});
 
 // MyAction
 type MyAction = UpdateNameAction
@@ -77,7 +60,14 @@ type MyAction = UpdateNameAction
 | NewTaskAction
 | AuthRequestAction
 | AuthRequestSuccessAction
-| AuthRequestErrorAction;
+| AuthRequestErrorAction
+| CurrentDayAction
+| CurrentWeekAction
+| TimePomodoroAction
+| TimeShortBreakAction
+| TimeLongBreakAction
+| FrequencyLongBreakAction
+| IsActivePushAction;
 
 export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, action) => {
   switch (action.type) {
@@ -101,6 +91,16 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         ...state,
         newTask: action.text,
       };
+    case CURRENT_DAY:
+      return {
+        ...state,
+        currentDay: action.currentDay,
+      };
+    case CURRENT_WEEK:
+      return {
+        ...state,
+        currentWeek: action.currentWeek,
+      };
     case AUTH_REQUEST:
     case AUTH_REQUEST_ERROR:
     case AUTH_REQUEST_SUCCESS:
@@ -108,6 +108,31 @@ export const rootReducer: Reducer<RootState, MyAction> = (state = initialState, 
         ...state,
         auth: authReducer(state.auth, action),
       }
+    case TIME_POMODORO:
+      return {
+        ...state,
+        timePomodoro: action.timePomodoro,
+      };
+    case TIME_SHORT_BREAK:
+      return {
+        ...state,
+        timeShortBreak: action.timeShortBreak,
+      };
+    case TIME_LONG_BREAK:
+      return {
+        ...state,
+        timeLongBreak: action.timeLongBreak,
+      };
+    case FREQUENCY_LONG_BREAK:
+      return {
+        ...state,
+        frequencyLongBreak: action.frequencyLongBreak,
+      };
+    case IS_ACTIVE_PUSH:
+      return {
+        ...state,
+        isActivePush: action.isActivePush,
+      };
     default:
       return state;
   }

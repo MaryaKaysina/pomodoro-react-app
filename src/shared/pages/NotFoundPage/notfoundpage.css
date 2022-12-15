@@ -1,0 +1,10 @@
+.notFoundBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notFoundBlock a {
+  display: inline;
+  color: var(--red);
+}

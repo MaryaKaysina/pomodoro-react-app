@@ -1,0 +1,122 @@
+.menuBlock {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.menuBlock:not(:last-child) {
+  margin-right: 15px;
+}
+
+.menuBlock > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.menuBlock span {
+  margin-left: 5px;
+  transition: color .3s ease-in-out;
+}
+
+.menuBlock svg {
+  fill: var(--red);
+  transition: fill .3s ease-in-out;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  margin-right: 50px;
+  width: 60px;
+  height: 25px;
+}
+
+.switch .switchInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switchSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid var(--red);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.switchSlider:before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  left: -5px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  box-shadow: 0 0px 15px #2020203d;
+  background: white url('https://i.ibb.co/FxzBYR9/night.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.switchInput:checked + .switchSlider {
+  background-color: var(--red);
+}
+
+.switchInput:focus + .switchSlider {
+  box-shadow: 0 0 1px var(--red);
+}
+
+.switchInput:checked + .switchSlider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+  background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.switchSlider {
+  border-radius: 34px;
+}
+
+.switchSlider:before {
+  border-radius: 50%;
+}
+
+.settings {
+  display: flex;
+  margin-right: 50px;
+  width: 42px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.settings svg {
+  fill: var(--red);
+  transition: fill .3s ease-in-out;
+}
+
+@media all and (min-width: 1024px) {
+  .menuBlock:hover svg {
+    fill: var(--redHover);
+  }
+
+  .menuBlock:hover span {
+    color: var(--redHover);
+  }
+
+  .settings:hover span {
+    color: var(--redHover);
+  }
+}

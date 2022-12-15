@@ -13,3 +13,8 @@ declare module "*.png" {
   export default content;
 }
 
+declare module "*.wav" {
+  const content: any;
+  export default content;
+}
+
