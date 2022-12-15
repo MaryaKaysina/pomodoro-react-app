@@ -6,7 +6,7 @@ import { RootState } from '../../../../store/reducer';
 import { EIcons, Icon } from '../../Icon';
 import { Text, EColors } from '../../Text';
 import { ModalSettings } from '../ModalSettings';
-import styles from './menublock.css';
+import styles from './menublock.module.css';
 
 export function MenuBlock() {
   const [isDark, setIsDark] = useState(false);
@@ -48,13 +48,13 @@ export function MenuBlock() {
 
   useEffect(() => {
     const body = document.querySelector('body');
-    let modal = document.querySelector('#modal_root > div > div');
 
     function handleClick(event: MouseEvent) {
+      const modal = document.getElementById('modalBlock');
+
       if (event.target instanceof Node && ref.current?.contains(event.target)) {
         setIsOpenModal(true);
         body?.classList.add('isModal');
-        modal = document.querySelector('#modal_root > div > div');
       } else {
         if (!modal?.contains(event.target as HTMLElement)) {
           body?.classList.remove('isModal');

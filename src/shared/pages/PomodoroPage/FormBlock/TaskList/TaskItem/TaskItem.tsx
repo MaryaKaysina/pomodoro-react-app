@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Menu } from './Menu';
-import styles from './taskitem.css';
+import styles from './taskitem.module.css';
 
 interface ITaskItem {
   id: number;

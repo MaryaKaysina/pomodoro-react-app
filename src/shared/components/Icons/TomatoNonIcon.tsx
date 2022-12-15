@@ -1,5 +1,3 @@
-import React from "react";
-
 export function TomatoNonIcon() {
   return (
     <svg width="115" height="115" viewBox="0 0 115 115" fill="none" xmlns="http://www.w3.org/2000/svg">

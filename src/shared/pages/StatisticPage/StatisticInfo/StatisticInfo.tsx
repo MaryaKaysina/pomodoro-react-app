@@ -9,7 +9,7 @@ import { CardItem } from './CardItem';
 import { CountBlock } from './CountBlock';
 import { DayBlock } from './DayBlock';
 import { DiagramBlock } from './DiagramBlock';
-import styles from './statisticinfo.css';
+import styles from './statisticinfo.module.css';
 
 export function StatisticInfo() {
   const [dayTime, setDayTime] = useState<number>(0);

@@ -1,5 +1,5 @@
-import React, { ChangeEvent, FormEvent } from 'react';
-import styles from './formauth.css';
+import { ChangeEvent, FormEvent } from 'react';
+import styles from './formauth.module.css';
 
 import { Button } from '../../../components/Button';
 import { ErrorBlock } from '../../../components/ErrorBlock';

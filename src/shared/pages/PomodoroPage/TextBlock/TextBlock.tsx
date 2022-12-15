@@ -1,6 +1,5 @@
-import React from 'react';
 import { Text, EColors } from '../../../components/Text';
-import styles from './textblock.css';
+import styles from './textblock.module.css';
 
 export function TextBlock() {
   return (

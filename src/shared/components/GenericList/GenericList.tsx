@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './genericlist.css';
 
 interface IItemList {
   element: React.ReactNode;

@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { Button } from '../../../../components/Button';
-import styles from './form.css';
+import styles from './form.module.css';
 
 interface IForm {
   value: string;

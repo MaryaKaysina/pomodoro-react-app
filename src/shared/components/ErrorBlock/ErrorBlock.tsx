@@ -1,6 +1,4 @@
-import React from 'react';
 import { Text, EColors, TSizes } from '../Text';
-import styles from './errorblock.css';
 
 interface IErrorBlock {
   message: string;

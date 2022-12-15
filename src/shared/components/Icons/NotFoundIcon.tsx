@@ -1,5 +1,3 @@
-import React from "react";
-
 export function NotFoundIcon() {
   return (
     <svg version="1.1"

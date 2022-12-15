@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './menu.css';
+import { useEffect, useRef, useState } from 'react';
+import styles from './menu.module.css';
 
 import { MenuItemsList } from './MenuItemsList';
 import { Dropdown } from '../../../../../../components/Dropdown';
@@ -15,6 +15,7 @@ interface IMenu {
 }
 
 export function Menu({ taskId }: IMenu) {
+  const [isOpen, setIsOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState<IPosition>({ top: 0, left: 0 });
 
@@ -39,14 +40,12 @@ export function Menu({ taskId }: IMenu) {
           <Dropdown
             taskId={taskId}
             button={
-              <button
-                className={styles.menuButton}
-                ref={btnRef}
-              >
+              <button className={styles.menuButton} ref={btnRef} onClick={() => setIsOpen(!isOpen)}>
                 <MenuIcon/>
               </button>
             }
             position={position}
+            isOpen={isOpen}
           >
             <div className={styles.dropdown}>
               <MenuItemsList taskId={taskId}/>

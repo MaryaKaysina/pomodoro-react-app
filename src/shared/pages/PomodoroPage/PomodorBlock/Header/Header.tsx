@@ -1,6 +1,5 @@
-import React from 'react';
 import { Text, EColors } from '../../../../components/Text';
-import styles from './header.css';
+import styles from './header.module.css';
 
 interface IHeader {
   title?: string;

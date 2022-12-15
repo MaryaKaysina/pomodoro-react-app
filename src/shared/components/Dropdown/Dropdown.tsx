@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from './dropdown.css';
+import styles from './dropdown.module.css';
 import { DropdownList } from './DropdownList';
 
 interface IPosition {

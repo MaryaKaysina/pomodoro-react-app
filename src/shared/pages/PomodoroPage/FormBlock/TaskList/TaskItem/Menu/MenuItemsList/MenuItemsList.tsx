@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './menuitemslist.css';
+import styles from './menuitemslist.module.css';
 import classNames from 'classnames';
 
 import { Text, EColors } from '../../../../../../../components/Text';

@@ -1,6 +1,4 @@
-import React from 'react';
 import { Text, EColors } from '../../../../components/Text';
-import styles from './description.css';
 
 interface IDescription {
   title?: string;

@@ -57,7 +57,7 @@ export function vadateForm({ name, mail, isCheck, data, setAuthError }: IVadateF
       settings: current ? current.settings : defaultSettings,
     }];
 
-    const newData: IData[] = [ ...other, ... newAuthData ];
+    const newData: IData[] = [ ...other, ...newAuthData ];
 
     return newData;
   } catch (error: any) {

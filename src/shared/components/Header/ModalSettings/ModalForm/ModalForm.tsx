@@ -1,9 +1,9 @@
-import React, { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent } from 'react';
 import { Button } from '../../../Button';
 import { ErrorBlock } from '../../../ErrorBlock';
 import { Icon, EIcons } from '../../../Icon';
 import { EColors } from '../../../Text';
-import styles from './modalform.css';
+import styles from './modalform.module.css';
 
 interface IError {
   code: number;

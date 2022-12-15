@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { updateCurrentDay } from '../../../../../store/current_day';
-import styles from './diagramblock.css';
+import styles from './diagramblock.module.css';
 
 interface IDiagramBlock {
   tasks: number[];

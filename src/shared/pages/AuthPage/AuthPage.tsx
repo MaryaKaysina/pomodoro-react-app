@@ -5,7 +5,7 @@ import { authRequestAsync, IData } from '../../../store/auth/actions';
 
 import { RootState } from '../../../store/reducer';
 
-import styles from './authpage.css';
+import styles from './authpage.module.css';
 import { Loading } from '../../components/Loading';
 import { Logo } from './Logo';
 import { FormAuth } from './FormAuth';

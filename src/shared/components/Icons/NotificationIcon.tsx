@@ -1,5 +1,3 @@
-import React from "react";
-
 export function NotificationIcon() {
   return (
     <svg viewBox="0 0 32 32">

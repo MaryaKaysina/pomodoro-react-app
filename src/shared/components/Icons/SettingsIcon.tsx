@@ -1,5 +1,3 @@
-import React from "react";
-
 export function SettingsIcon() {
   return (
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="42px" height="32px" viewBox="0 0 42 32" enableBackground="new 0 0 42 32">

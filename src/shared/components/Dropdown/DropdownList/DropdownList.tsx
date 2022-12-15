@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './dropdownlist.css';
+import styles from './dropdownlist.module.css';
 
 import { IData, authRequestAsync } from '../../../../store/auth/actions';
 import { RootState } from '../../../../store/reducer';
@@ -60,7 +60,12 @@ export function DropdownList(props: IDropdownList) {
     let currentText = curentTask.text;
 
     function handleClick(event: MouseEvent) {
+      const modalBlock = document.getElementById('modalBlock');
       if (event.target instanceof Node && !ref.current?.contains(event.target)) {
+
+        if (modalBlock?.contains(event.target)) {
+          return;
+        }
         props.onClose?.();
         setIsOpenModal(false);
         body?.classList.remove('isModal');
@@ -138,7 +143,7 @@ export function DropdownList(props: IDropdownList) {
           {props.children}
         </div>
       </div>
-      {isOpenModal && <ModalDelete tasks={otherData} />}
+      {isOpenModal && <ModalDelete tasks={otherData} onClose={() => setIsOpenModal(false)}/>}
     </>
     ), node);
 }

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Icon, EIcons } from '../../../../components/Icon';
 import { Text, EColors } from '../../../../components/Text';
 
-import styles from './timer.css';
+import styles from './timer.module.css';
 
 interface ITimer {
   time?: number;

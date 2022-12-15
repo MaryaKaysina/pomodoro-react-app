@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EIcons, Icon } from '../../../../components/Icon';
 import { Text, EColors } from '../../../../components/Text';
 
-import styles from './carditem.css';
+import styles from './carditem.module.css';
 
 interface ICardItem {
   type: string;

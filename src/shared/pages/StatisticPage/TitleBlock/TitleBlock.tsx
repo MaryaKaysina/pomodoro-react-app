@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
-import styles from './titleblock.css';
+import styles from './titleblock.module.css';
 
 import { Text, EColors } from '../../../components/Text';
 import { useDispatch } from 'react-redux';

@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { hot } from 'react-hot-loader/root';
+import { useEffect, useState } from 'react';
 import './main.global.css';
-import stylesTransitions from './app.css';
-
+import stylesTransitions from './app.module.css';
 
 import { applyMiddleware, legacy_createStore as createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { rootReducer } from './store/reducer';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk from 'redux-thunk';
-import { rootReducer } from './store/reducer';
+
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
+import { mockData } from "./mock.test";
+import { Header } from './shared/components/Header';
 import { AuthPage } from './shared/pages/AuthPage';
-import { NotFoundPage } from "./shared/pages/NotFoundPage";
-import { PomodoroPage } from "./shared/pages/PomodoroPage";
-import { StatisticPage } from "./shared/pages/StatisticPage";
+import { NotFoundPage } from './shared/pages/NotFoundPage';
+import { PomodoroPage } from './shared/pages/PomodoroPage';
+import { StatisticPage } from './shared/pages/StatisticPage';
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { Header } from "./shared/components/Header";
-import { mockData } from "./mock.test";
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
@@ -54,7 +53,7 @@ function AppComponent() {
   );
 }
 
-function AppMain() {
+function App() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -74,4 +73,5 @@ function AppMain() {
   )
 };
 
-export const App = hot(() => (<AppMain />));
+export default App;
+

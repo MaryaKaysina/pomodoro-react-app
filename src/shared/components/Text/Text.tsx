@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './text.css';
+import styles from './text.module.css';
 import classNames from 'classnames';
 
 export enum EColors {

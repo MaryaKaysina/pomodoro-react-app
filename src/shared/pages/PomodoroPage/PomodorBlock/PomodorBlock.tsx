@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import styles from './pomodorblock.css';
-import stylesTransitions from '../../../../app.css';
+import styles from './pomodorblock.module.css';
+import stylesTransitions from '../../../../app.module.css';
 
 import { IData, ITask, authRequestAsync } from '../../../../store/auth/actions';
 import { RootState } from '../../../../store/reducer';
@@ -45,10 +45,10 @@ export function PomodorBlock() {
   const currentTasks = data.filter((item) => item.auth === currentAuth)[0].tasks;
   const current = currentTasks.filter((task) => !task.done).sort((a, b) => a.id - b.id)[0];
 
-  const timeShortBreak = currentData.settings.timeShortBreak;
-  const timeLongBreak = currentData.settings.timeLongBreak;
-  const isActivePush = currentData.settings.isActivePush;
-  const frequencyLongBreak = currentData.settings.frequencyLongBreak;
+  const timeShortBreak = currentData.settings?.timeShortBreak;
+  const timeLongBreak = currentData.settings?.timeLongBreak;
+  const isActivePush = currentData.settings?.isActivePush;
+  const frequencyLongBreak = currentData.settings?.frequencyLongBreak;
 
   const dispatch = useDispatch<any>();
   let currentTimerId: any;

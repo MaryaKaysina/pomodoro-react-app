@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
@@ -32,7 +32,7 @@ export function FormBlock() {
   const other = data.filter((item) => item.auth !== currentAuth);
   const newId = current.tasks?.sort((a, b) => b?.id - a?.id).slice(0, 1)[0]?.id + 1 || 0;
 
-  const timePomodoro = current.settings.timePomodoro;
+  const timePomodoro = current.settings?.timePomodoro;
   const logInDate = current?.logInDate;
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -52,7 +52,7 @@ export function FormBlock() {
         done:false,
         skip:false,
       };
-      const newTasks = [ ... current.tasks, task];
+      const newTasks = [ ...current.tasks, task];
 
       const newAuthData: IData[] = [{
         auth: currentAuth,
@@ -66,7 +66,7 @@ export function FormBlock() {
         settings: current.settings,
       }];
 
-      const newData: IData[] = [ ...other, ... newAuthData ];
+      const newData: IData[] = [ ...other, ...newAuthData ];
 
       dispatch(authRequestAsync(newData));
       dispatch(updateNewTask(''));
@@ -77,7 +77,7 @@ export function FormBlock() {
 
   return (
     <>
-      {mounred && currentAuth.length == 0 && (<Navigate to="/auth" replace />)}
+      {mounred && currentAuth.length === 0 && (<Navigate to="/auth" replace />)}
       <Form
         value={newTask}
         onChange={handleChange}

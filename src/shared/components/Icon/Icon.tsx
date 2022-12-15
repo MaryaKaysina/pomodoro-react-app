@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './icon.css';
+import styles from './icon.module.css';
 import {
   AddIcon,
   AddMenuIcon,

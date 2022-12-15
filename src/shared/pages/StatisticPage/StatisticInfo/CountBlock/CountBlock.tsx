@@ -1,7 +1,6 @@
-import React from 'react';
 import { EIcons, Icon } from '../../../../components/Icon';
 import { Text, EColors } from '../../../../components/Text';
-import styles from './countblock.css';
+import styles from './countblock.module.css';
 
 interface ICountBlock {
   count?: number;

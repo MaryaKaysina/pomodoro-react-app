@@ -1,6 +1,5 @@
-import React from 'react';
 import { Text, EColors } from '../../../../components/Text';
-import styles from './dayblock.css';
+import styles from './dayblock.module.css';
 
 interface IDayBlock {
   day?: number;
@@ -24,12 +23,12 @@ export function DayBlock({ day = 0, time = 0 }: IDayBlock) {
 
     if(value > 10 && value < 20) return words[2];
     if(num > 1 && num < 5) return words[1];
-    if(num == 1) return words[0];
+    if(num === 1) return words[0];
     return words[2];
   }
 
   const formatHours = [' часа ',' часов ',' часа '];
-  const formatMinutes = [' минуты ',' минут ',' минуты '];
+  const formatMinutes = [' минуты ',' минут ',' минут '];
   const formatSeconds = [' секунды ',' секунд ',' секунд '];
 
   const hours = Math.floor(time / 60 / 60);
@@ -42,9 +41,9 @@ export function DayBlock({ day = 0, time = 0 }: IDayBlock) {
       {time > 0 && (<Text mobileSize={12} size={16} color={EColors.black}>
         Вы работали над задачами в течение
         <Text mobileSize={12} size={16} color={EColors.red} bold>
-          {hours > 0 && hours + numWord(time%60, formatHours)}
-          {minutes > 0 && minutes + numWord(time%60, formatMinutes)}
-          {seconds > 0 && seconds + numWord(time%60, formatSeconds)}
+          {hours > 0 && hours + numWord(hours, formatHours)}
+          {minutes > 0 && minutes + numWord(minutes, formatMinutes)}
+          {seconds > 0 && seconds + numWord(seconds, formatSeconds)}
         </Text>
       </Text>)}
       {time === 0 && (<Text mobileSize={12} size={16} color={EColors.black}>

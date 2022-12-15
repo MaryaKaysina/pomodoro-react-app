@@ -6,7 +6,6 @@ import { RootState } from '../../../store/reducer';
 import { Content } from './Content';
 import { StatisticInfo } from './StatisticInfo';
 
-import styles from './statisticpage.css';
 import { TitleBlock } from './TitleBlock';
 
 export function StatisticPage() {

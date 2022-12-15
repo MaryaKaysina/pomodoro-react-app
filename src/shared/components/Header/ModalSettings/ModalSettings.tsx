@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authRequestAsync, IData, ISettings } from '../../../../store/auth/actions';
@@ -14,7 +14,7 @@ import { updateFormInputSetting } from '../../../../utils/js/updateFormInputSett
 import { IError, validateSettings } from '../../../../utils/js/validateSettings';
 import { preventDefault } from '../../../../utils/react/preventDefault';
 import { ModalForm } from './ModalForm';
-import styles from './modalsettings.css';
+import styles from './modalsettings.module.css';
 
 interface IModalSettings {
   settings: ISettings;
@@ -85,7 +85,7 @@ export function ModalSettings(props: IModalSettings) {
   return ReactDOM.createPortal(
     (
       <div className={styles.container}>
-        <div className={styles.modalBlock}>
+        <div className={styles.modalBlock} id="modalBlock">
           <h3 className={styles.modalTitle}>Настройки таймера</h3>
           <ModalForm
             valueTimePomodoro={timePomodoro}

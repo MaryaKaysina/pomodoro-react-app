@@ -31,7 +31,7 @@ export function setDataTasks({
   let newTasks = otherTask;
 
   if (curentTime !== 0 && currentText.length !== 0) {
-    newTasks = [ ... otherTask, task];
+    newTasks = [ ...otherTask, task];
   }
 
   const newAuthData: IData[] = [{
@@ -43,6 +43,6 @@ export function setDataTasks({
     settings: currentData.settings,
   }];
 
-  const newData: IData[] = [ ...other, ... newAuthData ];
+  const newData: IData[] = [ ...other, ...newAuthData ];
   return newData;
 }

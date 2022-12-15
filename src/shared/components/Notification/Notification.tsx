@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Icon, EIcons } from '../Icon';
 import { Text, EColors } from '../Text';
 import NotificationSound from '../../../assets/sound2.wav';
-import styles from './notification.css';
+import styles from './notification.module.css';
 
 export function Notification() {
   const [isOpen, setIsOpen] = useState(false);

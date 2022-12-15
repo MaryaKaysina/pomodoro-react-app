@@ -31,7 +31,7 @@ export function mockData() {
     for (let j = 0; j < week.length; j++) {
       const data = {};
       data.id = id;
-      data.text = `Тестовая задача №${i + 1}`;
+      data.text = `Тестовая задача №${id + 1}`;
       data.time = 1500;
       data.currentTime = randomInteger(0, 2000);
       data.createdAt = Date.parse(week[0]);

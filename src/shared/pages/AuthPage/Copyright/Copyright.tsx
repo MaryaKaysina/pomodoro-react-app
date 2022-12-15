@@ -1,5 +1,3 @@
-import React from 'react';
-import styles from './copyright.css';
 import { Text, EColors } from '../../../components/Text';
 
 export function Copyright() {

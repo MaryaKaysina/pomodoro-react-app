@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './header.css';
+import styles from './header.module.css';
 import { LogoBlock } from './LogoBlock';
 import { MenuBlock } from './MenuBlock';
 

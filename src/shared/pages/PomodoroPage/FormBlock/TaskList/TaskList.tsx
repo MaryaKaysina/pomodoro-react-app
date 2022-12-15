@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './tasklist.css';
-import stylesTransitions from '../../../../../app.css';
+import styles from './tasklist.module.css';
+import stylesTransitions from '../../../../../app.module.css';
 
 import { Text, EColors } from '../../../../components/Text';
 import { TaskItem } from './TaskItem';
