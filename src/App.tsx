@@ -59,7 +59,7 @@ function App() {
   useEffect(() => {
     setMounted(true);
     // Заполнение тестовыми данными
-    // localStorage.setItem('token-pomodoro', JSON.stringify(mockTestData));
+    localStorage.setItem('token-pomodoro', JSON.stringify(mockTestData));
   }, []);
 
   return (

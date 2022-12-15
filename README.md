@@ -60,4 +60,4 @@
 :star: **В целях демонстрации страницы со статистикой Local Storage можно заполнить моковыми данными за 3 недели, раскомментировав
 `localStorage.setItem('token-pomodoro', JSON.stringify(mockTestData));` в файле App.tsx**
 
-:star: **Открыть приложение на **
+:star: **Открыть приложение на Vercel -> [pomodoro](https://pomodoro-box-tracker.vercel.app/)**
