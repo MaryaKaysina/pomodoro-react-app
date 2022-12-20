@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { authRequestAsync, IData } from '../../../store/auth/actions';
 
-import { RootState } from '../../../store/reducer';
+import { initialCurrentState, RootState } from '../../../store/reducer';
 
 import styles from './authpage.module.css';
 import { Loading } from '../../components/Loading';
@@ -27,19 +27,14 @@ export function AuthPage() {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
-  const localDefault = JSON.stringify([{auth: "", tasks: [], logInDate: 0}]);
-  const localString = localStorage.getItem('token-pomodoro') || localDefault;
-  const local: IData[] = JSON.parse(localString);
-
   useEffect(() => {
-    dispatch(authRequestAsync(local));
     const timer = setTimeout(() => {
       setIsLoading(true);
     }, 300);
     return () => clearTimeout(timer);
   }, [])
 
-  const data = useSelector<RootState, IData[]>(state => state.auth.data);
+  const data = useSelector<RootState, IData>(state => state.auth.data);
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     if (event.target.id === 'agree') {
@@ -52,7 +47,7 @@ export function AuthPage() {
   }
 
   function handleSubmit() {
-    const newData: IData[] = vadateForm({ name, mail, isCheck, data, setAuthError }) || [];
+    const newData: IData = vadateForm({ name, mail, isCheck, data, setAuthError }) || initialCurrentState;
     dispatch(authRequestAsync(newData));
     navigate('/pomodoros');
   }

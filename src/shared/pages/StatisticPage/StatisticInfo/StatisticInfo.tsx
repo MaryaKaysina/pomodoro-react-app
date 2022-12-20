@@ -18,8 +18,7 @@ export function StatisticInfo() {
   const [pause, setPause] = useState<number>(0);
   const [stop, setStop] = useState<number>(0);
   const [weekTasks, setWeekTasks] = useState<number[]>([]);
-  const data = useSelector<RootState, IData[]>(state => state.auth.data);
-  const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
+  const currentData = useSelector<RootState, IData>(state => state.auth.data);
 
   const currentDay = useSelector<RootState, number>(state => state.currentDay);
   const currentWeek = useSelector<RootState, number>(state => state.currentWeek);

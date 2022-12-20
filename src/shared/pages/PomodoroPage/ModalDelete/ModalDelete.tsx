@@ -10,7 +10,7 @@ import { Icon, EIcons } from '../../../components/Icon';
 import styles from './modaldelete.module.css';
 
 interface IModalDelete {
-  tasks: IData[];
+  tasks: IData;
   onClose?: () => void;
 }
 
@@ -23,7 +23,7 @@ export function ModalDelete({ tasks, onClose }: IModalDelete) {
 
   const dispatch = useDispatch<any>();
 
-  function handleClickDelete(tasks: IData[]) {
+  function handleClickDelete(tasks: IData) {
     dispatch(authRequestAsync(tasks));
     body?.classList.remove('isModal');
   }

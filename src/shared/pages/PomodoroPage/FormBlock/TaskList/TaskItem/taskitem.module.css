@@ -2,23 +2,44 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding-left: 35px;
+  margin-left: -15px;
+  padding-left: 15px;
   padding-top: 12px;
   padding-bottom: 12px;
+  width: 100%;
   font-weight: 300;
   font-size: 16px;
   line-height: 17px;
+  cursor: pointer;
 }
 
 .taskItem::before {
-  counter-increment: item;
-  content: counter(item);
+  content: "";
   position: absolute;
   left: 0;
-  top: 13px;
+  height: 100%;
+  width: 5px;
+  background: transparent;
+  transition: background .3s ease-in-out;
+}
+
+.taskItem.active::before {
+  background: var(--black);
+}
+
+.taskItem:hover::before {
+  background: var(--greyC4);
+}
+
+.taskItem.active:hover::before {
+  background: var(--black);
+}
+
+.taskNum {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 10px;
   width: 25px;
   height: 25px;
   font-weight: 300;
@@ -46,7 +67,7 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 17px;
-  cursor: default;
+  cursor: pointer;
 }
 
 .taskItem input:focus {

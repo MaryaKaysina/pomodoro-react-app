@@ -10,6 +10,8 @@
   content: "";
   position: absolute;
   height: 1px;
-  width: 100%;
+  width: calc(100% - 15px);
   background: var(--grayF4);
+  margin-left: -15px;
+  padding-left: 15px;
 }

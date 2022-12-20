@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authRequestAsync, IData, ISettings } from '../../../../store/auth/actions';
 import { updateFrequencyLongBreak } from '../../../../store/frequency_long_break';
 import { updateIsActivePush } from '../../../../store/is_active_push';
-import { RootState } from '../../../../store/reducer';
+import { initialCurrentState, RootState } from '../../../../store/reducer';
 import { updateTimeLongBreak } from '../../../../store/time_long_break';
 import { updateTimePomodoro } from '../../../../store/time_pomodoro';
 import { updateTimeShortBreak } from '../../../../store/time_short_break';
@@ -27,7 +27,7 @@ export function ModalSettings(props: IModalSettings) {
   const node = document.querySelector('#modal_root');
   if (!node) return null;
 
-  const data = useSelector<RootState, IData[]>(state => state.auth.data);
+  const data = useSelector<RootState, IData>(state => state.auth.data);
   const timePomodoro = useSelector<RootState, string>(state => state.timePomodoro);
   const timeShortBreak = useSelector<RootState, string>(state => state.timeShortBreak);
   const timeLongBreak = useSelector<RootState, string>(state => state.timeLongBreak);
@@ -61,7 +61,7 @@ export function ModalSettings(props: IModalSettings) {
   }
 
   function handleSubmit() {
-    const newData: IData[] = validateSettings({
+    const newData: IData = validateSettings({
       timePomodoro,
       timeShortBreak,
       timeLongBreak,
@@ -69,9 +69,8 @@ export function ModalSettings(props: IModalSettings) {
       setSettingsError,
       isActivePush,
       data
-    }) || [];
+    }) || initialCurrentState;
 
-    if (newData.length === 0) return null;
     dispatch(authRequestAsync(newData));
     body?.classList.remove('isModal');
     props.onClick?.();

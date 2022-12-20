@@ -16,8 +16,7 @@ export function MenuBlock() {
 
   const ref = useRef<HTMLButtonElement>(null);
 
-  const data = useSelector<RootState, IData[]>(state => state.auth.data);
-  const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
+  const currentData = useSelector<RootState, IData>(state => state.auth.data);
   const settings = currentData.settings;
 
   const dispatch = useDispatch<any>();
@@ -34,7 +33,7 @@ export function MenuBlock() {
   function handleClick() {
     setIsDark(!isDark);
     currentData.isDark = !isDark;
-    dispatch(authRequestAsync(data));
+    dispatch(authRequestAsync(currentData));
   }
 
   useEffect(() => {

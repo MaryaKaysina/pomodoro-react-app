@@ -11,7 +11,7 @@ export interface IVadateForm {
   name: string;
   mail: string;
   isCheck: string;
-  data: IData[];
+  data: IData;
   setAuthError: (value: React.SetStateAction<IError>) => void;
 }
 
@@ -37,8 +37,9 @@ export function vadateForm({ name, mail, isCheck, data, setAuthError }: IVadateF
       throw new AuthError(114, 'Не проставлено согласие (:');
     }
 
-    const current = data.filter((item) => item.auth === mail.trim())[0];
-    const other = data.filter((item) => item.auth !== mail.trim());
+    const local = localStorage.getItem('token-pomodoro') || '[]';
+    const localData: IData[] = JSON.parse(local);
+    const current = localData.filter((item) => item.auth === mail.trim())[0];
 
     const defaultSettings = {
       timePomodoro: DEFAULT_TIME,
@@ -48,18 +49,17 @@ export function vadateForm({ name, mail, isCheck, data, setAuthError }: IVadateF
       isActivePush: IS_ACTIVE,
     };
 
-    const newAuthData: IData[] = [{
+    const newAuthData: IData = {
       auth: mail.trim(),
       tasks: current ? current.tasks : [],
+      currentTask: current ? current.currentTask : -1,
       logInDate: Date.now(),
       pauseTime: current ? current.pauseTime : [{ createdAt: 0, time: 0 }],
       isDark: current ? current.isDark : false,
       settings: current ? current.settings : defaultSettings,
-    }];
+    };
 
-    const newData: IData[] = [ ...other, ...newAuthData ];
-
-    return newData;
+    return newAuthData;
   } catch (error: any) {
     setAuthError({ code: error.code, message: error.message });
   }

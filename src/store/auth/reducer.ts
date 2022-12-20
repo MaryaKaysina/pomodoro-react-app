@@ -14,31 +14,30 @@ import
 export type AuthState = {
   loading: boolean;
   error: string;
-  data: IData[];
+  data: IData;
 }
 
 export const initialAuthState: AuthState = {
   loading: false,
   error: '',
-  data: [
-    {
-      auth: '',
-      tasks: [],
-      logInDate: 0,
-      pauseTime: [{
-        createdAt: 0,
-        time: 0,
-      }],
-      isDark: false,
-      settings: {
-        timePomodoro: DEFAULT_TIME,
-        timeShortBreak: DEFAULT_TIME_BREAK,
-        timeLongBreak: DEFAULT_TIME_BREAK_LONG,
-        frequencyLongBreak: DEFAULT_FREQUENCY_LONG_BREAK,
-        isActivePush: IS_ACTIVE,
-      }
+  data: {
+    auth: '',
+    tasks: [],
+    currentTask: -1,
+    logInDate: 0,
+    pauseTime: [{
+      createdAt: 0,
+      time: 0,
+    }],
+    isDark: false,
+    settings: {
+      timePomodoro: DEFAULT_TIME,
+      timeShortBreak: DEFAULT_TIME_BREAK,
+      timeLongBreak: DEFAULT_TIME_BREAK_LONG,
+      frequencyLongBreak: DEFAULT_FREQUENCY_LONG_BREAK,
+      isActivePush: IS_ACTIVE,
     }
-  ]
+  }
 }
 
 type AuthActions = AuthRequestAction

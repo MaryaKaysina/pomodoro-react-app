@@ -1,11 +1,13 @@
 import { Reducer } from "redux";
+import { DEFAULT_TIME, DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG, DEFAULT_FREQUENCY_LONG_BREAK, IS_ACTIVE } from "../utils/conts";
 import {
   AuthRequestAction,
   AuthRequestSuccessAction,
   AuthRequestErrorAction,
   AUTH_REQUEST,
   AUTH_REQUEST_ERROR,
-  AUTH_REQUEST_SUCCESS
+  AUTH_REQUEST_SUCCESS,
+  IData
 } from "./auth/actions";
 import { authReducer, AuthState, initialAuthState } from "./auth/reducer";
 import { CurrentDayAction, CURRENT_DAY } from "./current_day";
@@ -36,6 +38,25 @@ export type RootState = {
   timeLongBreak: string;
   frequencyLongBreak: string;
   isActivePush: string;
+}
+
+export const initialCurrentState: IData = {
+  auth: '',
+  tasks: [],
+  currentTask: -1,
+  logInDate: 0,
+  pauseTime: [{
+    createdAt: 0,
+    time: 0,
+  }],
+  isDark: false,
+  settings: {
+    timePomodoro: DEFAULT_TIME,
+    timeShortBreak: DEFAULT_TIME_BREAK,
+    timeLongBreak: DEFAULT_TIME_BREAK_LONG,
+    frequencyLongBreak: DEFAULT_FREQUENCY_LONG_BREAK,
+    isActivePush: IS_ACTIVE,
+  }
 }
 
 const initialState: RootState = {

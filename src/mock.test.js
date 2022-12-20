@@ -58,10 +58,12 @@ export function mockData() {
     tasks: tasks,
     pauseTime: pauseTime,
     isDark: false,
-    timePomodoro: DEFAULT_TIME,
-    timeShortBreak: DEFAULT_TIME_BREAK,
-    timeLongBreak: DEFAULT_TIME_BREAK_LONG,
-    frequencyLongBreak: DEFAULT_FREQUENCY_LONG_BREAK,
-    isActivePush: IS_ACTIVE,
+    settings: {
+      timePomodoro: DEFAULT_TIME,
+      timeShortBreak: DEFAULT_TIME_BREAK,
+      timeLongBreak: DEFAULT_TIME_BREAK_LONG,
+      frequencyLongBreak: DEFAULT_FREQUENCY_LONG_BREAK,
+      isActivePush: IS_ACTIVE,
+    }
   }];
 }

@@ -6,7 +6,6 @@ export interface ISetDataTasks {
   curentTask: ITask;
   otherTask: ITask[];
   currentData: IData;
-  other: IData[];
 }
 
 export function setDataTasks({
@@ -15,7 +14,6 @@ export function setDataTasks({
   curentTask,
   otherTask,
   currentData,
-  other
 }: ISetDataTasks) {
   const task = {
     id: curentTask.id,
@@ -34,15 +32,15 @@ export function setDataTasks({
     newTasks = [ ...otherTask, task];
   }
 
-  const newAuthData: IData[] = [{
+  const newAuthData: IData = {
     auth: currentData.auth,
     tasks: newTasks,
     logInDate: currentData.logInDate,
     pauseTime: currentData.pauseTime,
     isDark: currentData.isDark,
     settings: currentData.settings,
-  }];
+    currentTask: currentData.currentTask,
+  };
 
-  const newData: IData[] = [ ...other, ...newAuthData ];
-  return newData;
+  return newAuthData;
 }

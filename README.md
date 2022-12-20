@@ -5,7 +5,6 @@
 ![React](https://img.shields.io/badge/-REACTJS-61DAFB?logo=react&logoColor=white&style=flat)
 ![TypeScript](https://img.shields.io/badge/-typescript-%23007ACC?logo=typescript&logoColor=white&style=flat)
 ![Redux](https://img.shields.io/badge/-redux-764ABC?logo=redux&logoColor=white&style=flat)
-![Heroku](https://img.shields.io/badge/-heroku-430098?logo=Heroku&logoColor=white&style=flat)
 
 ## Функционал
 

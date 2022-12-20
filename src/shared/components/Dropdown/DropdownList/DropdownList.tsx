@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './dropdownlist.module.css';
 
 import { IData, authRequestAsync } from '../../../../store/auth/actions';
-import { RootState } from '../../../../store/reducer';
+import { initialCurrentState, RootState } from '../../../../store/reducer';
 
 import { ModalDelete } from '../../../pages/PomodoroPage/ModalDelete';
 import { setDataTasks } from '../../../../utils/js/setDataTasks';
@@ -27,9 +27,9 @@ export function DropdownList(props: IDropdownList) {
   const [calcListTop, setCalcListTop] = useState<string>('0');
   const [calcListLeft, setCalcListLeft] = useState<number>(0);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [otherData, setOtherData] = useState<IData[]>([]);
+  const [otherData, setOtherData] = useState<IData>(initialCurrentState);
 
-  const data = useSelector<RootState, IData[]>(state => state.auth.data);
+  const currentData = useSelector<RootState, IData>(state => state.auth.data);
   const ref = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch<any>();
 
@@ -50,12 +50,8 @@ export function DropdownList(props: IDropdownList) {
   useEffect(() => {
     const body = document.querySelector('body');
 
-    const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
-    const tasks = currentData.tasks;
-    const other = data.filter((item) => item.auth !== currentData.auth);
-    const curentTask = tasks.filter((task) => task.id === props.taskId)[0];
-    const otherTask = tasks.filter((task) => task.id !== props.taskId);
-
+    const curentTask = currentData.tasks.filter((task) => task.id === props.taskId)[0];
+    const otherTask = currentData.tasks.filter((task) => task.id !== props.taskId);
     let curentTime = curentTask.time;
     let currentText = curentTask.text;
 
@@ -82,7 +78,7 @@ export function DropdownList(props: IDropdownList) {
             curentTime = curentTask.time - currentData.settings.timePomodoro;
             props.onClose?.();
           }
-          const newData = setDataTasks({ curentTime, currentText, curentTask, otherTask, currentData,other });
+          const newData = setDataTasks({ curentTime, currentText, curentTask, otherTask, currentData });
           dispatch(authRequestAsync(newData));
         }
 
@@ -93,7 +89,7 @@ export function DropdownList(props: IDropdownList) {
           textInput.focus();
           textInput.addEventListener('blur', () => {
             currentText = textInput.value;
-            const newData = setDataTasks({ curentTime, currentText, curentTask, otherTask, currentData,other });
+            const newData = setDataTasks({ curentTime, currentText, curentTask, otherTask, currentData });
             dispatch(authRequestAsync(newData));
           });
           props.onClose?.();
@@ -103,14 +99,15 @@ export function DropdownList(props: IDropdownList) {
           body?.classList.add('isModal');
           setIsOpenModal(true);
 
-          const newAuthData: IData[] = [{
+          const newAuthData: IData = {
             auth: currentData.auth,
             tasks: otherTask,
             logInDate: currentData.logInDate,
             pauseTime: currentData.pauseTime,
             isDark: currentData.isDark,
             settings: currentData.settings,
-          }];
+            currentTask: currentData.currentTask,
+          };
 
           setOtherData(newAuthData);
         }

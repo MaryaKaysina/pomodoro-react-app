@@ -12,7 +12,7 @@ export interface IVadateForm {
   timeLongBreak: string;
   frequencyLongBreak: string;
   isActivePush: string;
-  data: IData[];
+  data: IData;
   setSettingsError: (value: React.SetStateAction<IError>) => void;
 }
 
@@ -52,13 +52,11 @@ export function validateSettings({
       throw new SettingsError(214, 'Частота длинных перерывов должна быть цифрой больше нуля');
     }
 
-    const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
-
-    currentData.settings.timePomodoro = Math.ceil(+timePomodoro * 60);
-    currentData.settings.timeShortBreak = Math.ceil(+timeShortBreak * 60);
-    currentData.settings.timeLongBreak = Math.ceil(+timeLongBreak * 60);
-    currentData.settings.frequencyLongBreak = Math.ceil(+frequencyLongBreak);
-    currentData.settings.isActivePush = isActivePush === 'true';
+    data.settings.timePomodoro = Math.ceil(+timePomodoro * 60);
+    data.settings.timeShortBreak = Math.ceil(+timeShortBreak * 60);
+    data.settings.timeLongBreak = Math.ceil(+timeLongBreak * 60);
+    data.settings.frequencyLongBreak = Math.ceil(+frequencyLongBreak);
+    data.settings.isActivePush = isActivePush === 'true';
 
     return data;
   } catch (error: any) {

@@ -26,6 +26,7 @@ export function PomodorBlock() {
   const [count, setCount] = useState<number>(0);
   const [text, setText] = useState<string>('Введите название задачи');
   const [number, setNumber] = useState<string>('');
+  const [pomodor, setPomodor] = useState<string>('');
   const [pauseTime, setPauseTime] = useState<number>(0);
 
   const [classList, setClassList] = useState<string>('');
@@ -38,13 +39,14 @@ export function PomodorBlock() {
   const [isBtnStartActive, setIsBtnStartActive] = useState<boolean>(false);
   const [isBreak, setIsBreak] = useState<boolean>(false);
   const [isNotification, setIsNotification] = useState<boolean>(false);
+  const [current, setCurrent] = useState<ITask>();
 
-  const data = useSelector<RootState, IData[]>(state => state.auth.data);
-  const currentAuth = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0].auth;
-  const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
-  const currentTasks = data.filter((item) => item.auth === currentAuth)[0].tasks;
-  const current = currentTasks.filter((task) => !task.done).sort((a, b) => a.id - b.id)[0];
+  const currentData = useSelector<RootState, IData>(state => state.auth.data);
 
+  const currentTasks = useSelector<RootState, ITask[]>(state => state.auth.data.tasks);
+  const currentTaskId = useSelector<RootState, number>(state => state.auth.data.currentTask);
+
+  const timePomodoro = currentData.settings?.timePomodoro;
   const timeShortBreak = currentData.settings?.timeShortBreak;
   const timeLongBreak = currentData.settings?.timeLongBreak;
   const isActivePush = currentData.settings?.isActivePush;
@@ -52,6 +54,15 @@ export function PomodorBlock() {
 
   const dispatch = useDispatch<any>();
   let currentTimerId: any;
+
+  useEffect(() => {
+    const currentTaskActive = currentTasks.filter((task) => task.id === currentTaskId && !task.done);
+
+    const current = currentTaskActive.length !== 0 ?
+      currentTaskActive[0] :
+      currentTasks.filter((task) => !task.done).sort((a, b) => a.id - b.id)[0];
+    setCurrent(current);
+  }, [currentTasks, currentTaskId]);
 
   useEffect(() => {
     if (isBreak) {
@@ -68,23 +79,25 @@ export function PomodorBlock() {
     } else {
       setText(current ? current.text : 'Введите название задачи');
       setNumber(current ? `${current.id + 1}` : '');
+      setPomodor(current ? `${Math.ceil(current.time / timePomodoro)}` : '');
       setTime(current ? current.time - current.currentTime : 0);
     }
-  }, [current, isBreak]);
+  }, [current, isBreak, currentData]);
 
   useEffect(() => {
-    function isActiveTask(data: IData[], current: ITask) {
+    function isActiveTask(currentData: IData, current: ITask) {
       if (current && !isBreak) {
         if (time > 0) {
           currentTimerId = setTimeout(() => {
             setTime(time - 1);
             current.currentTime = current.currentTime + 1;
-            dispatch(authRequestAsync(data));
+            dispatch(authRequestAsync(currentData));
           }, 1000);
         } else {
           current.done = true;
           current.updateddAt = Date.now();
-          dispatch(authRequestAsync(data));
+          currentData.currentTask = currentData.currentTask + 1;
+          dispatch(authRequestAsync(currentData));
           setCount(count + 1);
           setIsTimerActive(false);
           setIsBreak(true);
@@ -96,7 +109,7 @@ export function PomodorBlock() {
       }
     };
 
-    function isActiveBreak(data: IData[], currentData: IData) {
+    function isActiveBreak(currentData: IData) {
       if (isBreak) {
         if (time > 0) {
           currentTimerId = setTimeout(() => {
@@ -104,7 +117,7 @@ export function PomodorBlock() {
           }, 1000);
         } else {
           currentData.pauseTime.push({ createdAt: Date.now(), time: pauseTime });
-          dispatch(authRequestAsync(data));
+          dispatch(authRequestAsync(currentData));
           setIsBreak(false);
           setIsTimerActive(false);
           setStartBtnText('Старт');
@@ -115,8 +128,8 @@ export function PomodorBlock() {
     };
 
     if (isTimerActive) {
-      if (current && !isBreak) isActiveTask(data, current);
-      if (isBreak) isActiveBreak(data, currentData);
+      if (current && !isBreak) isActiveTask(currentData, current);
+      if (isBreak) isActiveBreak(currentData);
     }
   }, [isTimerActive, time, current, isBreak])
 
@@ -177,7 +190,8 @@ export function PomodorBlock() {
       current.done = true;
       current.skip = true;
       current.updateddAt = Date.now();
-      dispatch(authRequestAsync(data));
+      currentData.currentTask = currentData.currentTask + 1;
+      dispatch(authRequestAsync(currentData));
       setCount(count + 1);
       setIsBreak(true);
       setIsTimerActive(false);
@@ -198,14 +212,14 @@ export function PomodorBlock() {
     if (current) {
       current.time = current.time - current.currentTime + DEFAULT_TIME_ADD;
       current.updateddAt = Date.now();
-      dispatch(authRequestAsync(data));
+      dispatch(authRequestAsync(currentData));
       setTime(current.time);
     }
   }
 
   return (
     <div className={classList}>
-      <Header title={text} number={number} />
+      <Header title={text} number={pomodor} />
       <div className={styles.content}>
         <TransitionGroup>
           <CSSTransition key={time} timeout={200} classNames={classes}>

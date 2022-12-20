@@ -41,6 +41,7 @@ export interface IData {
   auth: string;
   logInDate: number;
   tasks: ITask[];
+  currentTask: number;
   pauseTime: IPause[];
   isDark: boolean;
   settings: ISettings;
@@ -51,10 +52,10 @@ export const AUTH_REQUEST_SUCCESS = 'AUTH_REQUEST_SUCCESS';
 
 export type AuthRequestSuccessAction = {
   type: typeof AUTH_REQUEST_SUCCESS;
-  data: IData[];
+  data: IData;
 }
 
-export const authRequestSuccess: ActionCreator<AuthRequestSuccessAction> = (data: IData[]) => ({
+export const authRequestSuccess: ActionCreator<AuthRequestSuccessAction> = (data: IData) => ({
   type: AUTH_REQUEST_SUCCESS,
   data,
 });
@@ -73,13 +74,16 @@ export const authRequestError: ActionCreator<AuthRequestErrorAction> = (error: s
 });
 
 export const authRequestAsync =
-  (data: IData[]): ThunkAction<void, RootState, unknown, Action<string>> =>
+  (data: IData): ThunkAction<void, RootState, unknown, Action<string>> =>
   (dispatch, getState) => {
     dispatch(authRequest());
-    const currentData = data.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1);
+    const local = localStorage.getItem('token-pomodoro') || '[]';
+    const localData: IData[] = JSON.parse(local);
 
-    if (currentData[0].auth.length !== 0) {
-      localStorage.setItem('token-pomodoro', JSON.stringify(data));
+    if (data.auth.length !== 0) {
+      const local = localData.filter((local) => local.auth !== data.auth);
+      local.push(data);
+      localStorage.setItem('token-pomodoro', JSON.stringify(local));
       dispatch(authRequestSuccess(data));
     } else {
       dispatch(authRequestError('Our e-mail is empty(:'));
