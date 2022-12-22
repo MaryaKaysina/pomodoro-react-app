@@ -45,6 +45,8 @@ export function FormBlock() {
         updateddAt: 0,
         done:false,
         skip:false,
+        pomodor: 1,
+        currentPomodor: 1
       };
       const newTasks = [ ...data.tasks, task];
 
@@ -62,7 +64,6 @@ export function FormBlock() {
       };
 
       const newData: IData = newAuthData;
-
       dispatch(authRequestAsync(newData));
       dispatch(updateNewTask(''));
     } else {

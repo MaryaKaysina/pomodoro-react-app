@@ -3,15 +3,15 @@ import styles from './header.module.css';
 
 interface IHeader {
   title?: string;
-  number?: string;
+  number?: number;
 }
 
-export function Header({ title = 'Введите название задачи', number = '' }: IHeader) {
+export function Header({ title = 'Введите название задачи', number = 0 }: IHeader) {
   return (
     <div className={styles.header}>
       <Text mobileSize={14} size={16} color={EColors.white} bold>{title}</Text>
       <Text mobileSize={14} size={16} color={EColors.white}>
-        {number.length !== 0 ? `Помидор ${number}` : ''}
+        {number !== 0 ? `Помидор ${number}` : ''}
       </Text>
     </div>
   );

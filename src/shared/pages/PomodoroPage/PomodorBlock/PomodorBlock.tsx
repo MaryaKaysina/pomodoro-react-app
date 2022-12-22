@@ -26,7 +26,7 @@ export function PomodorBlock() {
   const [count, setCount] = useState<number>(0);
   const [text, setText] = useState<string>('Введите название задачи');
   const [number, setNumber] = useState<string>('');
-  const [pomodor, setPomodor] = useState<string>('');
+  const [pomodor, setPomodor] = useState<number>(0);
   const [pauseTime, setPauseTime] = useState<number>(0);
 
   const [classList, setClassList] = useState<string>('');
@@ -79,8 +79,8 @@ export function PomodorBlock() {
     } else {
       setText(current ? current.text : 'Введите название задачи');
       setNumber(current ? `${current.id + 1}` : '');
-      setPomodor(current ? `${Math.ceil(current.time / timePomodoro)}` : '');
-      setTime(current ? current.time - current.currentTime : 0);
+      setPomodor(current ? current.currentPomodor : 0);
+      setTime(current ? current.time * current.currentPomodor - current.currentTime : 0);
     }
   }, [current, isBreak, currentData]);
 
@@ -93,11 +93,24 @@ export function PomodorBlock() {
             current.currentTime = current.currentTime + 1;
             dispatch(authRequestAsync(currentData));
           }, 1000);
-        } else {
+        } else if (pomodor === current.pomodor) {
           current.done = true;
           current.updateddAt = Date.now();
           currentData.currentTask = currentData.currentTask + 1;
           dispatch(authRequestAsync(currentData));
+          setCount(count + 1);
+          setIsTimerActive(false);
+          setIsBreak(true);
+          setIsAfterStart(false);
+          setStopBtnText('Пропустить');
+          setStartBtnText('Старт');
+          setIsNotification(true);
+          setPomodor(0);
+        } else {
+          setPomodor(0);
+          current.currentPomodor = current.currentPomodor + 1;
+          dispatch(authRequestAsync(currentData));
+          setTime(current.time);
           setCount(count + 1);
           setIsTimerActive(false);
           setIsBreak(true);

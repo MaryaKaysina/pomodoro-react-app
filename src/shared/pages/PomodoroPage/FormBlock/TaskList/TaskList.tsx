@@ -37,14 +37,19 @@ const classes = {
   exitActive: stylesTransitions['transition-exit-active']
 };
 
-export function TaskList({ settings, onClick = NOOP }: ITaskList) {
+export function TaskList({ onClick = NOOP }: ITaskList) {
   const [currentTaskActive, setCurrentTaskActive] = useState<number>(0);
-  const [tasks, setTasks] = useState<ITask[]>([])
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [allTimeText, setAllTimeText] = useState<string>('');
 
   const data = useSelector<RootState, IData>(state => state.auth.data);
   const currentTask = useSelector<RootState, number>(state => state.auth.data.currentTask);
   const currentTasks = useSelector<RootState, ITask[]>(state => state.auth.data.tasks)
     .filter((task) => !task.done);
+  const currentTasksTime = useSelector<RootState, ITask[]>(state => state.auth.data.tasks)
+    .filter((task) => !task.done)
+    .reduce((acc, task) => task.time * task.pomodor + acc, 0) / 60 || 0;;
+  const settings = useSelector<RootState, ISettings>(state => state.auth.data.settings);
 
   useEffect(() => {
     if (currentTasks.length === tasks.length) return;
@@ -59,25 +64,23 @@ export function TaskList({ settings, onClick = NOOP }: ITaskList) {
       const currentId = tasksSort[0]?.id;
       setCurrentTaskActive(currentId);
       onClick(currentId);
-      setCurrentTaskActive(currentId);
     }
-  }, [currentTasks, currentTask])
+  }, [currentTasks, currentTask, currentTasksTime]);
 
-  const allTime = tasks?.reduce((acc, task) => task.time + acc, 0) / 60 || 0;
-  let allTimeText = '';
+  useEffect(() => {
+    if (currentTasksTime < 60) {
+      if (currentTasksTime * 10 % 10 === 0) {
+        setAllTimeText(`${currentTasksTime} мин`);
+      } else {
+        setAllTimeText(`${currentTasksTime.toFixed(2).toString()} мин`);
+      }
 
-  if (allTime < 60) {
-    if (allTime * 10 % 10 === 0) {
-      allTimeText = `${allTime} мин`;
+    } else if (currentTasksTime%60 !== 0) {
+      setAllTimeText(`${Math.floor(currentTasksTime / 60)} час ${(currentTasksTime%60)} мин`);
     } else {
-      allTimeText = `${allTime.toFixed(2).toString()} мин`;
+      setAllTimeText(`${Math.floor(currentTasksTime / 60)} час`);
     }
-
-  } else if (allTime%60 !== 0) {
-    allTimeText = `${Math.floor(allTime / 60)} час ${(allTime%60)} мин`;
-  } else {
-    allTimeText = `${Math.floor(allTime / 60)} час`;
-  }
+  }, [currentTasksTime])
 
   function handleClick(id: number) {
     setCurrentTaskActive(id);
@@ -98,8 +101,7 @@ export function TaskList({ settings, onClick = NOOP }: ITaskList) {
               >
                 <TaskItem
                   key={task.id}
-                  task={task}
-                  timeToOne={settings?.timePomodoro}
+                  taskId={task.id}
                   currentId={currentTaskActive}
                   onClick={() => handleClick(task.id)}
                 />

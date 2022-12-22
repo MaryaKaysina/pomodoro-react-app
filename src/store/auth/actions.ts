@@ -22,6 +22,8 @@ export interface ITask {
   updateddAt: number;
   done: boolean;
   skip: boolean;
+  pomodor: number;
+  currentPomodor: number;
 }
 
 export interface IPause {

@@ -10,6 +10,7 @@ interface IItemList {
   bg?: string;
   content?: string;
   dataAction?: string;
+  isDisabled?: string;
 }
 
 interface IGenericListProps {
@@ -32,7 +33,8 @@ export function GenericList({ list, divider = false, classNameDivider }: IGeneri
         href,
         bg,
         content = '',
-        dataAction
+        dataAction,
+        isDisabled = 'false'
       }) => (
         <div key={id}>
           <As
@@ -41,6 +43,7 @@ export function GenericList({ list, divider = false, classNameDivider }: IGeneri
             href={href}
             style={{ backgroundColor: bg, justifyContent: content }}
             data-action={dataAction}
+            disabled={isDisabled === 'true'}
           >
             {element}
           </As>

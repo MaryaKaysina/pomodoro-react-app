@@ -52,7 +52,7 @@ export function DropdownList(props: IDropdownList) {
 
     const curentTask = currentData.tasks.filter((task) => task.id === props.taskId)[0];
     const otherTask = currentData.tasks.filter((task) => task.id !== props.taskId);
-    let curentTime = curentTask.time;
+    let currentPomodor = curentTask.pomodor;
     let currentText = curentTask.text;
 
     function handleClick(event: MouseEvent) {
@@ -68,17 +68,17 @@ export function DropdownList(props: IDropdownList) {
       } else {
         const currentAction = ((event.target as HTMLElement).parentNode as HTMLElement).dataset.action;
 
-        if(currentAction === 'UpTime' || (currentAction === 'DownTime' && curentTime > 0)) {
+        if(currentAction === 'UpTime' || (currentAction === 'DownTime' && currentPomodor > 1)) {
           if(currentAction === 'UpTime') {
-            curentTime = curentTask.time + currentData.settings.timePomodoro;
+            currentPomodor = curentTask.pomodor + 1;
             props.onClose?.();
           }
 
-          if(currentAction === 'DownTime' && curentTime > 0) {
-            curentTime = curentTask.time - currentData.settings.timePomodoro;
+          if(currentAction === 'DownTime' && currentPomodor > 1) {
+            currentPomodor = curentTask.pomodor - 1;
             props.onClose?.();
           }
-          const newData = setDataTasks({ curentTime, currentText, curentTask, otherTask, currentData });
+          const newData = setDataTasks({ currentPomodor, currentText, curentTask, otherTask, currentData });
           dispatch(authRequestAsync(newData));
         }
 
@@ -89,7 +89,7 @@ export function DropdownList(props: IDropdownList) {
           textInput.focus();
           textInput.addEventListener('blur', () => {
             currentText = textInput.value;
-            const newData = setDataTasks({ curentTime, currentText, curentTask, otherTask, currentData });
+            const newData = setDataTasks({ currentPomodor, currentText, curentTask, otherTask, currentData });
             dispatch(authRequestAsync(newData));
           });
           props.onClose?.();

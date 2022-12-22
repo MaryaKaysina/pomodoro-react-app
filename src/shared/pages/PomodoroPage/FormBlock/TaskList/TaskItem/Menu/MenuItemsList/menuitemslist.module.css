@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.menuItem.isDisable {
+  cursor: not-allowed;
+}
+
 .menuItem.isDisable svg {
   filter: grayscale(1);
 }

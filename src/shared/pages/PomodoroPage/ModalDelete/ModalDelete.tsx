@@ -24,8 +24,10 @@ export function ModalDelete({ tasks, onClose }: IModalDelete) {
   const dispatch = useDispatch<any>();
 
   function handleClickDelete(tasks: IData) {
+    tasks.currentTask = tasks.currentTask + 1;
     dispatch(authRequestAsync(tasks));
     body?.classList.remove('isModal');
+    onClose?.();
   }
 
   function handleClick() {
