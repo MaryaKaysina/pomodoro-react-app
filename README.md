@@ -2,8 +2,8 @@
 
 **Трекер задач по методу Помодоро** 🍅
 
-![React](https://img.shields.io/badge/-REACTJS-61DAFB?logo=react&logoColor=white&style=flat)
 ![TypeScript](https://img.shields.io/badge/-typescript-%23007ACC?logo=typescript&logoColor=white&style=flat)
+![React](https://img.shields.io/badge/-REACTJS-61DAFB?logo=react&logoColor=white&style=flat)
 ![Redux](https://img.shields.io/badge/-redux-764ABC?logo=redux&logoColor=white&style=flat)
 
 ## Функционал
@@ -20,7 +20,7 @@
  </details>
 
 <details>
- <summary markdown="span"> Работа с таймером (старт, стоп, пауза, продлить, пропустить))</summary>
+ <summary markdown="span"> Работа с таймером (старт, стоп, пауза, продлить, пропустить)</summary>
 :alarm_clock:
 
 Как только пользователь готов, он запускает таймер. Если его отвлекли, то
