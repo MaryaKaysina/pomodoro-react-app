@@ -52,11 +52,15 @@
 
 ## Запуск
 
+npm >= v6.14.16
+
 `npm run dev` - запуск в режиме разработки
 
 `npm run build:prod` - сборка для продакшена
 
 :star: **В целях демонстрации страницы со статистикой Local Storage можно заполнить моковыми данными за 3 недели, раскомментировав
 `localStorage.setItem('token-pomodoro', JSON.stringify(mockTestData));` в файле App.tsx**
+
+npm
 
 :star: **Открыть приложение на Vercel -> [pomodoro](https://pomodoro-box-tracker.vercel.app/)**
