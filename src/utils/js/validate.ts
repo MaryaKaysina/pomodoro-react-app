@@ -1,6 +1,6 @@
 import { customErrorFactory } from "ts-custom-error";
 import { IData } from "../../store/auth/actions";
-import { DEFAULT_TIME, DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG, DEFAULT_FREQUENCY_LONG_BREAK, IS_ACTIVE } from "../conts";
+import { DEFAULT_TIME, DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG, DEFAULT_FREQUENCY_LONG_BREAK, IS_ACTIVE, APP_LOCAL_KEY } from "../conts";
 
 export interface IError {
   code: number;
@@ -37,7 +37,7 @@ export function vadateForm({ name, mail, isCheck, data, setAuthError }: IVadateF
       throw new AuthError(114, 'Не проставлено согласие (:');
     }
 
-    const local = localStorage.getItem('token-pomodoro') || '[]';
+    const local = localStorage.getItem(APP_LOCAL_KEY) || '[]';
     const localData: IData[] = JSON.parse(local);
     const current = localData.filter((item) => item.auth === mail.trim())[0];
 

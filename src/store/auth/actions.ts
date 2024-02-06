@@ -1,6 +1,7 @@
 import { Action, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 import { RootState } from "../reducer";
+import { APP_LOCAL_KEY } from "../../utils/conts";
 
 // AUTH_REQUEST
 export const AUTH_REQUEST = 'AUTH_REQUEST';
@@ -79,13 +80,13 @@ export const authRequestAsync =
   (data: IData): ThunkAction<void, RootState, unknown, Action<string>> =>
   (dispatch, getState) => {
     dispatch(authRequest());
-    const local = localStorage.getItem('token-pomodoro') || '[]';
+    const local = localStorage.getItem(APP_LOCAL_KEY) || '[]';
     const localData: IData[] = JSON.parse(local);
 
     if (data.auth.length !== 0) {
       const local = localData.filter((local) => local.auth !== data.auth);
       local.push(data);
-      localStorage.setItem('token-pomodoro', JSON.stringify(local));
+      localStorage.setItem(APP_LOCAL_KEY, JSON.stringify(local));
       dispatch(authRequestSuccess(data));
     } else {
       dispatch(authRequestError('Our e-mail is empty(:'));

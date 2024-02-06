@@ -7,6 +7,7 @@ import { EIcons, Icon } from '../../Icon';
 import { Text, EColors } from '../../Text';
 import { ModalSettings } from '../ModalSettings';
 import styles from './menublock.module.css';
+import { APP_LOCAL_KEY } from '../../../../utils/conts';
 
 export function MenuBlock() {
   const [isDark, setIsDark] = useState(false);
@@ -23,7 +24,7 @@ export function MenuBlock() {
 
   useEffect(() => {
     const localDefault = JSON.stringify([{auth: "", tasks: [], logInDate: 0}]);
-    const localString = localStorage.getItem('token-pomodoro') || localDefault;
+    const localString = localStorage.getItem(APP_LOCAL_KEY) || localDefault;
     const localData: IData[] = JSON.parse(localString);
     const currentLocalData = localData.sort((a, b) => b.logInDate - a.logInDate).slice(0, 1)[0];
 

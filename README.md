@@ -59,7 +59,7 @@ npm >= v6.14.16
 `npm run build:prod` - сборка для продакшена
 
 :star: **В целях демонстрации страницы со статистикой Local Storage можно заполнить моковыми данными за 3 недели, раскомментировав
-`localStorage.setItem('token-pomodoro', JSON.stringify(mockTestData));` в файле App.tsx**
+`localStorage.setItem(APP_LOCAL_KEY, JSON.stringify(mockTestData));` в файле App.tsx**
 
 npm
 

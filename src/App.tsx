@@ -18,6 +18,7 @@ import { PomodoroPage } from './shared/pages/PomodoroPage';
 import { StatisticPage } from './shared/pages/StatisticPage';
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { APP_LOCAL_KEY } from './utils/conts';
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
@@ -30,6 +31,7 @@ const classes = {
   exitActive: stylesTransitions['transition-exit-active']
 };
 
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 const mockTestData = mockData();
 
 function AppComponent() {
@@ -59,7 +61,7 @@ function App() {
   useEffect(() => {
     setMounted(true);
     // Заполнение тестовыми данными
-    // localStorage.setItem('token-pomodoro', JSON.stringify(mockTestData));
+    // localStorage.setItem(APP_LOCAL_KEY, JSON.stringify(mockTestData));
   }, []);
 
   return (
