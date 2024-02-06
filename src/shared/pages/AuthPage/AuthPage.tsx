@@ -30,7 +30,7 @@ export function AuthPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(true);
-    }, 300);
+    }, 500);
     return () => clearTimeout(timer);
   }, [])
 
