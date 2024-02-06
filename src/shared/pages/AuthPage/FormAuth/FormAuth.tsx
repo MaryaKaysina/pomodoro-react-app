@@ -1,25 +1,11 @@
-import { ChangeEvent, FormEvent } from 'react';
+import { Button } from 'src/shared/components/Button';
+import { ErrorBlock } from 'src/shared/components/ErrorBlock';
+import { Text, EColors } from 'src/shared/components/Text';
+
+import { IFormAuth } from './formauth.interface';
+
 import styles from './formauth.module.css';
-
-import { Button } from '../../../components/Button';
-import { ErrorBlock } from '../../../components/ErrorBlock';
-import { Text, EColors } from '../../../components/Text';
-
-interface IError {
-  code: number;
-  message: string;
-}
-
-interface IFormAuth {
-  valueName: string;
-  valueMail: string;
-  valueCheck: string;
-  authError: IError;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit?: (event: FormEvent) => void;
-}
-
-const NOOP = () => {};
+import { Input } from 'src/shared/components/Input';
 
 export function FormAuth(
   {
@@ -27,8 +13,8 @@ export function FormAuth(
     valueMail,
     valueCheck,
     authError,
-    onChange = NOOP,
-    onSubmit = NOOP
+    onChange = () => {},
+    onSubmit = () => {}
   }: IFormAuth) {
 
   return (
@@ -38,7 +24,7 @@ export function FormAuth(
       <Text As='h2' mobileSize={16} size={24} color={EColors.white}>
         Совсем чуть-чуть и можем начинать!
       </Text>
-      <div className={styles.inputBlock}>
+      {/* <div className={styles.inputBlock}>
         <label htmlFor="name" className={styles.label}>Введите имя</label>
         <input
           className={styles.input}
@@ -49,10 +35,25 @@ export function FormAuth(
           value={valueName}
         />
 
-        {authError && authError.code === 111 && (
-          <ErrorBlock message={authError.message}/>
-        )}
-      </div>
+        {authError && authError.code === 111 && <ErrorBlock message={authError.message}/>}
+      </div> */}
+      <Input
+        label='Введите имя'
+        placeholder='Ваше имя'
+        value={valueName}
+        id='name'
+        type='text'
+        onChange={onChange}
+      />
+
+      <Input
+        label='Введите email'
+        placeholder='Ваше имя'
+        value={valueName}
+        id='name'
+        type='text'
+        onChange={onChange}
+      />
 
       <div className={styles.inputBlock}>
         <label htmlFor="mail" className={styles.label}>Введите email</label>
@@ -66,17 +67,12 @@ export function FormAuth(
         />
 
         {authError &&
-        (authError.code === 112 || authError.code === 113) &&
-        (
-          <ErrorBlock message={authError.message}/>
-        )}
+        (authError.code === 112 || authError.code === 113) && <ErrorBlock message={authError.message}/>}
       </div>
 
       <Button>
-          Зарегистрироваться
-        {authError && authError.code === 114 && (
-          <ErrorBlock message={authError.message}/>
-        )}
+        Зарегистрироваться
+        {authError && authError.code === 114 && <ErrorBlock message={authError.message}/>}
       </Button>
 
       <label className={styles.labelCheckbox}>
