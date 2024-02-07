@@ -67,6 +67,7 @@
   --bgHeader: hsl(0, 0%, var(--whiteLightness));
   --bgNotification: #454954;
   --bgModal: #ffffff;
+  --shadow: -5px 5px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
 body {
@@ -83,17 +84,18 @@ body.isModal {
 }
 
 body.isDark {
-  --white:                #cccccc;
-  --black:                #cccccc;
-  --bg: #333333;
-  --bgHeader: #000000;
-  --grayF4:               hsl(0, 0%, calc(var(--whiteLightness) - 96%));
-  --textWhite: #ffffff;
-  --textblack: #ffffff;
-  --orangeLight:           #ff9a02;
-  --purpleLight:           #1500ff;
-  --blueLight:           #02c4ff;
-  --bgModal: #333333;
+  --white:        #cccccc;
+  --black:        #cccccc;
+  --bg:           #333333;
+  --bgHeader:       hsl(0, 0%, calc(var(--whiteLightness) - 85%));
+  --grayF4:         hsl(0, 0%, calc(var(--whiteLightness) - 85%));
+  --textWhite:    #ffffff;
+  --textblack:    #d3d3d3;
+  --orangeLight:  #ff9a02;
+  --purpleLight:  #1500ff;
+  --blueLight:    #02c4ff;
+  --bgModal:      #333333;
+  --shadow:       -5px 5px 8px 0px rgba(255, 255, 255, 0.2);
 }
 
 * {

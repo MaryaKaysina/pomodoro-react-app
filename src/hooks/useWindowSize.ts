@@ -12,10 +12,6 @@ export const useWindowSize = (): WindowSize => {
   });
 
   React.useEffect(() => {
-    console.log(windowSize);
-  }, [windowSize]);
-
-  React.useEffect(() => {
     function handleResize() {
       setWindowSize({
         width: window.innerWidth,
