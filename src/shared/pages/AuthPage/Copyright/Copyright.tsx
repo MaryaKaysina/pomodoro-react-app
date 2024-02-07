@@ -1,6 +1,8 @@
-import { Text, EColors } from '../../../components/Text';
+import { Text } from 'src/shared/components/Text';
 
-export function Copyright() {
+import { EColors } from 'src/shared/components/Text/text.interface';
+
+export const Copyright = () => {
   return (
     <Text size={10} color={EColors.white}>
       Skillbox® | 2021

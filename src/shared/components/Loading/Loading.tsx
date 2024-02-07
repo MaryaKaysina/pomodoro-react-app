@@ -1,6 +1,6 @@
 import styles from './loading.module.css';
 
-export function Loading() {
+export const Loading = () => {
   return (
     <div className={styles.container}>
       <div className={styles.loader}></div>

@@ -1,18 +1,19 @@
-import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import styles from './pomodorblock.module.css';
-import stylesTransitions from '../../../../app.module.css';
+import classNames from 'classnames';
 
-import { IData, ITask, authRequestAsync } from '../../../../store/auth/actions';
-import { RootState } from '../../../../store/reducer';
-import { DEFAULT_TIME_ADD } from '../../../../utils/conts';
-import { Button } from '../../../components/Button';
-import { Timer } from './Timer';
-import { Notification } from '../../../components/Notification';
-import { Header } from './Header';
-import { Description } from './Description';
+import { IData, ITask, authRequestAsync } from 'src/store/auth/actions';
+import { RootState } from 'src/store/reducer';
+import { DEFAULT_TIME_ADD } from 'src/utils/conts';
+import { Button } from 'src/shared/components/Button';
+import { Notification } from 'src/shared/components/Notification';
+import { Timer } from 'src/shared/pages/PomodoroPage/PomodorBlock/Timer';
+import { Header } from 'src/shared/pages/PomodoroPage/PomodorBlock/Header';
+import { Description } from 'src/shared/pages/PomodoroPage/PomodorBlock/Description';
+
+import stylesTransitions from 'src/app.module.css';
+import styles from './pomodorblock.module.css';
 
 const classes = {
   enter: stylesTransitions['timer-enter'],
@@ -21,25 +22,25 @@ const classes = {
   exitActive: stylesTransitions['timer-exit-active']
 };
 
-export function PomodorBlock() {
-  const [time, setTime] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
-  const [text, setText] = useState<string>('Введите название задачи');
-  const [number, setNumber] = useState<string>('');
-  const [pomodor, setPomodor] = useState<number>(0);
-  const [pauseTime, setPauseTime] = useState<number>(0);
+export const PomodorBlock = () => {
+  const [time, setTime] = React.useState<number>(0);
+  const [count, setCount] = React.useState<number>(0);
+  const [text, setText] = React.useState<string>('Введите название задачи');
+  const [number, setNumber] = React.useState<string>('');
+  const [pomodor, setPomodor] = React.useState<number>(0);
+  const [pauseTime, setPauseTime] = React.useState<number>(0);
 
-  const [classList, setClassList] = useState<string>('');
-  const [startBtnText, setStartBtnText] = useState<string>('Старт');
-  const [stopBtnText, setStopBtnText] = useState<string>('Стоп');
+  const [classList, setClassList] = React.useState<string>('');
+  const [startBtnText, setStartBtnText] = React.useState<string>('Старт');
+  const [stopBtnText, setStopBtnText] = React.useState<string>('Стоп');
 
-  const [isTimerActive, setIsTimerActive] = useState<boolean>(false);
-  const [isTimerPaused, setIsTimerPaused] = useState<boolean>(false);
-  const [isAfterStart, setIsAfterStart] = useState<boolean>(false);
-  const [isBtnStartActive, setIsBtnStartActive] = useState<boolean>(false);
-  const [isBreak, setIsBreak] = useState<boolean>(false);
-  const [isNotification, setIsNotification] = useState<boolean>(false);
-  const [current, setCurrent] = useState<ITask>();
+  const [isTimerActive, setIsTimerActive] = React.useState<boolean>(false);
+  const [isTimerPaused, setIsTimerPaused] = React.useState<boolean>(false);
+  const [isAfterStart, setIsAfterStart] = React.useState<boolean>(false);
+  const [isBtnStartActive, setIsBtnStartActive] = React.useState<boolean>(false);
+  const [isBreak, setIsBreak] = React.useState<boolean>(false);
+  const [isNotification, setIsNotification] = React.useState<boolean>(false);
+  const [current, setCurrent] = React.useState<ITask>();
 
   const currentData = useSelector<RootState, IData>(state => state.auth.data);
 
@@ -55,7 +56,7 @@ export function PomodorBlock() {
   const dispatch = useDispatch<any>();
   let currentTimerId: any;
 
-  useEffect(() => {
+  React.useEffect(() => {
     const currentTaskActive = currentTasks.filter((task) => task.id === currentTaskId && !task.done);
 
     const current = currentTaskActive.length !== 0 ?
@@ -64,7 +65,7 @@ export function PomodorBlock() {
     setCurrent(current);
   }, [currentTasks, currentTaskId]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isBreak) {
       setText('Перерыв');
       setNumber('');
@@ -84,7 +85,7 @@ export function PomodorBlock() {
     }
   }, [current, isBreak, currentData]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     function isActiveTask(currentData: IData, current: ITask) {
       if (current && !isBreak) {
         if (time > 0) {
@@ -146,7 +147,7 @@ export function PomodorBlock() {
     }
   }, [isTimerActive, time, current, isBreak])
 
-  useEffect(() => {
+  React.useEffect(() => {
     const classes = classNames(
       styles['block'],
       { [styles.isTimerPaused]: isTimerPaused },

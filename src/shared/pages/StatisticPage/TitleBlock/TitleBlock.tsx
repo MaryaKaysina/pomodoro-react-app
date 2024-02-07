@@ -1,47 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import classNames from 'classnames';
+
+import { Text } from 'src/shared/components/Text';
+import { updateCurrentDay } from 'src/store/current_day';
+import { updateCurrentWeek } from 'src/store/current_week';
+
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { IList } from './titleblock.interface';
+
+import { LIST } from './titleblock.const';
+
 import styles from './titleblock.module.css';
 
-import { Text, EColors } from '../../../components/Text';
-import { useDispatch } from 'react-redux';
-import { updateCurrentDay } from '../../../../store/current_day';
-import { updateCurrentWeek } from '../../../../store/current_week';
+export const TitleBlock = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [classList, setClassList] = React.useState<string>('');
+  const [list, setList] = React.useState<IList[]>(LIST);
 
-
-interface IList {
-  id: string;
-  dataAction: string;
-  isActive: boolean;
-  element: React.ReactNode;
-}
-
-const LIST: IList[] = [
-  {
-    id: 'week',
-    element: <Text mobileSize={12} size={16} color={EColors.black}>Эта неделя</Text>,
-    dataAction: 'Week',
-    isActive: true,
-  },
-  {
-    id: 'lastweek',
-    element: <Text mobileSize={12} size={16} color={EColors.black}>Прошедшая неделя</Text>,
-    dataAction: 'LastWeek',
-    isActive: false,
-  },
-  {
-    id: 'twoweek',
-    element: <Text mobileSize={12} size={16} color={EColors.black}>2 недели назад</Text>,
-    dataAction: 'TwoWeek',
-    isActive: false,
-  },
-];
-
-export function TitleBlock() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [classList, setClassList] = useState<string>('');
-  const [list, setList] = useState<IList[]>(LIST);
-
-  const btnRef = useRef<HTMLButtonElement>(null);
+  const btnRef = React.useRef<HTMLButtonElement>(null);
   const dispatch = useDispatch<any>();
 
   function handleClick() {
@@ -75,7 +52,7 @@ export function TitleBlock() {
     )
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     function handleClick(event: MouseEvent) {
       if (event.target instanceof Node && !btnRef.current?.contains(event.target)) {
         const currentAction = ((event.target as HTMLElement).parentNode as HTMLElement).dataset.action;
@@ -106,7 +83,7 @@ export function TitleBlock() {
     }
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const classes = classNames(
       styles['selectBlock'],
       { [styles.isOpen]: isOpen },

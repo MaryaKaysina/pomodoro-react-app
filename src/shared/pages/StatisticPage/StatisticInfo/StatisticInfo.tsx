@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IData } from '../../../../store/auth/actions';
-import { updateCurrentDay } from '../../../../store/current_day';
-import { RootState } from '../../../../store/reducer';
-import { getWeek, formatDate } from '../../../../utils/js/getWeek';
 
-import { CardItem } from './CardItem';
-import { CountBlock } from './CountBlock';
-import { DayBlock } from './DayBlock';
-import { DiagramBlock } from './DiagramBlock';
+import { IData } from 'src/store/auth/actions';
+import { updateCurrentDay } from 'src/store/current_day';
+import { RootState } from 'src/store/reducer';
+import { getWeek, formatDate } from 'src/utils/js/getWeek';
+
+import { CardItem } from 'src/shared/pages/StatisticPage/StatisticInfo/CardItem';
+import { CountBlock } from 'src/shared/pages/StatisticPage/StatisticInfo/CountBlock';
+import { DayBlock } from 'src/shared/pages/StatisticPage/StatisticInfo/DayBlock';
+import { DiagramBlock } from 'src/shared/pages/StatisticPage/StatisticInfo/DiagramBlock';
+
 import styles from './statisticinfo.module.css';
 
-export function StatisticInfo() {
-  const [dayTime, setDayTime] = useState<number>(0);
-  const [count, setCount] = useState<number>(0);
-  const [focus, setFocus] = useState<number>(0);
-  const [pause, setPause] = useState<number>(0);
-  const [stop, setStop] = useState<number>(0);
-  const [weekTasks, setWeekTasks] = useState<number[]>([]);
+export const StatisticInfo = () => {
+  const [dayTime, setDayTime] = React.useState<number>(0);
+  const [count, setCount] = React.useState<number>(0);
+  const [focus, setFocus] = React.useState<number>(0);
+  const [pause, setPause] = React.useState<number>(0);
+  const [stop, setStop] = React.useState<number>(0);
+  const [weekTasks, setWeekTasks] = React.useState<number[]>([]);
   const currentData = useSelector<RootState, IData>(state => state.auth.data);
 
   const currentDay = useSelector<RootState, number>(state => state.currentDay);
@@ -25,13 +27,13 @@ export function StatisticInfo() {
 
   const dispatch = useDispatch<any>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const today = new Date();
     const weekNum = [6, 0, 1, 2, 3, 4, 5]
     dispatch(updateCurrentDay(weekNum[today.getDay()]));
   }, [])
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (currentData.auth.length === 0) return;
     const tasks = currentData.tasks;
     if (tasks.length === 0) return;

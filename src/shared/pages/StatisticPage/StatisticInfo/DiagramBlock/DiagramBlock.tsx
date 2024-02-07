@@ -1,15 +1,15 @@
-import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
-import { updateCurrentDay } from '../../../../../store/current_day';
+
+import { updateCurrentDay } from 'src/store/current_day';
+
+import { IDiagramBlock } from './diagramblock.interface';
+
 import styles from './diagramblock.module.css';
 
-interface IDiagramBlock {
-  tasks: number[];
-  currentDay: number;
-}
 
-export function DiagramBlock({ tasks, currentDay }: IDiagramBlock) {
+export const DiagramBlock = ({ tasks, currentDay }: IDiagramBlock) => {
   const dispatch = useDispatch<any>();
 
   const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];

@@ -1,34 +1,21 @@
-import React, { useEffect } from 'react';
-import styles from './dropdown.module.css';
+import React from 'react';
+
 import { DropdownList } from './DropdownList';
 
-interface IPosition {
-  top: number;
-  left: number;
-}
+import { IDropdownProps } from './dropdown.interface';
 
-interface IDropdownProps {
-  button: React.ReactNode;
-  children: React.ReactNode;
-  position?: IPosition;
-  taskId?: number;
-  isOpen?: boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
-}
+import styles from './dropdown.module.css';
 
-const NOOP = () => {};
-
-export function Dropdown(
+export const Dropdown = (
   {
     button,
     children,
     position,
     isOpen,
     taskId = -1,
-    onOpen = NOOP,
-    onClose = NOOP
-  }: IDropdownProps) {
+    onOpen = () => {},
+    onClose = () => {}
+  }: IDropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(isOpen);
 
   const handleOpen = () => {
@@ -37,7 +24,7 @@ export function Dropdown(
     }
   }
 
-  useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
+  React.useEffect(() => setIsDropdownOpen(isOpen), [isOpen]);
 
   return (
     <div className={styles.container}>

@@ -1,22 +1,16 @@
 import ReactDOM from 'react-dom';
 import { useDispatch } from 'react-redux';
 
-import { IData, authRequestAsync } from '../../../../store/auth/actions';
+import { IData, authRequestAsync } from 'src/store/auth/actions';
+import { Button } from 'src/shared/components/Button';
+import { Icon } from 'src/shared/components/Icon';
 
-import { Button } from '../../../components/Button';
-import { Icon, EIcons } from '../../../components/Icon';
-
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { IModalDelete } from './modaldelete.interface';
 
 import styles from './modaldelete.module.css';
 
-interface IModalDelete {
-  tasks: IData;
-  onClose?: () => void;
-}
-
-const NOOP = () => {};
-
-export function ModalDelete({ tasks, onClose }: IModalDelete) {
+export const ModalDelete = ({ tasks, onClose }: IModalDelete) => {
   const body = document.querySelector('body');
   const node = document.querySelector('#modal_root');
   if (!node) return null;

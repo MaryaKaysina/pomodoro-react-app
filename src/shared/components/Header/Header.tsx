@@ -1,8 +1,9 @@
-import styles from './header.module.css';
 import { LogoBlock } from './LogoBlock';
 import { MenuBlock } from './MenuBlock';
 
-export function Header() {
+import styles from './header.module.css';
+
+export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>

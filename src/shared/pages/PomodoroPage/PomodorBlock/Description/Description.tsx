@@ -1,11 +1,9 @@
-import { Text, EColors } from '../../../../components/Text';
+import { Text } from 'src/shared/components/Text';
 
-interface IDescription {
-  title?: string;
-  number?: string;
-}
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { IDescription } from './description.interface';
 
-export function Description({ title = 'Введите название задачи', number = '' }: IDescription) {
+export const Description = ({ title = 'Введите название задачи', number = '' }: IDescription) => {
   return (
     <>
       {number.length !== 0 && (

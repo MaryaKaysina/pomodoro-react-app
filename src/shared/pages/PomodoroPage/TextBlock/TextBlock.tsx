@@ -1,7 +1,10 @@
-import { Text, EColors } from '../../../components/Text';
+import { Text } from 'src/shared/components/Text';
+
+import { EColors } from 'src/shared/components/Text/text.interface';
+
 import styles from './textblock.module.css';
 
-export function TextBlock() {
+export const TextBlock = () => {
   return (
     <>
       <Text As='h2' mobileSize={20} size={24} color={EColors.black}>Ура! Теперь можно начать работать:</Text>

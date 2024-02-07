@@ -1,34 +1,18 @@
-import styles from './tasklist.module.css';
-import stylesTransitions from '../../../../../app.module.css';
-
-import { Text, EColors } from '../../../../components/Text';
-import { TaskItem } from './TaskItem';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { ISettings } from '../../../../../store/setSettings';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { IData, ITask } from '../../../../../store/auth/actions';
-import { RootState } from '../../../../../store/reducer';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-interface ITaskItem {
-  id: number;
-  text: string;
-  time: number;
-  currentTime: number;
-  createdAt: number;
-  updateddAt: number;
-  done: boolean;
-  skip: boolean;
-}
+import { Text } from 'src/shared/components/Text';
+import { ISettings } from 'src/store/setSettings';
+import { IData, ITask } from 'src/store/auth/actions';
+import { RootState } from 'src/store/reducer';
+import { TaskItem } from 'src/shared/pages/PomodoroPage/FormBlock/TaskList/TaskItem';
 
-interface ITaskList {
-  tasks: ITaskItem[];
-  settings: ISettings;
-  onClick?: (id: number) => void;
-  auth: string;
-}
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { ITaskList } from './tasklist.interface';
 
-const NOOP = () => {};
+import stylesTransitions from 'src/app.module.css';
+import styles from './tasklist.module.css';
 
 const classes = {
   enter: stylesTransitions['transition-enter'],
@@ -37,7 +21,7 @@ const classes = {
   exitActive: stylesTransitions['transition-exit-active']
 };
 
-export function TaskList({ onClick = NOOP }: ITaskList) {
+export const TaskList = ({ onClick = () => {} }: ITaskList) => {
   const [currentTaskActive, setCurrentTaskActive] = useState<number>(0);
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [allTimeText, setAllTimeText] = useState<string>('');

@@ -1,16 +1,10 @@
-import { ChangeEvent, FormEvent } from 'react';
-import { Button } from '../../../../components/Button';
+import { Button } from 'src/shared/components/Button';
+
+import { IForm } from './form.interface';
+
 import styles from './form.module.css';
 
-interface IForm {
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (event: FormEvent) => void;
-}
-
-const NOOP = () => {};
-
-export function Form({ value, onChange = NOOP, onSubmit = NOOP }: IForm) {
+export const Form = ({ value, onChange = () => {}, onSubmit = () => {} }: IForm) => {
   return (
     <form
       action="#"

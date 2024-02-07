@@ -1,21 +1,24 @@
-import classNames from 'classnames';
-import React from 'react';
-import styles from './input.module.css';
-import { IInput } from './input.interface';
-import { ErrorBlock } from 'src/shared/components/ErrorBlock';
+import { ErrorBlock } from "src/shared/components/ErrorBlock";
 
-export function Input({
-    label,
-    placeholder,
-    error,
-    id,
-    type,
-    onChange = () => {},
-    value
-  }: IInput) {
+import { IInput } from "./input.interface";
+import styles from "./input.module.css";
+
+export const Input = ({
+  label,
+  placeholder,
+  error,
+  id,
+  type,
+  onChange = () => {},
+  value,
+  forInput,
+}: IInput) => {
+
   return (
     <div className={styles.inputBlock}>
-      <label htmlFor="name" className={styles.label}>{label}</label>
+      <label htmlFor={forInput} className={styles.label}>
+        {label}
+      </label>
       <input
         className={styles.input}
         type={type}
@@ -25,7 +28,10 @@ export function Input({
         value={value}
       />
 
-      {error && error.code && <ErrorBlock message={error.message}/>}
+      {error
+        && error.field === id
+        && ( <ErrorBlock message={error.message} /> )
+      }
     </div>
   );
 }

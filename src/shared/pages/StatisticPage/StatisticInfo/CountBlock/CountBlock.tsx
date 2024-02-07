@@ -1,12 +1,15 @@
-import { EIcons, Icon } from '../../../../components/Icon';
-import { Text, EColors } from '../../../../components/Text';
+import { Icon } from 'src/shared/components/Icon';
+import { Text } from 'src/shared/components/Text';
+
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { ICountBlock } from './countblock.interface';
+
 import styles from './countblock.module.css';
 
-interface ICountBlock {
-  count?: number;
-}
 
-export function CountBlock({ count = 0 }: ICountBlock) {
+
+export const CountBlock = ({ count = 0 }: ICountBlock) => {
   function numWord(value: number, words: string[]){
     value = Math.abs(value) % 100;
     const num = value % 10;

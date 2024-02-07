@@ -1,28 +1,33 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import { authRequestAsync, IData } from '../../../../store/auth/actions';
-import { RootState } from '../../../../store/reducer';
-import { EIcons, Icon } from '../../Icon';
-import { Text, EColors } from '../../Text';
-import { ModalSettings } from '../ModalSettings';
-import styles from './menublock.module.css';
-import { APP_LOCAL_KEY } from '../../../../utils/conts';
 
-export function MenuBlock() {
-  const [isDark, setIsDark] = useState(false);
-  const [isOpenModal, setIsOpenModal] = useState(false);
+import { authRequestAsync, IData } from 'src/store/auth/actions';
+import { RootState } from 'src/store/reducer';
+import { Icon } from 'src/shared/components/Icon';
+import { Text } from 'src/shared/components/Text';
+import { ModalSettings } from 'src/shared/components/Header/ModalSettings';
+import { APP_LOCAL_KEY } from 'src/utils/conts';
+
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { EColors } from 'src/shared/components/Text/text.interface';
+
+import styles from './menublock.module.css';
+
+export const MenuBlock = () => {
+  const [isDark, setIsDark] = React.useState(false);
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
 
   const location = useLocation();
 
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = React.useRef<HTMLButtonElement>(null);
 
   const currentData = useSelector<RootState, IData>(state => state.auth.data);
   const settings = currentData.settings;
 
   const dispatch = useDispatch<any>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const localDefault = JSON.stringify([{auth: "", tasks: [], logInDate: 0}]);
     const localString = localStorage.getItem(APP_LOCAL_KEY) || localDefault;
     const localData: IData[] = JSON.parse(localString);
@@ -37,7 +42,7 @@ export function MenuBlock() {
     dispatch(authRequestAsync(currentData));
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     const body = document.querySelector('body');
     if (isDark) {
       body?.classList.add('isDark');
@@ -46,7 +51,7 @@ export function MenuBlock() {
     }
   }, [isDark]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const body = document.querySelector('body');
 
     function handleClick(event: MouseEvent) {
@@ -88,11 +93,11 @@ export function MenuBlock() {
         <>
           <Link to='/statistic' className={styles.menuBlock}>
             <Icon name={EIcons.menuLinkIcon} />
-            <Text mobileSize={12} size={20} color={EColors.red}>Статистика</Text>
+            <Text mobileSize={16} size={20} color={EColors.red}>Статистика</Text>
           </Link>
           <Link to='/auth' className={styles.menuBlock}>
             <Icon name={EIcons.logoutIcon} />
-            <Text mobileSize={12} size={20} color={EColors.red}>Выход</Text>
+            <Text mobileSize={16} size={20} color={EColors.red}>Выход</Text>
           </Link>
         </>
       )}
@@ -100,7 +105,7 @@ export function MenuBlock() {
       {location.pathname === '/statistic' && (
         <Link to='/pomodoros' className={styles.menuBlock}>
           <Icon name={EIcons.arrowIcon} />
-          <Text mobileSize={12} size={20} color={EColors.red}>Назад</Text>
+          <Text mobileSize={16} size={20} color={EColors.red}>Назад</Text>
         </Link>
       )}
       {isOpenModal && <ModalSettings onClick={() => setIsOpenModal(false)} settings={settings}/>}

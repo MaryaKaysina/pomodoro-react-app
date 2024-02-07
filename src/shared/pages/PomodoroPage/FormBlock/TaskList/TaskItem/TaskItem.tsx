@@ -1,40 +1,35 @@
+import React from 'react';
 import classNames from 'classnames';
-import { ChangeEvent, MouseEventHandler, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ITask } from '../../../../../../store/auth/actions';
-import { RootState } from '../../../../../../store/reducer';
-import { ISettings } from '../../../../../../store/setSettings';
-import { Menu } from './Menu';
+
+import { ITask } from 'src/store/auth/actions';
+import { RootState } from 'src/store/reducer';
+import { Menu } from 'src/shared/pages/PomodoroPage/FormBlock/TaskList/TaskItem/Menu';
+
+import { ITaskItem } from './taskitem.interface';
+
 import styles from './taskitem.module.css';
 
-interface ITaskItem {
-  taskId: number;
-  currentId: number;
-  onClick?: (id: number) => void;
-}
-
-const NOOP = () => {};
-
-export function TaskItem({ taskId, onClick = NOOP, currentId }: ITaskItem) {
-  const [value, setValue] = useState('');
-  const [num, setNum] = useState(1);
-  const [classes, setClasses] = useState('');
+export const TaskItem = ({ taskId, onClick = () => {}, currentId }: ITaskItem) => {
+  const [value, setValue] = React.useState('');
+  const [num, setNum] = React.useState(1);
+  const [classes, setClasses] = React.useState('');
 
   const currentTask = useSelector<RootState, ITask[]>(state => state.auth.data.tasks)
     .filter((task) => task.id === taskId)[0];
   const timePomodoro = useSelector<RootState, number>(state => state.auth.data.settings.timePomodoro);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!currentTask) return;
     setValue(currentTask.text);
     setNum(currentTask.pomodor);
   }, [currentTask, timePomodoro]);
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setValue(event.target.value);
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     const classes = classNames(
       styles['taskItem'],
       { [styles.active]: currentTask?.id === currentId },

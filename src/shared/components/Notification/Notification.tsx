@@ -1,17 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Icon, EIcons } from '../Icon';
-import { Text, EColors } from '../Text';
-import NotificationSound from '../../../assets/sound2.wav';
+import React from 'react';
+
+import { Icon } from 'src/shared/components/Icon';
+import { Text } from 'src/shared/components/Text';
+import NotificationSound from 'src/assets/sound2.wav';
+
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { EColors } from 'src/shared/components/Text/text.interface';
+
 import styles from './notification.module.css';
 
-export function Notification() {
-  const [isOpen, setIsOpen] = useState(false);
+export const Notification = () => {
+  const [isOpen, setIsOpen] = React.useState(false);
 
   function handleClick() {
     setIsOpen(!isOpen);
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     const song = new Audio(NotificationSound);
     song.play();
   }, [])

@@ -1,28 +1,28 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authRequestAsync, IData, ISettings } from '../../../../store/auth/actions';
-import { updateFrequencyLongBreak } from '../../../../store/frequency_long_break';
-import { updateIsActivePush } from '../../../../store/is_active_push';
-import { initialCurrentState, RootState } from '../../../../store/reducer';
-import { updateTimeLongBreak } from '../../../../store/time_long_break';
-import { updateTimePomodoro } from '../../../../store/time_pomodoro';
-import { updateTimeShortBreak } from '../../../../store/time_short_break';
-import { formatTimeToValue } from '../../../../utils/js/formatTimeToValue';
-import { updateFormCheckbox } from '../../../../utils/js/updateFormCheckbox';
-import { updateFormInputSetting } from '../../../../utils/js/updateFormInputSetting';
-import { IError, validateSettings } from '../../../../utils/js/validateSettings';
-import { preventDefault } from '../../../../utils/react/preventDefault';
+
+import { authRequestAsync, IData } from 'src/store/auth/actions';
+import { updateFrequencyLongBreak } from 'src/store/frequency_long_break';
+import { updateIsActivePush } from 'src/store/is_active_push';
+import { initialCurrentState, RootState } from 'src/store/reducer';
+import { updateTimeLongBreak } from 'src/store/time_long_break';
+import { updateTimePomodoro } from 'src/store/time_pomodoro';
+import { updateTimeShortBreak } from 'src/store/time_short_break';
+import { formatTimeToValue } from 'src/utils/js/formatTimeToValue';
+import { updateFormCheckbox } from 'src/utils/js/updateFormCheckbox';
+import { updateFormInputSetting } from 'src/utils/js/updateFormInputSetting';
+import { IError, validateSettings } from 'src/utils/js/validateSettings';
+import { preventDefault } from 'src/utils/react/preventDefault';
+
 import { ModalForm } from './ModalForm';
+
+import { IModalSettings } from './modalsettings.interface';
+
 import styles from './modalsettings.module.css';
 
-interface IModalSettings {
-  settings: ISettings;
-  onClick?: () => void;
-}
-
-export function ModalSettings(props: IModalSettings) {
-  const [settingsError, setSettingsError] = useState<IError>({ code: 0, message: '' });
+export const ModalSettings = (props: IModalSettings) => {
+  const [settingsError, setSettingsError] = React.useState<IError>({ code: 0, message: '' });
   const body = document.querySelector('body');
   const node = document.querySelector('#modal_root');
   if (!node) return null;
@@ -36,7 +36,7 @@ export function ModalSettings(props: IModalSettings) {
 
   const dispatch = useDispatch<any>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     const timePomodoroValue = formatTimeToValue(props.settings.timePomodoro);
     const timeShortBreakValue = formatTimeToValue(props.settings.timeShortBreak);
     const timeLongBreakValue = formatTimeToValue(props.settings.timeLongBreak);
@@ -49,7 +49,7 @@ export function ModalSettings(props: IModalSettings) {
     dispatch(updateIsActivePush(props.settings.isActivePush.toString()));
   }, []);
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (event.target.id === 'agreeSettings') {
       const updateCheck = updateFormCheckbox(event.target.id, (event.target.checked)
         .toString());

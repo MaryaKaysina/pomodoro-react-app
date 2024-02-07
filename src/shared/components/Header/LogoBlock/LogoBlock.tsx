@@ -1,6 +1,7 @@
-import { EIcons, Icon } from '../../Icon';
+import { Icon } from 'src/shared/components/Icon';
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
 
-export function LogoBlock() {
+export const LogoBlock = () => {
   return (
     <Icon name={EIcons.logoIcon} />
   );

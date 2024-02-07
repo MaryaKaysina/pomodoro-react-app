@@ -1,8 +1,17 @@
 import { customErrorFactory } from "ts-custom-error";
-import { IData } from "../../store/auth/actions";
-import { DEFAULT_TIME, DEFAULT_TIME_BREAK, DEFAULT_TIME_BREAK_LONG, DEFAULT_FREQUENCY_LONG_BREAK, IS_ACTIVE, APP_LOCAL_KEY } from "../conts";
+
+import { IData } from "src/store/auth/actions";
+import {
+  DEFAULT_TIME,
+  DEFAULT_TIME_BREAK,
+  DEFAULT_TIME_BREAK_LONG,
+  DEFAULT_FREQUENCY_LONG_BREAK,
+  IS_ACTIVE,
+  APP_LOCAL_KEY
+} from "src/utils/conts";
 
 export interface IError {
+  field: string;
   code: number;
   message: string;
 }
@@ -15,7 +24,8 @@ export interface IVadateForm {
   setAuthError: (value: React.SetStateAction<IError>) => void;
 }
 
-const AuthError = customErrorFactory(function AuthError (code: number, message= '') {
+const AuthError = customErrorFactory(function AuthError (field: string, code: number, message = '') {
+  this.field = field
 	this.code = code
 	this.message = message
 })
@@ -25,16 +35,16 @@ export function vadateForm({ name, mail, isCheck, data, setAuthError }: IVadateF
 
   try {
     if (name.trim().length < 2) {
-      throw new AuthError(111, 'Имя должно содержать от 2-х символов');
+      throw new AuthError('name', 111, 'Имя должно содержать от 2-х символов');
     }
     if (mail.trim().length === 0) {
-      throw new AuthError(112, 'E-mail должен быть заполнен');
+      throw new AuthError('mail', 112, 'E-mail должен быть заполнен');
     }
     if (!mail.trim().match(reg)) {
-      throw new AuthError(113, 'E-mail должен быть в формате mail@mail.mail');
+      throw new AuthError('mail', 113, 'E-mail должен быть в формате mail@mail.mail');
     }
     if (isCheck === 'false') {
-      throw new AuthError(114, 'Не проставлено согласие (:');
+      throw new AuthError('isCheck', 114, 'Не проставлено согласие (:');
     }
 
     const local = localStorage.getItem(APP_LOCAL_KEY) || '[]';
@@ -61,6 +71,6 @@ export function vadateForm({ name, mail, isCheck, data, setAuthError }: IVadateF
 
     return newAuthData;
   } catch (error: any) {
-    setAuthError({ code: error.code, message: error.message });
+    setAuthError({ field: error.field, code: error.code, message: error.message });
   }
 }

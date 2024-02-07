@@ -1,9 +1,9 @@
-import { Content } from './Content';
-import { FormBlock } from './FormBlock';
-import { PomodorBlock } from './PomodorBlock';
-import { TextBlock } from './TextBlock';
+import { Content } from 'src/shared/pages/PomodoroPage/Content';
+import { FormBlock } from 'src/shared/pages/PomodoroPage/FormBlock';
+import { PomodorBlock } from 'src/shared/pages/PomodoroPage/PomodorBlock';
+import { TextBlock } from 'src/shared/pages/PomodoroPage/TextBlock';
 
-export function PomodoroPage() {
+export const PomodoroPage = () => {
   return (
     <Content>
       <TextBlock />

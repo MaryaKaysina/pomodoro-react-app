@@ -1,12 +1,9 @@
-import { Text, EColors, TSizes } from '../Text';
+import { Text } from 'src/shared/components/Text';
 
-interface IErrorBlock {
-  message: string;
-  color?: EColors;
-  size?: TSizes;
-}
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { IErrorBlock } from './errorblock.interface';
 
-export function ErrorBlock({ message, color = EColors.white, size = 16 }: IErrorBlock) {
+export const ErrorBlock = ({ message, color = EColors.white, size = 16 }: IErrorBlock) => {
   return (
     <Text mobileSize={12} size={size} color={color}>
       {message}

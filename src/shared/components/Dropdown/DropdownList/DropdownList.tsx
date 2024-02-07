@@ -1,36 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { IData, authRequestAsync } from 'src/store/auth/actions';
+import { initialCurrentState, RootState } from 'src/store/reducer';
+import { ModalDelete } from 'src/shared/pages/PomodoroPage/ModalDelete';
+import { setDataTasks } from 'src/utils/js/setDataTasks';
+
+import { IDropdownList } from './dropdownlist.interface';
+
 import styles from './dropdownlist.module.css';
 
-import { IData, authRequestAsync } from '../../../../store/auth/actions';
-import { initialCurrentState, RootState } from '../../../../store/reducer';
-
-import { ModalDelete } from '../../../pages/PomodoroPage/ModalDelete';
-import { setDataTasks } from '../../../../utils/js/setDataTasks';
-
-interface IPosition {
-  top: number;
-  left: number;
-}
-
-interface IDropdownList {
-  children: React.ReactNode;
-  position?: IPosition;
-  taskId?: number;
-  onClose?: () => void;
-  onClick?: () => void;
-}
-
-export function DropdownList(props: IDropdownList) {
-  const [calcListTop, setCalcListTop] = useState<string>('0');
-  const [calcListLeft, setCalcListLeft] = useState<number>(0);
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [otherData, setOtherData] = useState<IData>(initialCurrentState);
+export const DropdownList = (props: IDropdownList) => {
+  const [calcListTop, setCalcListTop] = React.useState<string>('0');
+  const [calcListLeft, setCalcListLeft] = React.useState<number>(0);
+  const [isOpenModal, setIsOpenModal] = React.useState(false);
+  const [otherData, setOtherData] = React.useState<IData>(initialCurrentState);
 
   const currentData = useSelector<RootState, IData>(state => state.auth.data);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
   const dispatch = useDispatch<any>();
 
   function calcPositionMenu() {
@@ -42,12 +30,12 @@ export function DropdownList(props: IDropdownList) {
     return { listTop, listLeft};
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     setCalcListTop(calcPositionMenu().listTop);
     setCalcListLeft(calcPositionMenu().listLeft);
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const body = document.querySelector('body');
 
     const curentTask = currentData.tasks.filter((task) => task.id === props.taskId)[0];

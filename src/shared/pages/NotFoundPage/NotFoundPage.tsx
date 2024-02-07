@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
-import { Icon, EIcons } from '../../components/Icon';
-import { Content } from './Content';
+
+import { Icon } from 'src/shared/components/Icon';
+import { Content } from 'src/shared/pages/NotFoundPage/Content';
+
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+
 import styles from './notfoundpage.module.css';
 
-export function NotFoundPage() {
+export const NotFoundPage = () => {
   return (
     <div className={styles.notFoundBlock}>
       <Content>

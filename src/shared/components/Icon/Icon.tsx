@@ -1,4 +1,3 @@
-import styles from './icon.module.css';
 import {
   AddIcon,
   AddMenuIcon,
@@ -9,38 +8,21 @@ import {
   DownMenuIcon,
   EditMenuIcon,
   FocusIcon,
-  LogoIcon, LogoutIcon, MenuIcon, MenuLinkIcon, NotFoundIcon, NotificationIcon, SettingsIcon, StopIcon, ThemeIcon, TomatoIcon, TomatoNonIcon
-} from '../Icons';
+  LogoIcon,
+  LogoutIcon,
+  MenuIcon,
+  MenuLinkIcon,
+  NotFoundIcon,
+  NotificationIcon,
+  SettingsIcon,
+  StopIcon,
+  ThemeIcon,
+  TomatoIcon,
+  TomatoNonIcon
+} from 'src/shared/components/Icons';
 
-export enum EIcons {
-  logoIcon = 'LogoIcon',
-  menuIcon = 'MenuIcon',
-  menuLinkIcon = 'MenuLinkIcon',
-  addIcon = 'AddIcon',
-  addMenuIcon = 'AddMenuIcon',
-  downMenuIcon = 'DownMenuIcon',
-  editMenuIcon = 'EditMenuIcon',
-  deleteMenuIcon = 'DeleteMenuIcon',
-  logoutIcon = 'LogoutIcon',
-  closeIcon = 'CloseIcon',
-  arrowIcon = 'ArrowIcon',
-  tomatoNonIcon = 'TomatoNonIcon',
-  tomatoIcon = 'TomatoIcon',
-  focusIcon = 'FocusIcon',
-  clockIcon = 'ClockIcon',
-  stopIcon = 'StopIcon',
-  themeIcon = 'ThemeIcon',
-  notificationIcon = 'NotificationIcon',
-  settingsIcon = 'SettingsIcon',
-  notFoundIcon = 'NotFoundIcon',
-}
-
-type TSizes = 20 | 16 | 14;
-
-interface IIconProps {
-  name: EIcons;
-  size?: TSizes;
-}
+import styles from './icon.module.css';
+import { EIcons, IIconProps } from './icon.interface';
 
 const sizeIcons = {
   14: styles.smallIcon,
@@ -71,7 +53,7 @@ const icons = {
   [EIcons.notFoundIcon]: <NotFoundIcon />,
 }
 
-export function Icon({ name, size = 16 }: IIconProps) {
+export const Icon = ({ name, size = 16 }: IIconProps) => {
   return (
     <div className={sizeIcons[size]}>{icons[name]}</div>
   );

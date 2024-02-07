@@ -1,12 +1,11 @@
-import { Text, EColors } from '../../../../components/Text';
+import { Text } from 'src/shared/components/Text';
+
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { IDayBlock } from './dayblock.interface';
+
 import styles from './dayblock.module.css';
 
-interface IDayBlock {
-  day?: number;
-  time?: number;
-}
-
-export function DayBlock({ day = 0, time = 0 }: IDayBlock) {
+export const DayBlock = ({ day = 0, time = 0 }: IDayBlock) => {
   const weekDay = [
     'Понедельник',
     'Вторник',

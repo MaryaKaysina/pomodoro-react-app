@@ -1,64 +1,24 @@
 import { useEffect, useState } from 'react';
-import styles from './menuitemslist.module.css';
+import { useSelector } from 'react-redux';
 import classNames from 'classnames';
 
-import { Text, EColors } from '../../../../../../../components/Text';
-import { EIcons, Icon } from '../../../../../../../components/Icon';
-import { GenericList } from '../../../../../../../components/GenericList';
-import { generateId } from '../../../../../../../../utils/react/generateRandomIndex';
-import { merge } from '../../../../../../../../utils/js/merge';
-import { useSelector } from 'react-redux';
-import { ITask } from '../../../../../../../../store/auth/actions';
-import { RootState } from '../../../../../../../../store/reducer';
+import { Text } from 'src/shared/components/Text';
+import { Icon } from 'src/shared/components/Icon';
+import { GenericList } from 'src/shared/components/GenericList';
+import { generateId } from 'src/utils/react/generateRandomIndex';
+import { merge } from 'src/utils/js/merge';
+import { ITask } from 'src/store/auth/actions';
+import { RootState } from 'src/store/reducer';
 
-interface IMenuItemsList {
-  taskId: number;
-}
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { IMenuItemsList } from './menuitemlist.interface';
 
-const LIST_DEFAULT = [
-  {
-    As: 'button' as const,
-    element:
-    <>
-      <Icon name={EIcons.addMenuIcon} size={16}/>
-      <Text mobileSize={12} size={16} color={EColors.grey99}>Увеличить</Text>
-    </>,
-    className: classNames(styles.menuItem),
-    dataAction: 'UpTime',
-  },
-  {
-    As: 'button' as const,
-    element:
-    <>
-      <Icon name={EIcons.downMenuIcon} size={16}/>
-      <Text mobileSize={12} size={16} color={EColors.grey99}>Уменьшить</Text>
-    </>,
-    className: classNames(styles.menuItem),
-    dataAction: 'DownTime',
-  },
-  {
-    As: 'button' as const,
-    element:
-    <>
-      <Icon name={EIcons.editMenuIcon} size={16}/>
-      <Text mobileSize={12} size={16} color={EColors.grey99}>Редактировать</Text>
-    </>,
-    className: styles.menuItem,
-    dataAction: 'EditTask',
-  },
-  {
-    As: 'button' as const,
-    element:
-      <>
-        <Icon name={EIcons.deleteMenuIcon} size={16}/>
-        <Text mobileSize={12} size={16} color={EColors.grey99}>Удалить</Text>
-      </>,
-    className: classNames(styles.menuItem),
-    dataAction: 'DeleteTask',
-  },
-].map(generateId);
+import styles from './menuitemslist.module.css';
 
-export function MenuItemsList({ taskId }: IMenuItemsList) {
+import { LIST_DEFAULT } from './menuitemlist.const';
+
+export const MenuItemsList = ({ taskId }: IMenuItemsList) => {
   const [list, setList] = useState<any>(LIST_DEFAULT);
 
   const currentPomodor = useSelector<RootState, ITask[]>(state => state.auth.data.tasks)

@@ -1,40 +1,24 @@
-import { ChangeEvent, FormEvent } from 'react';
-import { Button } from '../../../Button';
-import { ErrorBlock } from '../../../ErrorBlock';
-import { Icon, EIcons } from '../../../Icon';
-import { EColors } from '../../../Text';
+import { Button } from 'src/shared/components/Button';
+import { ErrorBlock } from 'src/shared/components/ErrorBlock';
+import { Icon } from 'src/shared/components/Icon';
+
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { IModalForm } from './modalform.interface';
+
 import styles from './modalform.module.css';
 
-interface IError {
-  code: number;
-  message: string;
-}
-
-interface IModalForm {
-  valueTimePomodoro: string;
-  valueTimeShortBreak: string;
-  valueTimeLongBreak: string;
-  valueFrequencyLongBreak: string;
-  valueIsActivePush: string;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit?: (event: FormEvent) => void;
-  onClick?: () => void;
-  settingsError: IError;
-}
-
-const NOOP = () => {};
-
-export function ModalForm({
+export const ModalForm = ({
   valueTimePomodoro,
   valueTimeShortBreak,
   valueTimeLongBreak,
   valueFrequencyLongBreak,
   valueIsActivePush,
   settingsError,
-  onChange = NOOP,
-  onSubmit = NOOP,
-  onClick = NOOP,
-}: IModalForm) {
+  onChange = () => {},
+  onSubmit = () => {},
+  onClick = () => {},
+}: IModalForm) => {
   return (
     <form
       className={styles.modalForm}

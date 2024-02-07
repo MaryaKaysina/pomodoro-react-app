@@ -1,21 +1,18 @@
-import { Icon, EIcons } from '../../../../components/Icon';
-import { Text, EColors } from '../../../../components/Text';
+import { Icon } from 'src/shared/components/Icon';
+import { Text } from 'src/shared/components/Text';
+
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { ITimer } from './timer.interface';
 
 import styles from './timer.module.css';
 
-interface ITimer {
-  time?: number;
-  onClick?: () => void;
-}
-
-const NOOP = () => {};
-
-function formatTime(time: number) {
+const formatTime = (time: number) => {
   if (time < 10) return `0${time}`;
   return time;
 }
 
-export function Timer({ time, onClick = NOOP }: ITimer) {
+export const Timer = ({ time, onClick = () => {} }: ITimer) => {
   let timeText = '00:00';
 
   if (time) {

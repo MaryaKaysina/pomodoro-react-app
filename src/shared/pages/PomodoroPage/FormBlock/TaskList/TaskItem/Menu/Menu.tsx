@@ -1,20 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+
+import { Dropdown } from 'src/shared/components/Dropdown';
+import { MenuIcon } from 'src/shared/components/Icons';
+import { MenuItemsList } from 'src/shared/pages/PomodoroPage/FormBlock/TaskList/TaskItem/Menu/MenuItemsList';
+import { IMenu, IPosition } from './menu.interface';
+
 import styles from './menu.module.css';
 
-import { MenuItemsList } from './MenuItemsList';
-import { Dropdown } from '../../../../../../components/Dropdown';
-import { MenuIcon } from '../../../../../../components/Icons';
-
-interface IPosition {
-  top: number;
-  left: number;
-}
-
-interface IMenu {
-  taskId: number;
-}
-
-export function Menu({ taskId }: IMenu) {
+export const Menu = ({ taskId }: IMenu) => {
   const [isOpen, setIsOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const [position, setPosition] = useState<IPosition>({ top: 0, left: 0 });

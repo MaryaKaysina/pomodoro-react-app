@@ -17,20 +17,6 @@
   margin-bottom: 25px;
 }
 
-/* .inputBlock {
-  position: relative;
-  margin-bottom: 25px;
-  width: 85%;
-  max-width: 370px;
-}
-
-.inputBlock span {
-  position: absolute;
-  left: 5px;
-  width: max-content;
-  color: var(--red);
-} */
-
 .form button {
   position: relative;
 }
@@ -45,32 +31,6 @@
   color: var(--red);
   transform: translateX(-50%);
 }
-
-/* .label {
-  position: absolute;
-  opacity: 0;
-  height: 0;
-  width: 0;
-}
-
-.input {
-  padding: 19px 15px;
-  width: 100%;
-  border: none;
-  background: var(--grayF4);
-  color: var(--black);
-  font-family: inherit;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 17px;
-}
-
-.input::placeholder {
-  color: var(--grey99);
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 17px;
-} */
 
 .labelCheckbox {
   display: flex;

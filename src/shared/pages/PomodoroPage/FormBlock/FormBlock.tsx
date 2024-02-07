@@ -1,22 +1,21 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { authRequestAsync, IData, ITask } from '../../../../store/auth/actions';
-import { RootState } from '../../../../store/reducer';
+import { authRequestAsync, IData, ITask } from 'src/store/auth/actions';
+import { updateNewTask } from 'src/store/new_task';
+import { RootState } from 'src/store/reducer';
+import { useLoadLocal } from 'src/hooks/useLoadLocal';
+import { Form } from 'src/shared/pages/PomodoroPage/FormBlock/Form';
+import { TaskList } from 'src/shared/pages/PomodoroPage/FormBlock/TaskList';
 
-import { Form } from './Form';
-import { TaskList } from './TaskList';
-import { updateNewTask } from '../../../../store/new_task';
-import { useLoadLocal } from '../../../../hooks/useLoadLocal';
-
-export function FormBlock() {
-  const [mounred, setMounted] = useState(false);
+export const FormBlock = () => {
+  const [mounred, setMounted] = React.useState(false);
   const dispatch = useDispatch<any>();
 
   useLoadLocal();
 
-  useEffect(() => {
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 
@@ -29,11 +28,11 @@ export function FormBlock() {
   const timePomodoro = data.settings?.timePomodoro;
   const logInDate = data?.logInDate;
 
-  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     dispatch(updateNewTask(event.target.value));
   }
 
-  function handleSubmit(event: FormEvent) {
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     if (newTask.length > 0) {
       const task = {

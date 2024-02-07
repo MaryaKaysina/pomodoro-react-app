@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { useLoadLocal } from '../../../hooks/useLoadLocal';
-import { IData } from '../../../store/auth/actions';
-import { RootState } from '../../../store/reducer';
-import { Content } from './Content';
-import { StatisticInfo } from './StatisticInfo';
 
-import { TitleBlock } from './TitleBlock';
+import { useLoadLocal } from 'src/hooks/useLoadLocal';
+import { IData } from 'src/store/auth/actions';
+import { RootState } from 'src/store/reducer';
+import { Content } from 'src/shared/pages/StatisticPage/Content';
+import { StatisticInfo } from 'src/shared/pages/StatisticPage/StatisticInfo';
+import { TitleBlock } from 'src/shared/pages/StatisticPage/TitleBlock';
 
-export function StatisticPage() {
-  const [mounred, setMounted] = useState(false);
+export const StatisticPage = () => {
+  const [mounred, setMounted] = React.useState(false);
 
   useLoadLocal();
 
-  useEffect(() => {
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 

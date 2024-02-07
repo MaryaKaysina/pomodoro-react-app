@@ -4,13 +4,13 @@ import { preventDefault } from 'src/utils/react/preventDefault';
 import { useHandleForm } from 'src/hooks/useHandleForm';
 
 import { Loading } from 'src/shared/components/Loading';
+import { Logo } from 'src/shared/pages/AuthPage/Logo';
+import { FormAuth } from 'src/shared/pages/AuthPage/FormAuth';
+import { Copyright } from 'src/shared/pages/AuthPage/Copyright';
 
 import styles from './authpage.module.css';
-import { Logo } from './Logo';
-import { FormAuth } from './FormAuth';
-import { Copyright } from './Copyright';
 
-export function AuthPage() {
+export const AuthPage = () => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const {

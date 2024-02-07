@@ -10,7 +10,7 @@ import { initialCurrentState, RootState } from 'src/store/reducer';
 import { IData, authRequestAsync } from "src/store/auth/actions";
 
 export function useHandleForm() {
-  const [authError, setAuthError] = React.useState<IError>({ code: 0, message: '' });
+  const [authError, setAuthError] = React.useState<IError>({ field: '', code: 0, message: '' });
 
   const name = useSelector<RootState, string>(state => state.name);
   const mail = useSelector<RootState, string>(state => state.mail);

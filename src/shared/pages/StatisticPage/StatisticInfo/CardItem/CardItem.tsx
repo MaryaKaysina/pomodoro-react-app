@@ -1,16 +1,16 @@
-import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { EIcons, Icon } from '../../../../components/Icon';
-import { Text, EColors } from '../../../../components/Text';
+import classNames from 'classnames';
+
+import { Icon } from 'src/shared/components/Icon';
+import { Text } from 'src/shared/components/Text';
+
+import { EIcons } from 'src/shared/components/Icon/icon.interface';
+import { EColors } from 'src/shared/components/Text/text.interface';
+import { ICardItem } from './carditem.interface';
 
 import styles from './carditem.module.css';
 
-interface ICardItem {
-  type: string;
-  num: number;
-}
-
-export function CardItem({ type, num = 0 }: ICardItem) {
+export const CardItem = ({ type, num = 0 }: ICardItem) => {
   const [isActive, setIsActive] = useState(false);
   const [isFocus, setIsFocus] = useState(true);
   const [isPause, setIsPause] = useState(false);

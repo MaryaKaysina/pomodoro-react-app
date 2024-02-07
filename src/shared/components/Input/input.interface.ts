@@ -8,5 +8,6 @@ export interface IInput {
   error?: IError,
   id: string,
   type: string,
+  forInput: string,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }

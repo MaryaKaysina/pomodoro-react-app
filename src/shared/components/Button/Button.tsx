@@ -1,30 +1,19 @@
 import classNames from 'classnames';
-import React from 'react';
+
+import { IButton } from './button.interface';
+
 import styles from './button.module.css';
 
-interface IButton {
-  children: React.ReactNode;
-  isDisabled?: boolean;
-  isSuccess?: boolean;
-  isDanger?: boolean;
-  isDangerBg?: boolean;
-  onClick?: () => void;
-  onMouseDown?: () => void;
-  onMouseUp?: () => void;
-}
-
-const NOOP = () => {};
-
-export function Button({
+export const Button = ({
   children,
   isSuccess = true,
   isDisabled = false,
   isDanger = false,
   isDangerBg = false,
-  onClick = NOOP,
-  onMouseDown = NOOP,
-  onMouseUp = NOOP,
-}: IButton) {
+  onClick = () => {},
+  onMouseDown = () => {},
+  onMouseUp = () => {},
+}: IButton) => {
 
   const classes = classNames(
     styles['btn'],

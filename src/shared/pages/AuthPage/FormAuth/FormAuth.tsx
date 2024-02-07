@@ -1,13 +1,14 @@
 import { Button } from 'src/shared/components/Button';
 import { ErrorBlock } from 'src/shared/components/ErrorBlock';
-import { Text, EColors } from 'src/shared/components/Text';
+import { Text } from 'src/shared/components/Text';
+import { Input } from 'src/shared/components/Input';
 
+import { EColors } from 'src/shared/components/Text/text.interface';
 import { IFormAuth } from './formauth.interface';
 
 import styles from './formauth.module.css';
-import { Input } from 'src/shared/components/Input';
 
-export function FormAuth(
+export const FormAuth = (
   {
     valueName,
     valueMail,
@@ -15,7 +16,7 @@ export function FormAuth(
     authError,
     onChange = () => {},
     onSubmit = () => {}
-  }: IFormAuth) {
+  }: IFormAuth) => {
 
   return (
     <form
@@ -24,19 +25,7 @@ export function FormAuth(
       <Text As='h2' mobileSize={16} size={24} color={EColors.white}>
         Совсем чуть-чуть и можем начинать!
       </Text>
-      {/* <div className={styles.inputBlock}>
-        <label htmlFor="name" className={styles.label}>Введите имя</label>
-        <input
-          className={styles.input}
-          type="text"
-          id="name"
-          placeholder='Ваше имя'
-          onChange={onChange}
-          value={valueName}
-        />
 
-        {authError && authError.code === 111 && <ErrorBlock message={authError.message}/>}
-      </div> */}
       <Input
         label='Введите имя'
         placeholder='Ваше имя'
@@ -44,31 +33,20 @@ export function FormAuth(
         id='name'
         type='text'
         onChange={onChange}
+        forInput='name'
+        error={authError}
       />
 
       <Input
         label='Введите email'
-        placeholder='Ваше имя'
-        value={valueName}
-        id='name'
-        type='text'
+        placeholder='E-mail'
+        value={valueMail}
+        id='mail'
+        type='mail'
         onChange={onChange}
+        forInput='mail'
+        error={authError}
       />
-
-      <div className={styles.inputBlock}>
-        <label htmlFor="mail" className={styles.label}>Введите email</label>
-        <input
-          className={styles.input}
-          type="mail"
-          id="mail"
-          placeholder='E-mail'
-          onChange={onChange}
-          value={valueMail}
-        />
-
-        {authError &&
-        (authError.code === 112 || authError.code === 113) && <ErrorBlock message={authError.message}/>}
-      </div>
 
       <Button>
         Зарегистрироваться

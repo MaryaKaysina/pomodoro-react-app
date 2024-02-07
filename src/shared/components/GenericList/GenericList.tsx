@@ -1,33 +1,12 @@
-import React from 'react';
+import { IGenericListProps } from './genericlist.interface';
 
-interface IItemList {
-  element: React.ReactNode;
-  id: string;
-  onClick?: () => void;
-  className?: string;
-  As?: 'a' | 'li' | 'button' | 'div';
-  href?: string;
-  bg?: string;
-  content?: string;
-  dataAction?: string;
-  isDisabled?: string;
-}
-
-interface IGenericListProps {
-  list: IItemList[];
-  divider?: boolean;
-  classNameDivider?: string;
-}
-
-const noop = () => {};
-
-export function GenericList({ list, divider = false, classNameDivider }: IGenericListProps) {
+export const GenericList = ({ list, divider = false, classNameDivider }: IGenericListProps) => {
   return (
     <>
       {list.map(({
         As = 'div',
         element,
-        onClick = noop,
+        onClick = () => {},
         className = '',
         id,
         href,
