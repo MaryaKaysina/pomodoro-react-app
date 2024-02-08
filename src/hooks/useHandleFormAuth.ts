@@ -6,23 +6,30 @@ import { updateFormCheckbox } from "src/utils/js/updateFormCheckbox";
 import { updateFormInput } from "src/utils/js/updateFormInput";
 import { IError, vadateForm } from "src/utils/js/validate";
 
-import { initialCurrentState, RootState } from 'src/store/reducer';
+import { initialCurrentState, RootState } from "src/store/reducer";
 import { IData, authRequestAsync } from "src/store/auth/actions";
 
-export function useHandleForm() {
-  const [authError, setAuthError] = React.useState<IError>({ field: '', code: 0, message: '' });
+export const useHandleFormAuth = () => {
+  const [authError, setAuthError] = React.useState<IError>({
+    field: "",
+    code: 0,
+    message: "",
+  });
 
-  const name = useSelector<RootState, string>(state => state.name);
-  const mail = useSelector<RootState, string>(state => state.mail);
-  const isCheck = useSelector<RootState, string>(state => state.isCheck);
-  const data = useSelector<RootState, IData>(state => state.auth.data);
+  const name = useSelector<RootState, string>((state) => state.name);
+  const mail = useSelector<RootState, string>((state) => state.mail);
+  const isCheck = useSelector<RootState, string>((state) => state.isCheck);
+  const data = useSelector<RootState, IData>((state) => state.auth.data);
 
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (event.target.id === 'agree') {
-      const updateCheck = updateFormCheckbox(event.target.id, (event.target.checked).toString());
+    if (event.target.id === "agree") {
+      const updateCheck = updateFormCheckbox(
+        event.target.id,
+        event.target.checked.toString()
+      );
       dispatch(updateCheck);
       return;
     }
@@ -34,7 +41,7 @@ export function useHandleForm() {
     const formData = { name, mail, isCheck, data, setAuthError };
     const newData = vadateForm(formData);
     dispatch(authRequestAsync(newData || initialCurrentState));
-    if (newData) navigate('/pomodoros');
+    if (newData) navigate("/pomodoros");
   }
 
   return {
@@ -43,6 +50,6 @@ export function useHandleForm() {
     isCheck,
     authError,
     handleChange,
-    handleSubmit
+    handleSubmit,
   };
-}
+};

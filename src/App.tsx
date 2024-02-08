@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './main.global.css';
 import stylesTransitions from './app.module.css';
 
@@ -10,7 +9,6 @@ import thunk from 'redux-thunk';
 
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-import { mockData } from "./mock.test";
 import { Header } from './shared/components/Header';
 import { AuthPage } from './shared/pages/AuthPage';
 import { NotFoundPage } from './shared/pages/NotFoundPage';
@@ -18,7 +16,13 @@ import { PomodoroPage } from './shared/pages/PomodoroPage';
 import { StatisticPage } from './shared/pages/StatisticPage';
 
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { useIsMouted } from './hooks/useIsMounted';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+import { mockData } from "./mock.test";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 import { APP_LOCAL_KEY } from './utils/conts';
+import React from 'react';
 
 const store = createStore(rootReducer, composeWithDevTools(
   applyMiddleware(thunk),
@@ -30,9 +34,6 @@ const classes = {
   exit: stylesTransitions['transition-exit'],
   exitActive: stylesTransitions['transition-exit-active']
 };
-
-// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-const mockTestData = mockData();
 
 function AppComponent() {
   const location = useLocation();
@@ -56,13 +57,13 @@ function AppComponent() {
 }
 
 function App() {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMouted();
 
-  useEffect(() => {
-    setMounted(true);
-    // Заполнение тестовыми данными
-    // localStorage.setItem(APP_LOCAL_KEY, JSON.stringify(mockTestData));
-  }, []);
+  // Заполнение тестовыми данными
+  // React.useEffect(() => {
+  //   const mockTestData = mockData();
+  //   localStorage.setItem(APP_LOCAL_KEY, JSON.stringify(mockTestData));
+  // }, []);
 
   return (
     <Provider store={store}>
