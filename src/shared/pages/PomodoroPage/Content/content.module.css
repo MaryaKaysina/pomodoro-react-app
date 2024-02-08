@@ -40,3 +40,43 @@
 .content form {
   grid-area: form;
 }
+
+@media all and (max-width: 1340px) {
+  .content {
+    grid-template-columns: 1fr;
+    justify-content: center;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "header"
+    "text"
+    "block"
+    "form"
+    "list";
+  }
+
+  .content form {
+    max-width: 70%;
+  }
+
+  .content > div {
+    margin-bottom: 25px;
+    max-width: 70%;
+  }
+}
+
+@media all and (max-width: 1060px) {
+  .content form {
+    max-width: 100%;
+  }
+
+  .content > div {
+    margin-bottom: 25px;
+    max-width: 100%;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .content {
+    padding-top: 110px;
+  }
+}

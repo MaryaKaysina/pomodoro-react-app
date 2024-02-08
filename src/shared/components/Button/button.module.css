@@ -49,3 +49,9 @@
     color: var(--red);
   }
 }
+
+@media all and (max-width: 480px) {
+  .btn {
+    padding: 12px 35px;
+  }
+}

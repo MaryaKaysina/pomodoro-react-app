@@ -29,3 +29,9 @@
   font-size: 16px;
   line-height: 17px;
 }
+
+@media all and (max-width: 1340px) {
+  .input {
+    width: 100%;
+  }
+}

@@ -61,7 +61,7 @@
   }
 }
 
-@media all and (max-width: 650px) {
+@media all and (max-width: 768px) {
   .menuContainer {
     position: absolute;
     top: 0;
@@ -72,6 +72,7 @@
     padding: 60px;
     padding-top: 100px;
     padding-right: 100px;
+    min-height: 100vh;
     background: var(--bg);
     box-shadow: var(--shadow);
     transform: translateX(200%);

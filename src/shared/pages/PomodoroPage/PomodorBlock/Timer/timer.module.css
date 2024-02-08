@@ -39,3 +39,46 @@
   }
 }
 
+@media all and (max-width: 768px) {
+  .timer {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .addButton {
+    top: 40%;
+    right: 11%;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media all and (max-width: 667px) {
+  .timer h3 {
+    font-weight: 200;
+    font-size: 100px;
+    line-height: 110px;
+  }
+}
+
+@media all and (max-width: 480px) {
+  .timer h3 {
+    margin-right: 40px;
+    font-weight: 200;
+    font-size: 80px;
+    line-height: 90px;
+  }
+
+  .addButton {
+    top: 42%;
+    right: 7%;
+    width: 30px;
+    height: 30px;
+  }
+
+  .addButton svg {
+    width: 30px;
+  }
+}
+

@@ -42,3 +42,13 @@
 .block.isTimerPaused.isBtnStartActive h3 {
   color: var(--green);
 }
+
+@media all and (max-width: 768px) {
+  .block {
+    height: 400px;
+  }
+
+  .content {
+    padding-bottom: 45px;
+  }
+}
