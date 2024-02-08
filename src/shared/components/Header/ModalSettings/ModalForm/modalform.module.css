@@ -17,6 +17,7 @@
 .modalForm {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .modalLabel {
@@ -92,4 +93,14 @@
 .modalError {
   position: absolute;
   bottom: -17px;
+}
+
+@media all and (max-width: 420px) {
+  .modalText {
+    max-width: 60%;
+  }
+
+  .modalInput {
+    max-width: 30%;
+  }
 }
